@@ -5,6 +5,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     id("kotlinx-serialization")
+    id("io.fabric")
 }
 
 android {
@@ -32,13 +33,19 @@ dependencies {
     implementation("androidx.appcompat:appcompat:${ProjectVersions.APPCOMPAT}")
     implementation("androidx.core:core-ktx:${ProjectVersions.KTX}")
     implementation("androidx.constraintlayout:constraintlayout:${ProjectVersions.CONSTRAINT_LAYOUT}")
-
     implementation("com.google.android.material:material:${ProjectVersions.MATERIAL}")
-    implementation("com.squareup.sqldelight:android-driver:${ProjectVersions.SQLDELIGHT}")
     implementation("androidx.fragment:fragment-ktx:${ProjectVersions.FRAGMENT}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${ProjectVersions.LIFECYCLE}")
     implementation("androidx.navigation:navigation-fragment-ktx:${ProjectVersions.NAVIGATION}")
     implementation("androidx.navigation:navigation-ui-ktx:${ProjectVersions.NAVIGATION}")
+
+    implementation("com.google.firebase:firebase-common-ktx:${ProjectVersions.FIREBASE_CORE}")
+    implementation("com.google.firebase:firebase-auth:${ProjectVersions.FIREBASE_AUTH}")
+    implementation("com.google.firebase:firebase-messaging:${ProjectVersions.FIREBASE_CLOUD_MESSAGING}")
+    implementation("com.google.firebase:firebase-ml-vision:${ProjectVersions.FIREBASE_VISION}")
+    implementation("com.crashlytics.sdk.android:crashlytics:${ProjectVersions.FIREBASE_CRASHLYTICS}")
+
+    implementation("com.squareup.sqldelight:android-driver:${ProjectVersions.SQLDELIGHT}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${ProjectVersions.COROUTINES}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${ProjectVersions.COROUTINES}")
     implementation("com.squareup.retrofit2:retrofit:${ProjectVersions.RETROFIT}")
@@ -61,3 +68,5 @@ dependencies {
     androidTestImplementation("androidx.test:rules:${ProjectVersions.TEST_RULES}")
     androidTestImplementation("androidx.test.ext:junit:${ProjectVersions.TEST_JUNIT}")
 }
+
+apply(plugin = "com.google.gms.google-services")
