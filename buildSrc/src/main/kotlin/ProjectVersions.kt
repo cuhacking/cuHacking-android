@@ -23,5 +23,4 @@ object ProjectVersions {
     const val SQLDELIGHT = "1.1.3"
     const val TEST_JUNIT = "1.1.1"
     const val TEST_RULES = "1.2.0"
-    const val TEST_RUNNER = "1.2.0"
 }
