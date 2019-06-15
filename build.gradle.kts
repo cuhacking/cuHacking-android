@@ -13,6 +13,7 @@ buildscript {
         classpath(kotlin("serialization", version = ProjectVersions.KOTLIN))
         classpath("com.google.gms:google-services:4.2.0")
         classpath("io.fabric.tools:gradle:1.29.0")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${ProjectVersions.NAVIGATION}")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts files
     }
