@@ -6,6 +6,8 @@ plugins {
     kotlin("android.extensions")
     id("kotlinx-serialization")
     id("io.fabric")
+    id("com.squareup.sqldelight")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
