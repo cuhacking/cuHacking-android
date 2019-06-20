@@ -1,0 +1,11 @@
+import java.lang.Long;
+
+CREATE TABLE scheduleItem(
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    time INTEGER As Long NOT NULL
+);
+
+getAll:
+SELECT * FROM scheduleItem;

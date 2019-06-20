@@ -37,6 +37,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:${ProjectVersions.CONSTRAINT_LAYOUT}")
     implementation("com.google.android.material:material:${ProjectVersions.MATERIAL}")
     implementation("androidx.fragment:fragment-ktx:${ProjectVersions.FRAGMENT}")
+    implementation("androidx.lifecycle:lifecycle-extensions:${ProjectVersions.LIFECYCLE}")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${ProjectVersions.LIFECYCLE}")
     implementation("androidx.navigation:navigation-fragment-ktx:${ProjectVersions.NAVIGATION}")
     implementation("androidx.navigation:navigation-ui-ktx:${ProjectVersions.NAVIGATION}")

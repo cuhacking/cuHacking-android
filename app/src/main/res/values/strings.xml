@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">cuHacking</string>
+    <string name="info">Info</string>
+    <string name="schedule">Schedule</string>
+    <string name="map">Map</string>
 </resources>

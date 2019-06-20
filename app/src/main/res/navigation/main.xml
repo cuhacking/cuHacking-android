@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main"
+            app:startDestination="@id/info">
+
+    <fragment android:id="@+id/info" android:name="com.cuhacking.app.info.ui.InfoFragment"
+              android:label="info_fragment" tools:layout="@layout/info_fragment"/>
+    <fragment android:id="@+id/map" android:name="com.cuhacking.app.map.ui.MapFragment"
+              android:label="map_fragment" tools:layout="@layout/map_fragment"/>
+    <fragment android:id="@+id/schedule" android:name="com.cuhacking.app.schedule.ui.ScheduleFragment"
+              android:label="schedule_fragment" tools:layout="@layout/schedule_fragment"/>
+</navigation>
