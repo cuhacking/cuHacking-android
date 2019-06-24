@@ -5,9 +5,13 @@
             app:startDestination="@id/info">
 
     <fragment android:id="@+id/info" android:name="com.cuhacking.app.info.ui.InfoFragment"
-              android:label="info_fragment" tools:layout="@layout/info_fragment"/>
+              android:label="@string/app_name" tools:layout="@layout/info_fragment"/>
     <fragment android:id="@+id/map" android:name="com.cuhacking.app.map.ui.MapFragment"
-              android:label="map_fragment" tools:layout="@layout/map_fragment"/>
+              android:label="@string/app_name" tools:layout="@layout/map_fragment"/>
     <fragment android:id="@+id/schedule" android:name="com.cuhacking.app.schedule.ui.ScheduleFragment"
-              android:label="schedule_fragment" tools:layout="@layout/schedule_fragment"/>
+              android:label="@string/app_name" tools:layout="@layout/schedule_fragment"/>
+    <activity android:id="@+id/admin" android:name="com.cuhacking.app.admin.ui.AdminActivity"
+              android:label="activity_admin" tools:layout="@layout/activity_admin"/>
+    <activity android:id="@+id/profile" android:name="com.cuhacking.app.profile.ui.ProfileActivity"
+              android:label="activity_profile" tools:layout="@layout/activity_profile"/>
 </navigation>

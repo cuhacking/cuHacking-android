@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/admin"
+            android:icon="@drawable/ic_crop_free"
+            android:title="Scan QR Code"
+            app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_person"
+        android:title="Profile"
+        app:showAsAction="always"/>
+</menu>

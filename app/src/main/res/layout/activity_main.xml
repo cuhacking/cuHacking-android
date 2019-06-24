@@ -12,6 +12,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            app:menu="@menu/toolbar"
             app:title="@string/app_name"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
