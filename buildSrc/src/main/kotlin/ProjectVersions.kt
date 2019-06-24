@@ -4,6 +4,7 @@ object ProjectVersions {
     const val MIN_SDK = 21
 
     const val APPCOMPAT = "1.1.0-beta01"
+    const val CAMERA = "1.0.0-alpha01"
     const val CONSTRAINT_LAYOUT = "1.1.3"
     const val COROUTINES = "1.3.0-M1"
     const val ESPRESSO_CORE = "3.2.0"

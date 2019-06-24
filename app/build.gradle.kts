@@ -41,6 +41,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${ProjectVersions.LIFECYCLE}")
     implementation("androidx.navigation:navigation-fragment-ktx:${ProjectVersions.NAVIGATION}")
     implementation("androidx.navigation:navigation-ui-ktx:${ProjectVersions.NAVIGATION}")
+    implementation("androidx.camera:camera-core:${ProjectVersions.CAMERA}")
+    implementation("androidx.camera:camera-camera2:${ProjectVersions.CAMERA}")
 
     implementation("com.google.firebase:firebase-core:${ProjectVersions.FIREBASE_CORE}")
     implementation("com.google.firebase:firebase-common-ktx:${ProjectVersions.FIREBASE_CORE}")

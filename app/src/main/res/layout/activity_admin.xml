@@ -7,4 +7,11 @@
         android:layout_height="match_parent"
         tools:context=".admin.ui.AdminActivity">
 
+    <TextureView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/view_finder"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
