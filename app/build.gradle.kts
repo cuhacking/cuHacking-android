@@ -42,6 +42,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:${ProjectVersions.NAVIGATION}")
     implementation("androidx.navigation:navigation-ui-ktx:${ProjectVersions.NAVIGATION}")
 
+    implementation("com.google.firebase:firebase-core:${ProjectVersions.FIREBASE_CORE}")
     implementation("com.google.firebase:firebase-common-ktx:${ProjectVersions.FIREBASE_CORE}")
     implementation("com.google.firebase:firebase-auth:${ProjectVersions.FIREBASE_AUTH}")
     implementation("com.google.firebase:firebase-messaging:${ProjectVersions.FIREBASE_CLOUD_MESSAGING}")
