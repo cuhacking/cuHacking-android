@@ -6,9 +6,9 @@
         android:layout_height="match_parent"
         tools:context=".map.ui.MapFragment">
 
-    <TextView
+    <com.mapbox.mapboxsdk.maps.MapView
+            android:id="@+id/map_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello"/>
+            android:layout_height="match_parent"/>
 
 </FrameLayout>

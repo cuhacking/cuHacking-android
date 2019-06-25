@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
+import java.util.*
 
 plugins {
     id("com.android.application")
@@ -19,6 +20,19 @@ android {
         versionCode = 1
         versionName = "git describe --tag".execute().text.trim()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val props = Properties()
+        val localPropsFile = project.rootProject.file("local.properties")
+        if (localPropsFile.exists()) {
+            props.load(localPropsFile.inputStream())
+        }
+
+        if (props.containsKey("api.endpoint") && props.containsKey("mapbox.key")) {
+            buildConfigField("String", "API_ENDPOINT", "\"${props.getProperty("api.endpoint")}\"")
+            buildConfigField("String", "MAPBOX_KEY", "\"${props.getProperty("mapbox.key")}\"")
+        } else {
+            throw GradleException("mapbox.key and api.endpoint not declared in local.properties")
+        }
     }
     buildTypes {
         getByName("release") {
