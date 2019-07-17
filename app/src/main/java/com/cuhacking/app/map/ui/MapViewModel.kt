@@ -16,8 +16,25 @@
 
 package com.cuhacking.app.map.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.viewModelScope
+import com.cuhacking.app.data.map.Floor
+import com.cuhacking.app.data.map.MapDataSource
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MapViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class MapViewModel @Inject constructor(private val mapDataSource: MapDataSource) : ViewModel() {
+
+    private val _floorSource = MutableLiveData<GeoJsonSource>()
+    val floorSource: LiveData<GeoJsonSource> = _floorSource
+
+    init {
+        viewModelScope.launch {
+            _floorSource.value = mapDataSource.getFloorData(Floor.LV01)
+        }
+    }
+
 }
