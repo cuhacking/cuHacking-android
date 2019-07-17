@@ -17,7 +17,6 @@
 package com.cuhacking.app.map.ui
 
 import android.content.res.Configuration
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,7 +33,9 @@ import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.style.expressions.Expression
 import com.mapbox.mapboxsdk.style.layers.FillLayer
+import com.mapbox.mapboxsdk.style.layers.LineLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 
 class MapFragment : Fragment() {
@@ -85,13 +86,19 @@ class MapFragment : Fragment() {
 
                     val layer = FillLayer(source.id, source.id)
                     layer.setProperties(
-                        fillColor("#212121"),
-                        fillOpacity(0.5f),
-                        fillOutlineColor("#7C39BF"),
-                        lineWidth(3f)
+                        fillColor("#212121")
                     )
+                    layer.setFilter(Expression.eq(Expression.get("floor"), 1))
+
+                    val lineLayer = LineLayer("{source.id}-lines", source.id)
+                    lineLayer.setProperties(
+                        lineWidth(2f),
+                        lineColor("#7C39BF")
+                    )
+                    lineLayer.setFilter(Expression.eq(Expression.get("floor"), 1))
 
                     style.addLayer(layer)
+                    style.addLayer(lineLayer)
                 }
             })
         }

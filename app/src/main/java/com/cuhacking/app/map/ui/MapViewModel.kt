@@ -33,7 +33,7 @@ class MapViewModel @Inject constructor(private val mapDataSource: MapDataSource)
 
     init {
         viewModelScope.launch {
-            _floorSource.value = mapDataSource.getFloorData(Floor.LV01)
+            _floorSource.value = mapDataSource.getData()
         }
     }
 

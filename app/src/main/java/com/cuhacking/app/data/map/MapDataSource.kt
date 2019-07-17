@@ -31,33 +31,24 @@ class MapDataSource @Inject constructor(
     private val dispatchers: CoroutinesDispatcherProvider
 ) {
 
-    suspend fun getFloorData(floor: Floor): GeoJsonSource = withContext(dispatchers.io) {
+    suspend fun getData(): GeoJsonSource = withContext(dispatchers.io) {
         if (!dataInfoProvider.mapDataCopied) {
             copyAssetData()
         }
 
-        val file = File(context.filesDir, floor.fileName)
-        if (!file.exists()) { throw FileNotFoundException("Could not find ${floor.fileName}") }
+        val file = File(context.filesDir, "RB.geojson")
+        if (!file.exists()) { throw FileNotFoundException("Could not find RB.geojson") }
 
-        return@withContext withContext(dispatchers.main) { GeoJsonSource(floor.id, file.readText()) }
+        return@withContext withContext(dispatchers.main) { GeoJsonSource("rb", file.readText()) }
     }
 
     private fun copyAssetData() {
-        Floor.values().forEach { floor ->
-            context.assets.open(floor.fileName).use { inputStream ->
-                context.openFileOutput(floor.fileName, Context.MODE_PRIVATE).use { outputStream ->
-                    outputStream.write(inputStream.readBytes())
-                }
+        context.assets.open("RB.geojson").use { inputStream ->
+            context.openFileOutput("RB.geojson", Context.MODE_PRIVATE).use { outputStream ->
+                outputStream.write(inputStream.readBytes())
             }
         }
 
         dataInfoProvider.mapDataCopied = true
     }
-}
-
-enum class Floor(val fileName: String, val id: String) {
-    LV01("LV01.geojson", "LV01"),
-    LV02("LV02.geojson", "LV02"),
-    LV03("LV03.geojson", "LV03"),
-    LV04("LV04.geojson", "LV04")
 }
