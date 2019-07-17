@@ -31,10 +31,17 @@ class MapViewModel @Inject constructor(private val mapDataSource: MapDataSource)
     private val _floorSource = MutableLiveData<GeoJsonSource>()
     val floorSource: LiveData<GeoJsonSource> = _floorSource
 
+    private val _selectedFloor = MutableLiveData<Floor>()
+    val selectedFloor: LiveData<Floor> = _selectedFloor
+
     init {
         viewModelScope.launch {
             _floorSource.value = mapDataSource.getData()
         }
+    }
+
+    fun setFloor(floor: Floor) {
+        _selectedFloor.value = floor
     }
 
 }

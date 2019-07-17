@@ -22,11 +22,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.cuhacking.app.BuildConfig
 
 import com.cuhacking.app.R
+import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.di.injector
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
@@ -84,13 +86,13 @@ class MapFragment : Fragment() {
                 map.style?.let { style ->
                     style.addSource(source)
 
-                    val layer = FillLayer(source.id, source.id)
+                    val layer = FillLayer("rb", source.id)
                     layer.setProperties(
                         fillColor("#212121")
                     )
                     layer.setFilter(Expression.eq(Expression.get("floor"), 1))
 
-                    val lineLayer = LineLayer("{source.id}-lines", source.id)
+                    val lineLayer = LineLayer("rb-lines", source.id)
                     lineLayer.setProperties(
                         lineWidth(2f),
                         lineColor("#7C39BF")
@@ -101,6 +103,24 @@ class MapFragment : Fragment() {
                     style.addLayer(lineLayer)
                 }
             })
+
+            viewModel.selectedFloor.observe(this, Observer { floor ->
+                val fillLayer = map.style?.getLayer("rb") as FillLayer
+                fillLayer.setFilter(Expression.eq(Expression.get("floor"), floor.number))
+
+                val lineLayer = map.style?.getLayer("rb-lines") as LineLayer
+                lineLayer.setFilter(Expression.eq(Expression.get("floor"), floor.number))
+            })
+        }
+
+        view.findViewById<TextView>(R.id.first).setOnClickListener {
+            viewModel.setFloor(Floor.LV01)
+        }
+        view.findViewById<TextView>(R.id.second).setOnClickListener {
+            viewModel.setFloor(Floor.LV02)
+        }
+        view.findViewById<TextView>(R.id.third).setOnClickListener {
+            viewModel.setFloor(Floor.LV03)
         }
     }
 
