@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ToggleButton
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.cuhacking.app.BuildConfig
@@ -42,6 +43,7 @@ import com.mapbox.mapboxsdk.style.expressions.Expression.*
 import com.mapbox.mapboxsdk.style.layers.FillLayer
 import com.mapbox.mapboxsdk.style.layers.LineLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 
 class MapFragment : Fragment() {
@@ -117,38 +119,83 @@ class MapFragment : Fragment() {
     private fun applyMapStyle(style: Style, source: GeoJsonSource) {
         style.addSource(source)
 
-        val layer = FillLayer("rb", source.id)
-        layer.setProperties(
-            fillColor(
-                match(
-                    get("type"), color(Color.parseColor("#212121")),
-                    stop("room", color(Color.parseColor("#00FF00"))),
-                    stop("washroom", color(Color.parseColor("#FFFF00"))),
-                    stop("elevator", color(Color.parseColor("#FF0000"))),
-                    stop("stairs", color(Color.parseColor("#0000FF"))),
-                    stop("hallway", color(Color.parseColor("#FFFFFF")))
+        FillLayer("rb", source.id).apply {
+            setProperties(
+                fillColor(
+                    match(
+                        get("type"), color(Color.parseColor("#212121")),
+                        stop("room", color(Color.parseColor("#00FF00"))),
+                        stop("washroom", color(Color.parseColor("#FFFF00"))),
+                        stop("elevator", color(Color.parseColor("#FF0000"))),
+                        stop("stairs", color(Color.parseColor("#0000FF"))),
+                        stop("hallway", color(Color.parseColor("#FFFFFF")))
+                    )
+                ),
+                fillOpacity(
+                    match(
+                        get("type"), literal(1f),
+                        stop("open", 0f)
+                    )
                 )
             )
-        )
-        layer.setFilter(eq(get("floor"), 1))
+            style.addLayer(this)
+        }
 
-        val lineLayer = LineLayer("rb-lines", source.id)
-        lineLayer.setProperties(
-            lineWidth(1f),
-            lineColor("#7C39BF")
-        )
-        lineLayer.setFilter(eq(get("floor"), 1))
+        FillLayer("rb-backdrop", source.id).apply {
+            setProperties(
+                fillColor(Color.parseColor("#888888"))
+            )
+            style.addLayerBelow(this, "rb")
+        }
 
-        style.addLayer(layer)
-        style.addLayer(lineLayer)
+        LineLayer("rb-lines", source.id).apply {
+            setProperties(
+                lineWidth(1f),
+                lineColor("#7C39BF")
+            )
+            style.addLayer(this)
+        }
 
+        SymbolLayer("rb-symbols", source.id).apply {
+            setProperties(textField(get("name")))
+            style.addLayer(this)
+        }
+
+        setLayerFilters(style, Floor.LV01)
         viewModel.selectedFloor.observe(this, Observer { floor ->
-            val floorFillLayer = style.getLayer("rb") as FillLayer
-            floorFillLayer.setFilter(eq(get("floor"), floor.number))
+            val id = when (floor) {
+                Floor.LV01 -> R.id.first
+                Floor.LV02 -> R.id.second
+                Floor.LV03 -> R.id.third
+                else -> R.id.first
+            }
 
-            val floorLineLayer = style.getLayer("rb-lines") as LineLayer
-            floorLineLayer.setFilter(eq(get("floor"), floor.number))
+            view?.findViewById<FloorSelectionButton>(id)?.let {
+                if (!it.isChecked) {
+                    it.isChecked = true
+                }
+            }
+
+            setLayerFilters(style, floor)
         })
+    }
+
+    private fun setLayerFilters(style: Style, floor: Floor) {
+        // Room fills
+        (style.getLayer("rb") as FillLayer)
+            .setFilter(all(eq(get("floor"), floor.number), neq(get("type"), "backdrop")))
+
+        // Backdrop layer
+        (style.getLayer("rb-backdrop") as FillLayer)
+            .setFilter(all(eq(get("floor"), floor.number), eq(get("type"), "backdrop")))
+
+        // Room outlines
+        (style.getLayer("rb-lines") as LineLayer)
+            .setFilter(eq(get("floor"), floor.number))
+
+        // Labels/Icons
+        (style.getLayer("rb-symbols") as SymbolLayer)
+            .setFilter(all(eq(get("floor"), floor.number), eq(get("label"), true)))
     }
 
     override fun onStart() {
@@ -169,6 +216,11 @@ class MapFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         view?.findViewById<MapView>(R.id.map_view)?.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        view?.findViewById<MapView>(R.id.map_view)?.onDestroy()
 
         // Remove all the layers we added
         map?.style?.layers?.let { layers ->
@@ -181,11 +233,6 @@ class MapFragment : Fragment() {
         viewModel.floorSource.value?.let { source ->
             map?.style?.removeSource(source)
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        view?.findViewById<MapView>(R.id.map_view)?.onDestroy()
     }
 
     override fun onLowMemory() {

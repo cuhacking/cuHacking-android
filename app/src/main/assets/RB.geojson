@@ -36,6 +36,10 @@
         "fid": 107,
         "type": "elevator",
         "room": "ELEV2",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 2",
+        "available": true,
         "floor": 1
       }
     },
@@ -74,6 +78,10 @@
         "fid": 109,
         "type": "elevator",
         "room": "ELEV1",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 1",
+        "available": true,
         "floor": 1
       }
     },
@@ -112,6 +120,10 @@
         "fid": 110,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -150,6 +162,10 @@
         "fid": 111,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -188,6 +204,10 @@
         "fid": 112,
         "type": null,
         "room": "1103",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -226,6 +246,10 @@
         "fid": 113,
         "type": "stairs",
         "room": "Stair A",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair A",
+        "available": true,
         "floor": 1
       }
     },
@@ -264,6 +288,10 @@
         "fid": 114,
         "type": "washroom",
         "room": "1910",
+        "label": true,
+        "symbolize": true,
+        "name": "Women's",
+        "available": true,
         "floor": 1
       }
     },
@@ -302,6 +330,10 @@
         "fid": 115,
         "type": "washroom",
         "room": "1911",
+        "label": true,
+        "symbolize": true,
+        "name": "Men's",
+        "available": true,
         "floor": 1
       }
     },
@@ -340,6 +372,10 @@
         "fid": 116,
         "type": "room",
         "room": "1202",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -378,6 +414,10 @@
         "fid": 117,
         "type": "room",
         "room": "1203",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -416,6 +456,10 @@
         "fid": 118,
         "type": "room",
         "room": "1204",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -454,6 +498,10 @@
         "fid": 119,
         "type": "room",
         "room": "1205",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -492,6 +540,10 @@
         "fid": 120,
         "type": "room",
         "room": "1206",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -530,6 +582,10 @@
         "fid": 121,
         "type": "room",
         "room": "1207",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -568,6 +624,10 @@
         "fid": 122,
         "type": "room",
         "room": "1209",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -606,6 +666,10 @@
         "fid": 123,
         "type": "room",
         "room": "1210",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -644,6 +708,10 @@
         "fid": 124,
         "type": "hallway",
         "room": "1922",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -690,6 +758,10 @@
         "fid": 125,
         "type": null,
         "room": "1201C",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -744,6 +816,10 @@
         "fid": 126,
         "type": "room",
         "room": "1201",
+        "label": true,
+        "symbolize": false,
+        "name": "1201",
+        "available": true,
         "floor": 1
       }
     },
@@ -778,6 +854,10 @@
         "fid": 129,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -812,6 +892,10 @@
         "fid": 130,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -858,6 +942,10 @@
         "fid": 133,
         "type": "stairs",
         "room": "Stair B",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair B",
+        "available": true,
         "floor": 1
       }
     },
@@ -900,6 +988,10 @@
         "fid": 134,
         "type": null,
         "room": "1212",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -938,6 +1030,10 @@
         "fid": 135,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -984,6 +1080,10 @@
         "fid": 136,
         "type": "hallway",
         "room": "1923",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1022,6 +1122,10 @@
         "fid": 137,
         "type": null,
         "room": "1211",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1060,6 +1164,10 @@
         "fid": 138,
         "type": null,
         "room": "1213",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1098,6 +1206,10 @@
         "fid": 139,
         "type": "hallway",
         "room": "1923",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1136,6 +1248,10 @@
         "fid": 140,
         "type": "room",
         "room": "1214C",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1174,6 +1290,10 @@
         "fid": 141,
         "type": "room",
         "room": "1214B",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1212,6 +1332,10 @@
         "fid": 142,
         "type": "room",
         "room": "1214A",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1266,6 +1390,10 @@
         "fid": 143,
         "type": "room",
         "room": "1214",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1304,6 +1432,10 @@
         "fid": 144,
         "type": "room",
         "room": "1214D",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1342,6 +1474,10 @@
         "fid": 145,
         "type": "room",
         "room": "1214E",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1380,6 +1516,10 @@
         "fid": 146,
         "type": "hallway",
         "room": "1214G",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1418,6 +1558,10 @@
         "fid": 147,
         "type": "room",
         "room": "1214H",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1464,6 +1608,10 @@
         "fid": 148,
         "type": "room",
         "room": "1220",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1506,6 +1654,10 @@
         "fid": 149,
         "type": "room",
         "room": "1214F",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1544,6 +1696,10 @@
         "fid": 150,
         "type": "room",
         "room": "1101E",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1582,6 +1738,10 @@
         "fid": 151,
         "type": "room",
         "room": "1101F",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1620,6 +1780,10 @@
         "fid": 152,
         "type": "room",
         "room": "1101G",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1658,6 +1822,10 @@
         "fid": 153,
         "type": "room",
         "room": "1101H",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1696,6 +1864,10 @@
         "fid": 154,
         "type": "room",
         "room": "1101J",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1734,6 +1906,10 @@
         "fid": 155,
         "type": "room",
         "room": "1101K",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1772,6 +1948,10 @@
         "fid": 156,
         "type": "room",
         "room": "1101L",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1810,6 +1990,10 @@
         "fid": 157,
         "type": "room",
         "room": "1101D",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1848,6 +2032,10 @@
         "fid": 158,
         "type": "hallway",
         "room": "1101",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1886,6 +2074,10 @@
         "fid": 159,
         "type": "room",
         "room": "1101A",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1924,6 +2116,10 @@
         "fid": 160,
         "type": "room",
         "room": "1101B",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -1962,6 +2158,10 @@
         "fid": 161,
         "type": "room",
         "room": "1101C",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2000,6 +2200,10 @@
         "fid": 162,
         "type": "room",
         "room": "1101R",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2038,6 +2242,10 @@
         "fid": 163,
         "type": "room",
         "room": "1101P",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2076,6 +2284,10 @@
         "fid": 166,
         "type": "room",
         "room": "1101M",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2114,6 +2326,10 @@
         "fid": 167,
         "type": "room",
         "room": "1104",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2152,6 +2368,10 @@
         "fid": 168,
         "type": "room",
         "room": "1105A",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2190,6 +2410,10 @@
         "fid": 169,
         "type": "room",
         "room": "1105",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2244,6 +2468,10 @@
         "fid": 170,
         "type": "hallway",
         "room": "1101T",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2282,6 +2510,10 @@
         "fid": 171,
         "type": "hallway",
         "room": "1000",
+        "label": true,
+        "symbolize": false,
+        "name": "Lobby",
+        "available": true,
         "floor": 1
       }
     },
@@ -2320,6 +2552,10 @@
         "fid": 172,
         "type": "hallway",
         "room": "1000A",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 1
       }
     },
@@ -2358,6 +2594,10 @@
         "fid": 173,
         "type": "room",
         "room": "1107",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2396,6 +2636,10 @@
         "fid": 174,
         "type": "room",
         "room": "1108",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2434,6 +2678,10 @@
         "fid": 175,
         "type": "room",
         "room": "1106",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2472,6 +2720,10 @@
         "fid": 176,
         "type": "stairs",
         "room": "Stair E",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": false,
         "floor": 1
       }
     },
@@ -2510,6 +2762,10 @@
         "fid": 177,
         "type": "hallway",
         "room": "1921",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 1
       }
     },
@@ -2552,6 +2808,10 @@
         "fid": 178,
         "type": "room",
         "room": "1200",
+        "label": true,
+        "symbolize": false,
+        "name": "1200",
+        "available": true,
         "floor": 1
       }
     },
@@ -2590,6 +2850,10 @@
         "fid": 179,
         "type": "hallway",
         "room": "1001A",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 1
       }
     },
@@ -2628,6 +2892,10 @@
         "fid": 180,
         "type": "hallway",
         "room": "1920",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 1
       }
     },
@@ -2674,6 +2942,10 @@
         "fid": 181,
         "type": "hallway",
         "room": "1919",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2744,6 +3016,10 @@
         "fid": 182,
         "type": "hallway",
         "room": "1001",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 1
       }
     },
@@ -2782,6 +3058,10 @@
         "fid": 183,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2820,6 +3100,10 @@
         "fid": 184,
         "type": "hallway",
         "room": "1420R",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2874,6 +3158,10 @@
         "fid": 185,
         "type": "stairs",
         "room": "Stair C",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair C",
+        "available": true,
         "floor": 1
       }
     },
@@ -2912,6 +3200,10 @@
         "fid": 186,
         "type": "elevator",
         "room": "ELEV3",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 3",
+        "available": true,
         "floor": 1
       }
     },
@@ -2950,6 +3242,10 @@
         "fid": 187,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -2996,6 +3292,10 @@
         "fid": 188,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3034,6 +3334,10 @@
         "fid": 189,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3072,6 +3376,10 @@
         "fid": 190,
         "type": "hallway",
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3110,6 +3418,10 @@
         "fid": 191,
         "type": "washroom",
         "room": "1913R",
+        "label": true,
+        "symbolize": true,
+        "name": "Men's",
+        "available": true,
         "floor": 1
       }
     },
@@ -3148,6 +3460,10 @@
         "fid": 192,
         "type": "washroom",
         "room": "1912R",
+        "label": true,
+        "symbolize": true,
+        "name": "Women's",
+        "available": true,
         "floor": 1
       }
     },
@@ -3186,6 +3502,10 @@
         "fid": 193,
         "type": "room",
         "room": "1401R-L",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3224,6 +3544,10 @@
         "fid": 194,
         "type": "room",
         "room": "1401R-K",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3262,6 +3586,10 @@
         "fid": 195,
         "type": "room",
         "room": "1401R-H",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3300,6 +3628,10 @@
         "fid": 196,
         "type": "room",
         "room": "1401R-D",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3338,6 +3670,10 @@
         "fid": 197,
         "type": "hallway",
         "room": "1401R-N",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3376,6 +3712,10 @@
         "fid": 198,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3414,6 +3754,10 @@
         "fid": 199,
         "type": "hallway",
         "room": "1401R-A",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3452,6 +3796,10 @@
         "fid": 200,
         "type": "room",
         "room": "1401R-J",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3490,6 +3838,10 @@
         "fid": 201,
         "type": "room",
         "room": "1401R-G",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3528,6 +3880,10 @@
         "fid": 202,
         "type": "hallway",
         "room": "1401R-M",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3566,6 +3922,10 @@
         "fid": 203,
         "type": "room",
         "room": "1401R-F",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3604,6 +3964,10 @@
         "fid": 204,
         "type": "room",
         "room": "1401R-E",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3642,6 +4006,10 @@
         "fid": 205,
         "type": "room",
         "room": "1401R-C",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3680,6 +4048,10 @@
         "fid": 206,
         "type": "room",
         "room": "1401R-B",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3718,6 +4090,10 @@
         "fid": 207,
         "type": "hallway",
         "room": "1400R-A",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 1
       }
     },
@@ -3756,6 +4132,10 @@
         "fid": 208,
         "type": null,
         "room": "1400R-B",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3794,6 +4174,10 @@
         "fid": 209,
         "type": "hallway",
         "room": "1401R",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3832,6 +4216,10 @@
         "fid": 210,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3886,6 +4274,10 @@
         "fid": 211,
         "type": "hallway",
         "room": "1400R",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 1
       }
     },
@@ -3924,6 +4316,10 @@
         "fid": 212,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -3962,6 +4358,10 @@
         "fid": 213,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 1
       }
     },
@@ -4000,6 +4400,52 @@
         "fid": 214,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
+        "floor": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                -75.69631092437578,
+                45.38260938416231
+              ],
+              [
+                -75.69629502939874,
+                45.382593383769105
+              ],
+              [
+                -75.69641238984848,
+                45.3825358686187
+              ],
+              [
+                -75.69642828482553,
+                45.38255186902819
+              ],
+              [
+                -75.69631092437578,
+                45.38260938416231
+              ]
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "fid": 215,
+        "type": "stairs",
+        "room": "Stair F",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair F",
+        "available": true,
         "floor": 1
       }
     },
@@ -4036,6 +4482,10 @@
         "fid": 1,
         "type": "room",
         "room": "2311",
+        "label": true,
+        "symbolize": false,
+        "name": "2311",
+        "available": true,
         "floor": 2
       }
     },
@@ -4072,6 +4522,10 @@
         "fid": 2,
         "type": "room",
         "room": "2308",
+        "label": true,
+        "symbolize": false,
+        "name": "2308",
+        "available": true,
         "floor": 2
       }
     },
@@ -4108,6 +4562,10 @@
         "fid": 3,
         "type": null,
         "room": "2304",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4144,6 +4602,10 @@
         "fid": 4,
         "type": null,
         "room": "2916",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4180,6 +4642,10 @@
         "fid": 5,
         "type": null,
         "room": "2915",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4224,6 +4690,10 @@
         "fid": 6,
         "type": "hallway",
         "room": "2920",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -4272,6 +4742,10 @@
         "fid": 7,
         "type": "room",
         "room": "2310",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4308,6 +4782,10 @@
         "fid": 8,
         "type": "room",
         "room": "2309",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4344,6 +4822,10 @@
         "fid": 9,
         "type": "room",
         "room": "2307",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4380,6 +4862,10 @@
         "fid": 10,
         "type": "room",
         "room": "2306",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4416,6 +4902,10 @@
         "fid": 11,
         "type": "room",
         "room": "2305",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4452,6 +4942,10 @@
         "fid": 12,
         "type": "room",
         "room": "2303",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4488,6 +4982,10 @@
         "fid": 13,
         "type": "room",
         "room": "2301",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4524,6 +5022,10 @@
         "fid": 14,
         "type": "stairs",
         "room": "Stair A",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair A",
+        "available": true,
         "floor": 2
       }
     },
@@ -4558,8 +5060,12 @@
       },
       "properties": {
         "fid": 15,
-        "type": null,
+        "type": "hallway",
         "room": "2929",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -4596,6 +5102,10 @@
         "fid": 16,
         "type": null,
         "room": "2302",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4632,6 +5142,10 @@
         "fid": 17,
         "type": "washroom",
         "room": "2914",
+        "label": true,
+        "symbolize": true,
+        "name": "Women's",
+        "available": true,
         "floor": 2
       }
     },
@@ -4668,6 +5182,10 @@
         "fid": 18,
         "type": "washroom",
         "room": "2913",
+        "label": true,
+        "symbolize": true,
+        "name": "Men's",
+        "available": true,
         "floor": 2
       }
     },
@@ -4704,6 +5222,10 @@
         "fid": 19,
         "type": "stairs",
         "room": "Stair C",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair C",
+        "available": true,
         "floor": 2
       }
     },
@@ -4740,6 +5262,10 @@
         "fid": 20,
         "type": "elevator",
         "room": "ELEV3",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 3",
+        "available": true,
         "floor": 2
       }
     },
@@ -4776,6 +5302,10 @@
         "fid": 21,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -4812,6 +5342,10 @@
         "fid": 22,
         "type": "hallway",
         "room": "2928",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -4848,6 +5382,10 @@
         "fid": 24,
         "type": "elevator",
         "room": "ELEV2",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 2",
+        "available": true,
         "floor": 2
       }
     },
@@ -4884,6 +5422,10 @@
         "fid": 25,
         "type": "elevator",
         "room": "ELEV1",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 1",
+        "available": true,
         "floor": 2
       }
     },
@@ -4920,6 +5462,10 @@
         "fid": 28,
         "type": "washroom",
         "room": "2911",
+        "label": true,
+        "symbolize": true,
+        "name": "Women's",
+        "available": true,
         "floor": 2
       }
     },
@@ -4956,6 +5502,10 @@
         "fid": 29,
         "type": "washroom",
         "room": "2910",
+        "label": true,
+        "symbolize": true,
+        "name": "Men's",
+        "available": true,
         "floor": 2
       }
     },
@@ -4992,6 +5542,10 @@
         "fid": 31,
         "type": "hallway",
         "room": "2926",
+        "label": true,
+        "symbolize": false,
+        "name": "Atrium",
+        "available": true,
         "floor": 2
       }
     },
@@ -5028,6 +5582,10 @@
         "fid": 32,
         "type": "hallway",
         "room": "2924",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -5064,6 +5622,10 @@
         "fid": 33,
         "type": "hallway",
         "room": "2925",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -5100,6 +5662,10 @@
         "fid": 35,
         "type": "room",
         "room": "2224",
+        "label": true,
+        "symbolize": false,
+        "name": "2224",
+        "available": true,
         "floor": 2
       }
     },
@@ -5136,6 +5702,10 @@
         "fid": 36,
         "type": "room",
         "room": "2228",
+        "label": true,
+        "symbolize": false,
+        "name": "2228",
+        "available": true,
         "floor": 2
       }
     },
@@ -5172,6 +5742,10 @@
         "fid": 37,
         "type": "room",
         "room": "2220",
+        "label": true,
+        "symbolize": false,
+        "name": "2220",
+        "available": true,
         "floor": 2
       }
     },
@@ -5240,6 +5814,10 @@
         "fid": 38,
         "type": "room",
         "room": "2102",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5276,6 +5854,10 @@
         "fid": 39,
         "type": "stairs",
         "room": "Stair B",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair B",
+        "available": true,
         "floor": 2
       }
     },
@@ -5312,6 +5894,10 @@
         "fid": 40,
         "type": null,
         "room": "2214",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5348,6 +5934,10 @@
         "fid": 41,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5384,6 +5974,10 @@
         "fid": 42,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5420,6 +6014,10 @@
         "fid": 43,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5456,6 +6054,10 @@
         "fid": 44,
         "type": null,
         "room": "2212B",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5492,6 +6094,10 @@
         "fid": 45,
         "type": null,
         "room": "2212",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5528,6 +6134,10 @@
         "fid": 46,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5538,8 +6148,8 @@
         "coordinates": [
           [
             [
-              -75.69640261698729,
-              45.38254065803314
+              -75.6964123898484,
+              45.38253586861864
             ],
             [
               -75.69629502939874,
@@ -5550,12 +6160,12 @@
               45.38260938416231
             ],
             [
-              -75.69641851196434,
-              45.382556658441274
+              -75.69642828482544,
+              45.38255186902815
             ],
             [
-              -75.69640261698729,
-              45.38254065803314
+              -75.6964123898484,
+              45.38253586861864
             ]
           ]
         ]
@@ -5564,6 +6174,10 @@
         "fid": 47,
         "type": "stairs",
         "room": "Stair F",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair F",
+        "available": true,
         "floor": 2
       }
     },
@@ -5612,6 +6226,10 @@
         "fid": 48,
         "type": null,
         "room": "2212C",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -5756,6 +6374,10 @@
         "fid": 49,
         "type": "room",
         "room": "2211",
+        "label": true,
+        "symbolize": false,
+        "name": "2211",
+        "available": true,
         "floor": 2
       }
     },
@@ -5812,6 +6434,10 @@
         "fid": 52,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -6012,6 +6638,10 @@
         "fid": 53,
         "type": "hallway",
         "room": "2001",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -6046,8 +6676,12 @@
       },
       "properties": {
         "fid": 54,
-        "type": "hallway",
+        "type": "open",
         "room": null,
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -6092,6 +6726,10 @@
         "fid": 55,
         "type": "stairs",
         "room": "Stair K",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -6136,6 +6774,10 @@
         "fid": 58,
         "type": "room",
         "room": "2200A",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -6172,6 +6814,10 @@
         "fid": 59,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -6224,6 +6870,10 @@
         "fid": 60,
         "type": null,
         "room": "2200B",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -6280,6 +6930,10 @@
         "fid": 61,
         "type": "room",
         "room": "2200",
+        "label": true,
+        "symbolize": false,
+        "name": "2200",
+        "available": true,
         "floor": 2
       }
     },
@@ -6328,6 +6982,10 @@
         "fid": 62,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -6372,6 +7030,10 @@
         "fid": 63,
         "type": null,
         "room": "2200C",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -6408,6 +7070,10 @@
         "fid": 64,
         "type": "hallway",
         "room": "2300",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 2
       }
     },
@@ -6452,6 +7118,10 @@
         "fid": 65,
         "type": null,
         "room": "Patio",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 2
       }
     },
@@ -6496,6 +7166,10 @@
         "fid": 66,
         "type": "stairs",
         "room": "Stair G",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair G",
+        "available": true,
         "floor": 2
       }
     },
@@ -6532,6 +7206,10 @@
         "fid": 1,
         "type": "stairs",
         "room": "Stair A",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair A",
+        "available": true,
         "floor": 3
       }
     },
@@ -6568,6 +7246,10 @@
         "fid": 2,
         "type": "washroom",
         "room": "3910",
+        "label": true,
+        "symbolize": true,
+        "name": "Women's",
+        "available": true,
         "floor": 3
       }
     },
@@ -6604,6 +7286,10 @@
         "fid": 3,
         "type": "washroom",
         "room": "3911",
+        "label": true,
+        "symbolize": true,
+        "name": "Men's",
+        "available": true,
         "floor": 3
       }
     },
@@ -6640,6 +7326,10 @@
         "fid": 5,
         "type": "elevator",
         "room": "ELEV2",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 2",
+        "available": true,
         "floor": 3
       }
     },
@@ -6676,6 +7366,10 @@
         "fid": 6,
         "type": "elevator",
         "room": "ELEV1",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 1",
+        "available": true,
         "floor": 3
       }
     },
@@ -6712,6 +7406,10 @@
         "fid": 7,
         "type": "room",
         "room": "3201",
+        "label": true,
+        "symbolize": false,
+        "name": "3201",
+        "available": true,
         "floor": 3
       }
     },
@@ -6748,6 +7446,10 @@
         "fid": 8,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -6784,6 +7486,10 @@
         "fid": 9,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -6820,6 +7526,10 @@
         "fid": 10,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -6856,6 +7566,10 @@
         "fid": 11,
         "type": "hallway",
         "room": "3922",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -6892,6 +7606,10 @@
         "fid": 12,
         "type": "room",
         "room": "3112",
+        "label": true,
+        "symbolize": false,
+        "name": "3112",
+        "available": true,
         "floor": 3
       }
     },
@@ -6928,6 +7646,10 @@
         "fid": 13,
         "type": "room",
         "room": "3110",
+        "label": true,
+        "symbolize": false,
+        "name": "3110",
+        "available": true,
         "floor": 3
       }
     },
@@ -6964,6 +7686,10 @@
         "fid": 14,
         "type": "room",
         "room": "3101",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7000,6 +7726,10 @@
         "fid": 15,
         "type": "room",
         "room": "3102",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7044,6 +7774,10 @@
         "fid": 16,
         "type": "room",
         "room": "3202",
+        "label": true,
+        "symbolize": false,
+        "name": "3202",
+        "available": true,
         "floor": 3
       }
     },
@@ -7080,6 +7814,10 @@
         "fid": 30,
         "type": "elevator",
         "room": "ELEV3",
+        "label": true,
+        "symbolize": true,
+        "name": "Elevator 3",
+        "available": true,
         "floor": 3
       }
     },
@@ -7116,6 +7854,10 @@
         "fid": 31,
         "type": "stairs",
         "room": "Stair C",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair C",
+        "available": true,
         "floor": 3
       }
     },
@@ -7152,6 +7894,10 @@
         "fid": 33,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7188,6 +7934,10 @@
         "fid": 34,
         "type": "hallway",
         "room": "3912A",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -7224,6 +7974,10 @@
         "fid": 35,
         "type": null,
         "room": "3309",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7268,6 +8022,10 @@
         "fid": 36,
         "type": "washroom",
         "room": "3912",
+        "label": true,
+        "symbolize": true,
+        "name": "Women's",
+        "available": true,
         "floor": 3
       }
     },
@@ -7312,6 +8070,10 @@
         "fid": 37,
         "type": "washroom",
         "room": "3913",
+        "label": true,
+        "symbolize": true,
+        "name": "Men's",
+        "available": true,
         "floor": 3
       }
     },
@@ -7348,6 +8110,10 @@
         "fid": 38,
         "type": null,
         "room": "3311",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7384,6 +8150,10 @@
         "fid": 39,
         "type": null,
         "room": "3313",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7420,6 +8190,10 @@
         "fid": 40,
         "type": "room",
         "room": "3317",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7456,6 +8230,10 @@
         "fid": 41,
         "type": null,
         "room": "3318",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7500,6 +8278,10 @@
         "fid": 42,
         "type": "room",
         "room": "3320",
+        "label": true,
+        "symbolize": false,
+        "name": "3320",
+        "available": true,
         "floor": 3
       }
     },
@@ -7536,6 +8318,10 @@
         "fid": 44,
         "type": "hallway",
         "room": "3928",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -7580,6 +8366,10 @@
         "fid": 57,
         "type": "hallway",
         "room": "3921",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -7616,6 +8406,10 @@
         "fid": 58,
         "type": "hallway",
         "room": "3920",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -7652,6 +8446,10 @@
         "fid": 60,
         "type": "room",
         "room": "3319",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7688,6 +8486,10 @@
         "fid": 61,
         "type": "room",
         "room": "3316",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7724,6 +8526,10 @@
         "fid": 62,
         "type": "room",
         "room": "3315",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7760,6 +8566,10 @@
         "fid": 63,
         "type": "room",
         "room": "3314",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7796,6 +8606,10 @@
         "fid": 64,
         "type": "room",
         "room": "3312",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7832,6 +8646,10 @@
         "fid": 65,
         "type": "room",
         "room": "3310",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7868,6 +8686,10 @@
         "fid": 66,
         "type": "room",
         "room": "3308",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7904,6 +8726,10 @@
         "fid": 67,
         "type": "room",
         "room": "3307",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7948,6 +8774,10 @@
         "fid": 68,
         "type": "room",
         "room": "3306",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -7984,6 +8814,10 @@
         "fid": 69,
         "type": "hallway",
         "room": "3926",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -8020,6 +8854,10 @@
         "fid": 70,
         "type": "room",
         "room": "3302",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8056,6 +8894,10 @@
         "fid": 71,
         "type": "room",
         "room": "3303",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8092,6 +8934,10 @@
         "fid": 72,
         "type": "room",
         "room": "3304",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8136,6 +8982,10 @@
         "fid": 73,
         "type": "room",
         "room": "3305",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8180,6 +9030,10 @@
         "fid": 74,
         "type": "room",
         "room": "3301",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8214,8 +9068,12 @@
       },
       "properties": {
         "fid": 76,
-        "type": "hallway",
+        "type": "open",
         "room": null,
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": false,
         "floor": 3
       }
     },
@@ -8252,6 +9110,10 @@
         "fid": 85,
         "type": "hallway",
         "room": "3230",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -8288,6 +9150,10 @@
         "fid": 86,
         "type": "hallway",
         "room": "3924",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -8324,6 +9190,10 @@
         "fid": 87,
         "type": "room",
         "room": "3224",
+        "label": true,
+        "symbolize": false,
+        "name": "3224",
+        "available": true,
         "floor": 3
       }
     },
@@ -8360,6 +9230,10 @@
         "fid": 88,
         "type": "room",
         "room": "3228",
+        "label": true,
+        "symbolize": false,
+        "name": "3228",
+        "available": true,
         "floor": 3
       }
     },
@@ -8396,6 +9270,10 @@
         "fid": 89,
         "type": "room",
         "room": "3220",
+        "label": true,
+        "symbolize": false,
+        "name": "3220",
+        "available": true,
         "floor": 3
       }
     },
@@ -8432,6 +9310,10 @@
         "fid": 90,
         "type": "stairs",
         "room": "Stair B",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair B",
+        "available": true,
         "floor": 3
       }
     },
@@ -8468,6 +9350,10 @@
         "fid": 91,
         "type": null,
         "room": "3213",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8504,6 +9390,10 @@
         "fid": 92,
         "type": null,
         "room": "3212",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8540,6 +9430,10 @@
         "fid": 93,
         "type": "hallway",
         "room": null,
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -8584,6 +9478,10 @@
         "fid": 94,
         "type": null,
         "room": "3211",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8716,6 +9614,10 @@
         "fid": 95,
         "type": "room",
         "room": "2200",
+        "label": true,
+        "symbolize": false,
+        "name": "2200",
+        "available": true,
         "floor": 3
       }
     },
@@ -8760,6 +9662,10 @@
         "fid": 97,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8796,6 +9702,10 @@
         "fid": 98,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8860,6 +9770,10 @@
         "fid": 99,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -8968,6 +9882,10 @@
         "fid": 100,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -9004,6 +9922,10 @@
         "fid": 102,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -9044,6 +9966,10 @@
         "fid": 103,
         "type": null,
         "room": "3113",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -9128,6 +10054,10 @@
         "fid": 104,
         "type": "hallway",
         "room": "3210",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -9188,6 +10118,10 @@
         "fid": 105,
         "type": null,
         "room": null,
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -9392,6 +10326,10 @@
         "fid": 106,
         "type": "hallway",
         "room": "3001",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
         "floor": 3
       }
     },
@@ -9436,6 +10374,10 @@
         "fid": 107,
         "type": "stairs",
         "room": "Stair H",
+        "label": null,
+        "symbolize": null,
+        "name": null,
+        "available": null,
         "floor": 3
       }
     },
@@ -9480,7 +10422,356 @@
         "fid": 108,
         "type": "stairs",
         "room": "Stair G",
+        "label": true,
+        "symbolize": true,
+        "name": "Stair G",
+        "available": true,
         "floor": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.69596825798757,
+              45.38227564314616
+            ],
+            [
+              -75.69594184769022,
+              45.38224905753516
+            ],
+            [
+              -75.69590888552807,
+              45.38226521147828
+            ],
+            [
+              -75.69592064142711,
+              45.38227704541208
+            ],
+            [
+              -75.69592449852686,
+              45.38227515514321
+            ],
+            [
+              -75.69610606897912,
+              45.382457931989705
+            ],
+            [
+              -75.69612530087481,
+              45.38244850694442
+            ],
+            [
+              -75.69595838385067,
+              45.382280482215464
+            ],
+            [
+              -75.69596825798757,
+              45.38227564314616
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "fid": 109,
+        "type": "hallway",
+        "room": "3927",
+        "label": false,
+        "symbolize": false,
+        "name": null,
+        "available": true,
+        "floor": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.69612136272265,
+              45.382563224980984
+            ],
+            [
+              -75.69607560138354,
+              45.38258565135927
+            ],
+            [
+              -75.69615261593209,
+              45.382663176640115
+            ],
+            [
+              -75.69616968667226,
+              45.38265481075067
+            ],
+            [
+              -75.696233261845,
+              45.38271880745992
+            ],
+            [
+              -75.69650360992362,
+              45.3825863174578
+            ],
+            [
+              -75.69650520001957,
+              45.382587918867095
+            ],
+            [
+              -75.69674637490535,
+              45.3824697269993
+            ],
+            [
+              -75.6965427723882,
+              45.3822647708527
+            ],
+            [
+              -75.69640343791755,
+              45.38212451294074
+            ],
+            [
+              -75.6963083756491,
+              45.38202881932711
+            ],
+            [
+              -75.69629089162699,
+              45.38203738784929
+            ],
+            [
+              -75.69633134573591,
+              45.382078110643164
+            ],
+            [
+              -75.6962160369133,
+              45.38213462080519
+            ],
+            [
+              -75.69612156537535,
+              45.38203952186281
+            ],
+            [
+              -75.69598511041505,
+              45.38210639529276
+            ],
+            [
+              -75.6959721205585,
+              45.38209331917088
+            ],
+            [
+              -75.69578133797206,
+              45.38218681720673
+            ],
+            [
+              -75.69594340803782,
+              45.38234996287915
+            ],
+            [
+              -75.69601438641207,
+              45.38243441840554
+            ],
+            [
+              -75.69613928651856,
+              45.38256014860767
+            ],
+            [
+              -75.69612517615826,
+              45.38256706370994
+            ],
+            [
+              -75.69612136272265,
+              45.382563224980984
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "fid": 1,
+        "floor": 1,
+        "type": "backdrop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.69674637490535,
+              45.3824697269993
+            ],
+            [
+              -75.69655287276754,
+              45.382564545578155
+            ],
+            [
+              -75.69658408489828,
+              45.38259596472074
+            ],
+            [
+              -75.69650876095743,
+              45.38263287889405
+            ],
+            [
+              -75.69647596502114,
+              45.382599865462524
+            ],
+            [
+              -75.69621618016704,
+              45.382727162329715
+            ],
+            [
+              -75.69607560138354,
+              45.382585651359285
+            ],
+            [
+              -75.69612118498566,
+              45.38256331208504
+            ],
+            [
+              -75.69612499842125,
+              45.382567150813976
+            ],
+            [
+              -75.69613928753004,
+              45.382560148111985
+            ],
+            [
+              -75.69601302354909,
+              45.382433046507515
+            ],
+            [
+              -75.69602161905176,
+              45.38242883407648
+            ],
+            [
+              -75.6958709398832,
+              45.3822771549311
+            ],
+            [
+              -75.69586495369964,
+              45.38228008861096
+            ],
+            [
+              -75.69578824745207,
+              45.38220287315269
+            ],
+            [
+              -75.69612156537535,
+              45.38203952186281
+            ],
+            [
+              -75.69621447084043,
+              45.382133044333024
+            ],
+            [
+              -75.69622673658293,
+              45.382127033181504
+            ],
+            [
+              -75.69621005369777,
+              45.38211023951136
+            ],
+            [
+              -75.69633058080001,
+              45.38205117196547
+            ],
+            [
+              -75.69674637490535,
+              45.3824697269993
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "fid": 2,
+        "floor": 2,
+        "type": "backdrop"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -75.69607560138354,
+              45.38258565135926
+            ],
+            [
+              -75.69621619266333,
+              45.38272717491048
+            ],
+            [
+              -75.69651601384338,
+              45.382580238637566
+            ],
+            [
+              -75.69651759865603,
+              45.38258183176878
+            ],
+            [
+              -75.69674637490535,
+              45.3824697269993
+            ],
+            [
+              -75.69633092830885,
+              45.38205152178232
+            ],
+            [
+              -75.69621040120656,
+              45.38211058932786
+            ],
+            [
+              -75.69621365385387,
+              45.38211386357521
+            ],
+            [
+              -75.69606749040865,
+              45.38218549481267
+            ],
+            [
+              -75.69605885549717,
+              45.382176802569475
+            ],
+            [
+              -75.69604779183197,
+              45.38218222460651
+            ],
+            [
+              -75.69602842857702,
+              45.38216273278577
+            ],
+            [
+              -75.6958374627031,
+              45.38225632053181
+            ],
+            [
+              -75.69613973945175,
+              45.38256060303117
+            ],
+            [
+              -75.69612545034286,
+              45.38256760573313
+            ],
+            [
+              -75.69612118498566,
+              45.38256331208505
+            ],
+            [
+              -75.69607560138354,
+              45.38258565135926
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "fid": 3,
+        "floor": 3,
+        "type": "backdrop"
       }
     }
   ]
