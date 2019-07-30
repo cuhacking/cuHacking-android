@@ -34,6 +34,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
+import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.MapView
 import com.mapbox.mapboxsdk.maps.MapboxMap
 import com.mapbox.mapboxsdk.maps.Style
@@ -85,8 +86,17 @@ class MapFragment : Fragment() {
             if (savedInstanceState == null) {
                 map?.cameraPosition = CameraPosition.Builder()
                     .target(LatLng(45.382344, -75.696256))
-                    .zoom(17.0)
+                    .zoom(18.0)
+                    .bearing(-34.5)
                     .build()
+
+                mapboxMap.setLatLngBoundsForCameraTarget(
+                    LatLngBounds.Builder()
+                        .include(LatLng(45.39242286156869, -75.70335388183594))
+                        .include(LatLng(45.379824116060036, -75.68588733673096))
+                        .build()
+                )
+                mapboxMap.setMinZoomPreference(15.0)
 
                 mapboxMap.uiSettings.isCompassEnabled = false
             }
@@ -124,7 +134,7 @@ class MapFragment : Fragment() {
 
         val lineLayer = LineLayer("rb-lines", source.id)
         lineLayer.setProperties(
-            lineWidth(2f),
+            lineWidth(1f),
             lineColor("#7C39BF")
         )
         lineLayer.setFilter(eq(get("floor"), 1))
