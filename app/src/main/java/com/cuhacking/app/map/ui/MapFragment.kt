@@ -82,18 +82,14 @@ class MapFragment : Fragment() {
                 })
             }
 
-            mapboxMap.cameraPosition = CameraPosition.Builder()
-                .target(LatLng(45.3823547, -75.6974599))
-                .zoom(17.0)
-                .build()
+            if (savedInstanceState == null) {
+                map?.cameraPosition = CameraPosition.Builder()
+                    .target(LatLng(45.382344, -75.696256))
+                    .zoom(17.0)
+                    .build()
 
-            viewModel.selectedFloor.observe(this, Observer { floor ->
-                val fillLayer = mapboxMap.style?.getLayer("rb") as FillLayer
-                fillLayer.setFilter(eq(get("floor"), floor.number))
-
-                val lineLayer = mapboxMap.style?.getLayer("rb-lines") as LineLayer
-                lineLayer.setFilter(eq(get("floor"), floor.number))
-            })
+                mapboxMap.uiSettings.isCompassEnabled = false
+            }
         }
 
         view.findViewById<MaterialButtonToggleGroup>(R.id.button_toggle_group)
@@ -109,10 +105,7 @@ class MapFragment : Fragment() {
     }
 
     private fun applyMapStyle(style: Style, source: GeoJsonSource) {
-        try {
-            style.addSource(source)
-        } catch (_: Exception) {
-        }
+        style.addSource(source)
 
         val layer = FillLayer("rb", source.id)
         layer.setProperties(
@@ -138,6 +131,14 @@ class MapFragment : Fragment() {
 
         style.addLayer(layer)
         style.addLayer(lineLayer)
+
+        viewModel.selectedFloor.observe(this, Observer { floor ->
+            val floorFillLayer = style.getLayer("rb") as FillLayer
+            floorFillLayer.setFilter(eq(get("floor"), floor.number))
+
+            val floorLineLayer = style.getLayer("rb-lines") as LineLayer
+            floorLineLayer.setFilter(eq(get("floor"), floor.number))
+        })
     }
 
     override fun onStart() {
@@ -158,6 +159,18 @@ class MapFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         view?.findViewById<MapView>(R.id.map_view)?.onStop()
+
+        // Remove all the layers we added
+        map?.style?.layers?.let { layers ->
+            layers.forEach { layer ->
+                map?.style?.removeLayer(layer)
+            }
+        }
+
+        // Remove data source so that it can be added again if the fragment is recreated
+        viewModel.floorSource.value?.let { source ->
+            map?.style?.removeSource(source)
+        }
     }
 
     override fun onDestroy() {
