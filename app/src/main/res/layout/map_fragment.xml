@@ -29,35 +29,38 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    <androidx.cardview.widget.CardView android:layout_width="@dimen/floor_selector_size"
-                                       android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
-                                       app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
-                                       android:layout_marginTop="16dp" app:cardElevation="4dp"
-                                       app:cardCornerRadius="4dp">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical">
-            <TextView android:layout_width="match_parent" android:layout_height="@dimen/floor_selector_size"
-                      android:id="@+id/third"
-                      android:textAlignment="center"
-                      android:clickable="true"
-                      android:focusable="true"
-                      android:foreground="?selectableItemBackground"
-                      android:text="3"/>
-            <TextView android:layout_width="match_parent" android:layout_height="@dimen/floor_selector_size"
-                      android:id="@+id/second"
-                      android:textAlignment="center"
-                      android:clickable="true"
-                      android:focusable="true"
-                      android:foreground="?selectableItemBackground"
-                      android:text="2"/>
-            <TextView android:layout_width="match_parent" android:layout_height="@dimen/floor_selector_size"
-                      android:id="@+id/first"
-                      android:textAlignment="center"
-                      android:clickable="true"
-                      android:focusable="true"
-                      android:foreground="?selectableItemBackground"
-                      android:text="1"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+    <com.google.android.material.button.MaterialButtonToggleGroup
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/floor_selector_size"
+            android:id="@+id/button_toggle_group"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:checkedButton="@+id/first"
+            app:singleSelection="true"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="4dp">
+        <com.cuhacking.app.map.ui.FloorSelectionButton
+                android:layout_width="@dimen/floor_selector_size"
+                android:layout_height="@dimen/floor_selector_size"
+                style="@style/Widget.CuHacking.Button.FloorSelectorButton"
+                android:id="@+id/first"
+                android:layout_below="@id/second"
+                android:text="1"/>
+        <com.cuhacking.app.map.ui.FloorSelectionButton
+                android:layout_width="@dimen/floor_selector_size"
+                android:layout_height="@dimen/floor_selector_size"
+                style="@style/Widget.CuHacking.Button.FloorSelectorButton"
+                android:id="@+id/second"
+                android:layout_below="@id/second"
+                android:text="2"/>
+        <com.cuhacking.app.map.ui.FloorSelectionButton
+                android:layout_width="@dimen/floor_selector_size"
+                android:layout_height="@dimen/floor_selector_size"
+                style="@style/Widget.CuHacking.Button.FloorSelectorButton"
+                android:background="?colorSurface"
+                android:id="@+id/third"
+                android:text="3"/>
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
