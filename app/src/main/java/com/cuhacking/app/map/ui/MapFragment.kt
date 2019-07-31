@@ -18,16 +18,16 @@ package com.cuhacking.app.map.ui
 
 import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.RectF
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ToggleButton
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.cuhacking.app.BuildConfig
-
 import com.cuhacking.app.R
 import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.di.injector
@@ -85,11 +85,13 @@ class MapFragment : Fragment() {
                 })
             }
 
+            mapboxMap.addOnMapClickListener(::handleMapClick)
+
             if (savedInstanceState == null) {
                 map?.cameraPosition = CameraPosition.Builder()
                     .target(LatLng(45.382344, -75.696256))
                     .zoom(18.0)
-                    .bearing(-34.5)
+                    .bearing(-125.0)
                     .build()
 
                 mapboxMap.setLatLngBoundsForCameraTarget(
@@ -196,6 +198,24 @@ class MapFragment : Fragment() {
         // Labels/Icons
         (style.getLayer("rb-symbols") as SymbolLayer)
             .setFilter(all(eq(get("floor"), floor.number), eq(get("label"), true)))
+    }
+
+    private fun handleMapClick(latLng: LatLng): Boolean {
+        map?.let { mapboxMap ->
+            val pointF = mapboxMap.projection.toScreenLocation(latLng)
+            val rectF = RectF(pointF.x - 10, pointF.y - 10, pointF.x + 10, pointF.y - 10)
+            val features = mapboxMap.queryRenderedFeatures(rectF, "rb")
+
+            if (features.size > 0) {
+                features.forEach { feature ->
+                    Toast.makeText(requireContext(), feature.getStringProperty("room"), Toast.LENGTH_SHORT).show()
+                }
+
+                return true
+            }
+        }
+
+        return false
     }
 
     override fun onStart() {
