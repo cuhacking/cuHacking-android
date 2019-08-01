@@ -238,21 +238,9 @@ class MapFragment : Fragment() {
         view?.findViewById<MapView>(R.id.map_view)?.onStop()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         view?.findViewById<MapView>(R.id.map_view)?.onDestroy()
-
-        // Remove all the layers we added
-        map?.style?.layers?.let { layers ->
-            layers.forEach { layer ->
-                map?.style?.removeLayer(layer)
-            }
-        }
-
-        // Remove data source so that it can be added again if the fragment is recreated
-        viewModel.floorSource.value?.let { source ->
-            map?.style?.removeSource(source)
-        }
     }
 
     override fun onLowMemory() {
