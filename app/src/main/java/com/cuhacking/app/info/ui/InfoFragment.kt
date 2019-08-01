@@ -48,12 +48,4 @@ class InfoFragment : Fragment() {
         // TODO: Use the ViewModel
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<Button>(R.id.button).setOnClickListener {
-            Crashlytics.getInstance().crash()
-        }
-    }
-
 }

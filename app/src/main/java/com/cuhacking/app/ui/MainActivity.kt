@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         findViewById<BottomNavigationView>(R.id.bottom_navigation_view).setupWithNavController(navController)
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+/*        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
 
         toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             true
-        }
+        }*/
 
     }
 
