@@ -18,7 +18,7 @@ android {
         applicationId = "com.cuhacking.app"
         minSdkVersion(ProjectVersions.MIN_SDK)
         targetSdkVersion(ProjectVersions.TARGET_SDK)
-        versionCode = 1
+        versionCode = "git rev-list --first-parent --count HEAD".execute().text.trim().toInt()
         versionName = "git describe --tag".execute().text.trim()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

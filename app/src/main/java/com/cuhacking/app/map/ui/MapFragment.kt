@@ -23,6 +23,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,7 +32,9 @@ import com.cuhacking.app.BuildConfig
 import com.cuhacking.app.R
 import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.di.injector
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButtonToggleGroup
+import com.google.android.material.card.MaterialCardView
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -116,6 +119,15 @@ class MapFragment : Fragment() {
                     R.id.third -> viewModel.setFloor(Floor.LV03)
                 }
             }
+
+        val bottomCard = view.findViewById<MaterialCardView>(R.id.bottom_card)
+        val bottomSheet = BottomSheetBehavior.from(bottomCard)
+        bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+
+        viewModel.selectedRoom.observe(this, Observer { roomId ->
+            bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
+            view.findViewById<TextView>(R.id.room_name).text = roomId
+        })
     }
 
     private fun applyMapStyle(style: Style, source: GeoJsonSource) {
@@ -207,8 +219,8 @@ class MapFragment : Fragment() {
             val features = mapboxMap.queryRenderedFeatures(rectF, "rb")
 
             if (features.size > 0) {
-                features.forEach { feature ->
-                    Toast.makeText(requireContext(), feature.getStringProperty("room"), Toast.LENGTH_SHORT).show()
+                if (features[0].hasNonNullValueForProperty("room")) {
+                    viewModel.selectRoom(features[0].getStringProperty("room"))
                 }
 
                 return true

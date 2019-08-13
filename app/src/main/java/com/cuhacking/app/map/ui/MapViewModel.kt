@@ -34,6 +34,9 @@ class MapViewModel @Inject constructor(private val mapDataSource: MapDataSource)
     private val _selectedFloor = MutableLiveData<Floor>()
     val selectedFloor: LiveData<Floor> = _selectedFloor
 
+    private val _selectedRoom = MutableLiveData<String>()
+    val selectedRoom: LiveData<String> = _selectedRoom
+
     init {
         viewModelScope.launch {
             _floorSource.value = mapDataSource.getData()
@@ -42,6 +45,10 @@ class MapViewModel @Inject constructor(private val mapDataSource: MapDataSource)
 
     fun setFloor(floor: Floor) {
         _selectedFloor.value = floor
+    }
+
+    fun selectRoom(id: String) {
+        _selectedRoom.value = id
     }
 
 }
