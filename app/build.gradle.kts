@@ -48,6 +48,10 @@ android {
     }
 }
 
+repositories {
+    maven(url = "https://jitpack.io")
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation(kotlin("stdlib-jdk7", KotlinCompilerVersion.VERSION))
@@ -84,6 +88,7 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:${ProjectVersions.OKHTTP}")
     implementation("com.mapbox.mapboxsdk:mapbox-android-sdk:${ProjectVersions.MAPBOX}")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${ProjectVersions.SERIALIZATION}")
+    implementation("com.github.kenglxn.QRGen:android:${ProjectVersions.QRGEN}")
 
     testImplementation("junit:junit:${ProjectVersions.JUNIT}")
     testImplementation("androidx.arch.core:core-testing:${ProjectVersions.LIFECYCLE}")

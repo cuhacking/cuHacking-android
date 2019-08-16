@@ -23,6 +23,7 @@ object ProjectVersions {
     const val MAPBOX = "8.2.0"
     const val NAVIGATION = "2.1.0-beta02"
     const val OKHTTP = "4.0.1"
+    const val QRGEN = "2.6.0"
     const val RETROFIT = "2.6.0"
     const val RETROFIT_SERIALIZATION = "0.4.0"
     const val SERIALIZATION = "0.11.0"

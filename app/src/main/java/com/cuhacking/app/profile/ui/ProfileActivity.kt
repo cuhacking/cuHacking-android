@@ -18,12 +18,39 @@ package com.cuhacking.app.profile.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.ImageView
 import com.cuhacking.app.R
+import net.glxn.qrgen.android.QRCode
 
 class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        setSupportActionBar(findViewById(R.id.toolbar))
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = ""
+        }
+
+
+        val imageView = findViewById<ImageView>(R.id.user_qr_code)
+        imageView.post {
+            val bitmap =
+                QRCode.from("info@cuhacking.com").withSize(imageView.width, imageView.height)
+                    .bitmap()
+            imageView.setImageBitmap(bitmap)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

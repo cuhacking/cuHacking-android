@@ -20,12 +20,15 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import com.crashlytics.android.Crashlytics
 
 import com.cuhacking.app.R
+import com.google.android.material.appbar.MaterialToolbar
 
 class InfoFragment : Fragment() {
 
@@ -42,10 +45,28 @@ class InfoFragment : Fragment() {
         return inflater.inflate(R.layout.info_fragment, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.findViewById<MaterialToolbar>(R.id.toolbar).apply{
+            setOnMenuItemClickListener(::onOptionsItemSelected)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(InfoViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.profile -> {
+                findNavController().navigate(InfoFragmentDirections.actionGlobalProfile())
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
