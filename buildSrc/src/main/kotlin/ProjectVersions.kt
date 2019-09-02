@@ -15,6 +15,7 @@ object ProjectVersions {
     const val FIREBASE_CRASHLYTICS = "2.10.1"
     const val FIREBASE_VISION = "20.0.0"
     const val FRAGMENT = "1.1.0-rc03"
+    const val GLIDE = "4.9.0"
     const val JUNIT = "4.12"
     const val KOTLIN = "1.3.41"
     const val KTX = "1.1.0-rc02"
@@ -27,7 +28,7 @@ object ProjectVersions {
     const val RETROFIT = "2.6.0"
     const val RETROFIT_SERIALIZATION = "0.4.0"
     const val SERIALIZATION = "0.11.0"
-    const val SQLDELIGHT = "1.1.4"
+    const val SQLDELIGHT = "1.2.0"
     const val TEST_JUNIT = "1.1.1"
     const val TEST_RULES = "1.2.0"
 }

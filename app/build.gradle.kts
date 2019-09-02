@@ -72,6 +72,9 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:${ProjectVersions.DAGGER}")
     kapt("com.google.dagger:dagger-android-processor:${ProjectVersions.DAGGER}")
 
+    implementation("com.github.bumptech.glide:glide:${ProjectVersions.GLIDE}")
+    kapt("com.github.bumptech.glide:compiler:${ProjectVersions.GLIDE}")
+
     implementation("com.google.firebase:firebase-core:${ProjectVersions.FIREBASE_CORE}")
     implementation("com.google.firebase:firebase-common-ktx:${ProjectVersions.FIREBASE_CORE}")
     implementation("com.google.firebase:firebase-auth:${ProjectVersions.FIREBASE_AUTH}")
@@ -80,6 +83,7 @@ dependencies {
     implementation("com.crashlytics.sdk.android:crashlytics:${ProjectVersions.FIREBASE_CRASHLYTICS}")
 
     implementation("com.squareup.sqldelight:android-driver:${ProjectVersions.SQLDELIGHT}")
+    implementation("com.squareup.sqldelight:coroutines-extensions-jvm:${ProjectVersions.SQLDELIGHT}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${ProjectVersions.COROUTINES}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${ProjectVersions.COROUTINES}")
     implementation("com.squareup.retrofit2:retrofit:${ProjectVersions.RETROFIT}")

@@ -16,10 +16,14 @@
 
 package com.cuhacking.app.data.api
 
+import com.cuhacking.app.profile.data.model.UserFromApi
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
     @GET("hello/{id}")
     suspend fun exampleApiMethod(@Path("id") id: String): String
+
+    @GET("users/{id}")
+    suspend fun getUser(@Path("id") id: String): UserFromApi
 }
