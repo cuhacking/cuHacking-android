@@ -33,12 +33,12 @@ class ProfileRepository @Inject constructor(
      * Gets a bitmap for a user with a specified width, height, and optionally a colour.
      * The QR code is mapped to a url to the user's profile page.
      */
-    fun getUserQRCode(userId: String, width: Int, height: Int, color: Int? = null): Bitmap {
+    fun getUserQRCode(userId: String, size: Int, color: Int? = null): Bitmap {
         return QRCode.from("https://live.cuhacking.com/dashboard/user/$userId")
             .apply {
                 if (color != null) withColor(color, Color.WHITE)
             }
-            .withSize(width, height)
+            .withSize(size, size)
             .bitmap()
     }
 
@@ -53,7 +53,7 @@ class ProfileRepository @Inject constructor(
                 database.userQueries.insert(id, name, email, color, school, isPrimary, Date().time)
                 Result.Success(Unit)
             } catch (e: Exception) {
-                Result.Error(e)
+                Result.Error<Unit>(e)
             }
         }
 }

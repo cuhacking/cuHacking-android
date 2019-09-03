@@ -30,20 +30,13 @@ import com.crashlytics.android.Crashlytics
 import com.cuhacking.app.R
 import com.google.android.material.appbar.MaterialToolbar
 
-class InfoFragment : Fragment() {
+class InfoFragment : Fragment(R.layout.info_fragment) {
 
     companion object {
         fun newInstance() = InfoFragment()
     }
 
     private lateinit var viewModel: InfoViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.info_fragment, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

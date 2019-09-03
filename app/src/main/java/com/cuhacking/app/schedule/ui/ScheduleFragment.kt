@@ -25,20 +25,13 @@ import android.view.ViewGroup
 
 import com.cuhacking.app.R
 
-class ScheduleFragment : Fragment() {
+class ScheduleFragment : Fragment(R.layout.schedule_fragment) {
 
     companion object {
         fun newInstance() = ScheduleFragment()
     }
 
     private lateinit var viewModel: ScheduleViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.schedule_fragment, container, false)
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

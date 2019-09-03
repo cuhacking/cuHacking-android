@@ -46,6 +46,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
+    }
 }
 
 repositories {

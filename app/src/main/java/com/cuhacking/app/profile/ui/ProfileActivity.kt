@@ -20,14 +20,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
+import androidx.activity.viewModels
 import com.cuhacking.app.R
+import com.cuhacking.app.di.injector
 import net.glxn.qrgen.android.QRCode
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
+
+    private val viewModel by viewModels<ProfileViewModel> { injector.profileViewModelFactory() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
 
         setSupportActionBar(findViewById(R.id.toolbar))
 

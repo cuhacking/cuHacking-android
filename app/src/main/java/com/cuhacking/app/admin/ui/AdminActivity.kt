@@ -38,13 +38,12 @@ private const val REQUEST_PERMISSIONS_CODE = 10
 
 private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
-class AdminActivity : AppCompatActivity() {
+class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
 
     private val viewFinder: TextureView by lazy { findViewById<TextureView>(R.id.view_finder) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin)
 
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
