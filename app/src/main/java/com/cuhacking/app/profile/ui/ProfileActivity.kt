@@ -21,6 +21,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.di.injector
 import net.glxn.qrgen.android.QRCode
@@ -39,14 +41,12 @@ class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
             title = ""
         }
 
+        val adapter = ProfileAdapter()
+        findViewById<RecyclerView>(R.id.recycler_view).adapter = adapter
 
-        val imageView = findViewById<ImageView>(R.id.user_qr_code)
-        imageView.post {
-            val bitmap =
-                QRCode.from("info@cuhacking.com").withSize(imageView.width, imageView.height)
-                    .bitmap()
-            imageView.setImageBitmap(bitmap)
-        }
+        viewModel.profileItems.observe(this, Observer {
+            adapter.submitList(it)
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

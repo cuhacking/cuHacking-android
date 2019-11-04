@@ -19,4 +19,6 @@
     <string name="info">Info</string>
     <string name="schedule">Schedule</string>
     <string name="map">Map</string>
+
+    <string name="authentication_failure">Authentication failed.</string>
 </resources>

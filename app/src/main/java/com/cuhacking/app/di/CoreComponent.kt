@@ -20,6 +20,7 @@ import android.content.Context
 import com.cuhacking.app.CuHackingApplication
 import com.cuhacking.app.map.ui.MapViewModel
 import com.cuhacking.app.profile.ui.ProfileViewModel
+import com.cuhacking.app.signin.ui.SignInViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -41,6 +42,8 @@ interface CoreComponent {
     fun mapViewModelFactory(): ViewModelFactory<MapViewModel>
 
     fun profileViewModelFactory(): ViewModelFactory<ProfileViewModel>
+
+    fun signInViewModelFactory(): ViewModelFactory<SignInViewModel>
 
     fun inject(application: CuHackingApplication)
 

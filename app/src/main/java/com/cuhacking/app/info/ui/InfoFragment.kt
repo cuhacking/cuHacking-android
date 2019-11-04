@@ -55,7 +55,7 @@ class InfoFragment : Fragment(R.layout.info_fragment) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.profile -> {
-                findNavController().navigate(InfoFragmentDirections.actionGlobalProfile())
+                findNavController().navigate(InfoFragmentDirections.login())
             }
         }
 

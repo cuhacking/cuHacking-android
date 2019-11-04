@@ -16,11 +16,18 @@
 
 package com.cuhacking.app.di
 
+import android.content.Context
 import android.content.SharedPreferences
+import com.cuhacking.app.BuildConfig
+import com.cuhacking.app.Database
 import com.cuhacking.app.data.DataInfoProvider
 import com.cuhacking.app.data.DefaultDataInfoProvider
+import com.cuhacking.app.data.api.ApiService
+import com.google.firebase.auth.FirebaseAuth
+import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module
@@ -29,4 +36,20 @@ class DataModule {
     @Singleton
     fun provideDataInfoProvider(sharedPreference: SharedPreferences): DataInfoProvider =
         DefaultDataInfoProvider(sharedPreference)
+
+    @Provides
+    @Singleton
+    fun provideApiService(): ApiService = Retrofit.Builder()
+        .baseUrl(BuildConfig.API_ENDPOINT)
+        .build()
+        .create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideDatabase(context: Context): Database =
+        Database(AndroidSqliteDriver(Database.Schema, context, "cuHacking.db"))
+
+    @Provides
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 }
