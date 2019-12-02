@@ -16,8 +16,41 @@
 
 package com.cuhacking.app.info.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.viewModelScope
+import com.cuhacking.app.data.Result
+import com.cuhacking.app.info.domain.GetInfoCardsUseCase
+import com.cuhacking.app.info.domain.RefreshInfoCardsUseCase
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class InfoViewModel : ViewModel() {
+class InfoViewModel @Inject constructor(
+    private val getInfoCards: GetInfoCardsUseCase,
+    private val refreshInfoCards: RefreshInfoCardsUseCase
+) :
+    ViewModel() {
+
+    private val _refreshState = MutableLiveData<Result<Unit>>()
+    val refreshState: LiveData<Result<Unit>> = _refreshState
+
+    private val _cards = MutableLiveData<List<InfoCard>>()
+    val cards: LiveData<List<InfoCard>> = _cards
+
+    init {
+        viewModelScope.launch {
+            getInfoCards().collect {
+                _cards.postValue(it)
+            }
+        }
+    }
+
+    fun refreshInfo() = viewModelScope.launch {
+        _refreshState.value = Result.Loading()
+        _refreshState.postValue(refreshInfoCards())
+    }
+
     // TODO: Implement the ViewModel
 }

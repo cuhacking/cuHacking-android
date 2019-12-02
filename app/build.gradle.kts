@@ -71,6 +71,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:${ProjectVersions.NAVIGATION}")
     implementation("androidx.camera:camera-core:${ProjectVersions.CAMERA}")
     implementation("androidx.camera:camera-camera2:${ProjectVersions.CAMERA}")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:${ProjectVersions.SWIPE_REFRESH}")
 
     implementation("com.google.dagger:dagger:${ProjectVersions.DAGGER}")
     kapt("com.google.dagger:dagger-compiler:${ProjectVersions.DAGGER}")
@@ -79,8 +80,8 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:${ProjectVersions.GLIDE}")
     kapt("com.github.bumptech.glide:compiler:${ProjectVersions.GLIDE}")
 
-    implementation("com.google.firebase:firebase-core:${ProjectVersions.FIREBASE_CORE}")
-    implementation("com.google.firebase:firebase-common-ktx:${ProjectVersions.FIREBASE_CORE}")
+    implementation("com.google.firebase:firebase-analytics:${ProjectVersions.FIREBASE_CORE}")
+//    implementation("com.google.firebase:firebase-common-ktx:${ProjectVersions.FIREBASE_CORE}")
     implementation("com.google.firebase:firebase-auth:${ProjectVersions.FIREBASE_AUTH}")
     implementation("com.google.firebase:firebase-messaging:${ProjectVersions.FIREBASE_CLOUD_MESSAGING}")
     implementation("com.google.firebase:firebase-ml-vision:${ProjectVersions.FIREBASE_VISION}")
@@ -91,6 +92,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${ProjectVersions.COROUTINES}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${ProjectVersions.COROUTINES}")
     implementation("com.squareup.retrofit2:retrofit:${ProjectVersions.RETROFIT}")
+    implementation("com.squareup.retrofit2:converter-moshi:${ProjectVersions.RETROFIT}")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${ProjectVersions.RETROFIT_SERIALIZATION}")
     implementation("com.squareup.okhttp3:okhttp:${ProjectVersions.OKHTTP}")
     implementation("com.squareup.okhttp3:logging-interceptor:${ProjectVersions.OKHTTP}")

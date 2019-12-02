@@ -28,6 +28,7 @@ import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -39,8 +40,9 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideApiService(): ApiService = Retrofit.Builder()
+    fun provideApiService(converter: MoshiConverterFactory): ApiService = Retrofit.Builder()
         .baseUrl(BuildConfig.API_ENDPOINT)
+        .addConverterFactory(converter)
         .build()
         .create(ApiService::class.java)
 
@@ -52,4 +54,8 @@ class DataModule {
     @Provides
     @Singleton
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideConverterFactory() = MoshiConverterFactory.create()
 }

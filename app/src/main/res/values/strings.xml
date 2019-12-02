@@ -21,4 +21,7 @@
     <string name="map">Map</string>
 
     <string name="authentication_failure">Authentication failed.</string>
+
+    <string name="header_announcements">Announcements</string>
+    <string name="header_info">Info</string>
 </resources>

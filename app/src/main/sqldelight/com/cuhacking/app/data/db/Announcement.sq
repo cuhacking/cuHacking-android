@@ -1,0 +1,20 @@
+CREATE TABLE announcement(
+    id TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    locationId TEXT,
+    deliveryTime INTEGER NOT NULL,
+    eventId TEXT
+);
+
+insert:
+INSERT INTO announcement VALUES(:id, :title, :descirption, :locationId, :deliveryTime, :eventId);
+
+delete:
+DELETE FROM announcement WHERE id = :id;
+
+getAll:
+SELECT * FROM announcement;
+
+getById:
+SELECT * FROM announcement WHERE id = :id;

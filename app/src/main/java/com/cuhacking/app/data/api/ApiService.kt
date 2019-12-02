@@ -16,6 +16,7 @@
 
 package com.cuhacking.app.data.api
 
+import com.cuhacking.app.data.api.models.UpdatesResponse
 import com.cuhacking.app.profile.data.model.UserFromApi
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,4 +27,7 @@ interface ApiService {
 
     @GET("users/{id}")
     suspend fun getUser(@Path("id") id: String): UserFromApi
+
+    @GET("updates")
+    suspend fun getUpdates(): UpdatesResponse
 }

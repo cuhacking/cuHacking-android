@@ -28,7 +28,7 @@ class AuthenticationManager @Inject constructor(
 
             return@withContext try {
                 val result = Tasks.await(auth.signInWithEmailAndPassword(email, password))
-                val user = result.user
+                val user = result.user!!
 
                 database.userQueries.insert(
                     user.uid,
