@@ -16,6 +16,7 @@
 
 package com.cuhacking.app.data.api
 
+import com.cuhacking.app.data.api.models.ScheduleResponse
 import com.cuhacking.app.data.api.models.UpdatesResponse
 import com.cuhacking.app.profile.data.model.UserFromApi
 import retrofit2.http.GET
@@ -30,4 +31,7 @@ interface ApiService {
 
     @GET("updates")
     suspend fun getUpdates(): UpdatesResponse
+
+    @GET("schedule")
+    suspend fun getSchedule(): ScheduleResponse
 }
