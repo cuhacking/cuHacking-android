@@ -99,6 +99,8 @@ dependencies {
     implementation("com.mapbox.mapboxsdk:mapbox-android-sdk:${ProjectVersions.MAPBOX}")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${ProjectVersions.SERIALIZATION}")
     implementation("com.github.kenglxn.QRGen:android:${ProjectVersions.QRGEN}")
+    implementation("com.jakewharton.threetenabp:threetenabp:${ProjectVersions.THREE_TEN_ABP}")
+
 
     testImplementation("junit:junit:${ProjectVersions.JUNIT}")
     testImplementation("androidx.arch.core:core-testing:${ProjectVersions.LIFECYCLE}")

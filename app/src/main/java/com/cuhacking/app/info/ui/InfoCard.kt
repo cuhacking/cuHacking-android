@@ -44,3 +44,12 @@ data class UpdateCard(
         const val viewType = 2
     }
 }
+
+data class WiFiCard(val ssid: String, val password: String): InfoCard() {
+    override fun sameAs(other: InfoCard): Boolean = (other as? WiFiCard)?.ssid == ssid
+
+    companion object {
+        const val viewType = 3
+    }
+}
+

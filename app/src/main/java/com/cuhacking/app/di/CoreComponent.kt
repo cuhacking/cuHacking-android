@@ -27,7 +27,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [SharedPreferencesModule::class, DataModule::class])
+@Component(modules = [SharedPreferencesModule::class, DataModule::class, AppModule::class])
 interface CoreComponent {
 
     @Component.Builder

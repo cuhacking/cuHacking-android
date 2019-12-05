@@ -22,6 +22,7 @@ import com.cuhacking.app.di.CoreComponent
 import com.cuhacking.app.di.DaggerComponentProvider
 import com.cuhacking.app.di.DaggerCoreComponent
 import com.cuhacking.app.di.SharedPreferencesModule
+import com.jakewharton.threetenabp.AndroidThreeTen
 
 class CuHackingApplication : Application(), DaggerComponentProvider {
 
@@ -35,6 +36,7 @@ class CuHackingApplication : Application(), DaggerComponentProvider {
     override fun onCreate() {
         super.onCreate()
 
+        AndroidThreeTen.init(this)
         component.inject(this)
     }
 

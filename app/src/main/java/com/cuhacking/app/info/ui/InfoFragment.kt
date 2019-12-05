@@ -34,7 +34,7 @@ class InfoFragment : Fragment(R.layout.info_fragment) {
 
     private val viewModel: InfoViewModel by viewModels { injector.infoViewModelFactory() }
 
-    private val infoCardAdapter = InfoCardAdapter()
+    private val infoCardAdapter by lazy { InfoCardAdapter(viewModel) }
 
     companion object {
         fun newInstance() = InfoFragment()

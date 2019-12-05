@@ -24,4 +24,10 @@
 
     <string name="header_announcements">Announcements</string>
     <string name="header_info">Info</string>
+    <string name="header_wifi">WiFi</string>
+
+    <string name="action_connect">Connect</string>
+
+    <string name="wifi_network">Network: %1$s</string>
+    <string name="wifi_password">Password: %1$s</string>
 </resources>
