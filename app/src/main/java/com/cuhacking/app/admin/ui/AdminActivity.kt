@@ -27,6 +27,7 @@ import android.view.Surface
 import android.view.TextureView
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraX
 import androidx.camera.core.Preview
 import androidx.camera.core.PreviewConfig
@@ -58,7 +59,7 @@ class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
 
     private fun startCamera() {
         val previewConfig = PreviewConfig.Builder().apply {
-            setTargetAspectRatio(Rational(1, 1))
+            setTargetAspectRatio(AspectRatio.RATIO_16_9)
             setTargetResolution(Size(640, 640))
         }.build()
 

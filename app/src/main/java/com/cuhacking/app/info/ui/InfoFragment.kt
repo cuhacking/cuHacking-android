@@ -16,40 +16,49 @@
 
 package com.cuhacking.app.info.ui
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.crashlytics.android.Crashlytics
-
+import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cuhacking.app.R
+import com.cuhacking.app.data.Result
+import com.cuhacking.app.di.injector
 import com.google.android.material.appbar.MaterialToolbar
 
 class InfoFragment : Fragment(R.layout.info_fragment) {
+
+    private val viewModel: InfoViewModel by viewModels { injector.infoViewModelFactory() }
+
+    private val infoCardAdapter = InfoCardAdapter()
 
     companion object {
         fun newInstance() = InfoFragment()
     }
 
-    private lateinit var viewModel: InfoViewModel
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<MaterialToolbar>(R.id.toolbar).apply{
+        view.findViewById<MaterialToolbar>(R.id.toolbar).apply {
             setOnMenuItemClickListener(::onOptionsItemSelected)
         }
-    }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(InfoViewModel::class.java)
-        // TODO: Use the ViewModel
+        view.findViewById<RecyclerView>(R.id.recycler_view).adapter = infoCardAdapter
+        viewModel.cards.observe(this, Observer(infoCardAdapter::submitList))
+
+        val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_layout)
+        swipeRefreshLayout
+            .setOnRefreshListener { viewModel.refreshInfo() }
+
+        viewModel.refreshInfo()
+
+        viewModel.refreshState.observe(this, Observer {
+            swipeRefreshLayout.isRefreshing = it is Result.Loading
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
