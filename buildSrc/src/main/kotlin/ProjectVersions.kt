@@ -32,4 +32,5 @@ object ProjectVersions {
     const val SWIPE_REFRESH = "1.0.0"
     const val TEST_JUNIT = "1.1.1"
     const val TEST_RULES = "1.2.0"
+    const val THREE_TEN_ABP = "1.2.1"
 }

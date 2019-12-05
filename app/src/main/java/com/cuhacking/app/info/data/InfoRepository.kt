@@ -23,6 +23,7 @@ import com.cuhacking.app.data.api.ApiService
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.withContext
+import org.threeten.bp.LocalDate
 import java.util.*
 import javax.inject.Inject
 
@@ -34,6 +35,12 @@ class InfoRepository @Inject constructor(
 
     fun getCuHackingDate() = Calendar.getInstance().apply {
         set(2020, 1, 11, 9, 0)
+    }
+
+    fun getWifiInfo(): WifiInfo = if(LocalDate.now().isBefore(LocalDate.of(2019, 12, 10))) {
+        WifiInfo("Local Hack Day", "cuhacking")
+    } else {
+        WifiInfo("cuHacking 2020", "richcraft")
     }
 
     suspend fun refreshUpdates(): Result<Unit> = withContext(dispatchers.io) {

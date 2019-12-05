@@ -5,6 +5,7 @@ import com.cuhacking.app.info.data.InfoRepository
 import com.cuhacking.app.info.ui.Header
 import com.cuhacking.app.info.ui.InfoCard
 import com.cuhacking.app.info.ui.UpdateCard
+import com.cuhacking.app.info.ui.WiFiCard
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -28,6 +29,9 @@ class GetInfoCardsUseCase @Inject constructor(private val repository: InfoReposi
                 } else {
                     it
                 }
+            }.map {
+                val (ssid, password) = repository.getWifiInfo()
+                listOf(Header(R.string.header_info), WiFiCard(ssid, password)) + it
             }
     }
 
