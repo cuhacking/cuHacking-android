@@ -19,6 +19,11 @@
     <color name="colorPrimary">#7C39BF</color>
     <color name="colorPrimaryDark">#49018e</color>
     <color name="colorAccent">#00d0fe</color>
-    <color name="colorPale">#e498ff</color>
-    <color name="colorPaleDark">#1c0038</color>
+    <color name="colorPale">#A571B8</color>
+    <color name="colorPaleDark">#2D1D3D</color>
+
+    <color name="eventPurple">#9756D8</color>
+    <color name="eventRed">#D85656</color>
+    <color name="eventGreen">#4CAF50</color>
+    <color name="eventBlue">#007CC2</color>
 </resources>

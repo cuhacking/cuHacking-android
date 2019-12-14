@@ -76,3 +76,14 @@ class WiFiCardHolder(parent: ViewGroup, private val viewModel: InfoViewModel) :
             context.getString(R.string.wifi_password, value.password)
     }
 }
+
+class TitleViewHolder(parent: ViewGroup) : CardViewHolder<Title>(
+    LayoutInflater.from(parent.context).inflate(
+        R.layout.header_announcement,
+        parent,
+        false
+    )
+) {
+    override fun bind(value: Title) {
+    }
+}
