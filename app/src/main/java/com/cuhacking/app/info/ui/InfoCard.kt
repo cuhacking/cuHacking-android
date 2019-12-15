@@ -29,6 +29,13 @@ data class Header(@StringRes val title: Int) : InfoCard() {
     }
 }
 
+class Title : InfoCard() {
+    override fun sameAs(other: InfoCard): Boolean = true
+    companion object {
+        const val viewType = 8
+    }
+}
+
 data class CountdownCard(private val timeString: String) : InfoCard() {
     override fun sameAs(other: InfoCard): Boolean = false
 }

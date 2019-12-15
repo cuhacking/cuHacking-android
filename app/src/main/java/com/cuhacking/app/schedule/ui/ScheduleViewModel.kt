@@ -16,8 +16,25 @@
 
 package com.cuhacking.app.schedule.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.viewModelScope
+import com.cuhacking.app.schedule.data.models.EventUiModel
+import com.cuhacking.app.schedule.domain.GetScheduleUseCase
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ScheduleViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class ScheduleViewModel @Inject constructor(private val getSchedule: GetScheduleUseCase) : ViewModel() {
+    private val _scheduleData = MutableLiveData<List<EventUiModel>>()
+    val scheduleData: LiveData<List<EventUiModel>> = _scheduleData
+
+    init {
+        viewModelScope.launch {
+            getSchedule().collect {
+                _scheduleData.postValue(it)
+            }
+        }
+    }
 }

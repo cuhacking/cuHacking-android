@@ -27,8 +27,15 @@ class DefaultDataInfoProvider @Inject constructor(private val sharedPreferences:
             sharedPreferences.edit().putBoolean(KEY_MAP_DATA_COPIED, value).apply()
         }
 
+    override var scheduleDataVersion: Long
+        get() = sharedPreferences.getLong(KEY_SCHEDULE_DATA_VERSION, -1)
+        set(value) {
+            sharedPreferences.edit().putLong(KEY_SCHEDULE_DATA_VERSION, value).apply()
+        }
+
     companion object {
         const val KEY_MAP_DATA_COPIED = "map_data_copied"
+        const val KEY_SCHEDULE_DATA_VERSION = "schedule_data_version"
 
         const val INFO_PREF = "data_info"
     }

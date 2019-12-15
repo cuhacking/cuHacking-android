@@ -3,14 +3,16 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingStart="16dp">
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
 
     <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:fontFamily="@font/reem_kufi"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
             tools:text="Headline" />
 </LinearLayout>

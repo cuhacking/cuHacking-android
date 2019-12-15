@@ -1,0 +1,24 @@
+import java.lang.Long;
+
+CREATE TABLE event(
+    id TEXT NOT NULL PRIMARY KEY,
+    locationName TEXT NOT NULL,
+    locationId TEXT NOT NULL,
+    title TEXT NOT NULL,
+    description TEXT NOT NULL,
+    startTime INTEGER As Long NOT NULL,
+    endTime INTEGER As Long NOT NULL,
+    type TEXT NOT NULL
+);
+
+insert:
+INSERT INTO event VALUES(:id, :locationName, :locationId, :title, :description, :startTime, :endTime, :type);
+
+deleteAll:
+DELETE FROM event;
+
+getById:
+SELECT * FROM event WHERE id = :id;
+
+getAll:
+SELECT * FROM event;

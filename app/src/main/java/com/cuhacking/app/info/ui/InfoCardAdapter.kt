@@ -11,6 +11,7 @@ class InfoCardAdapter(private val viewModel: InfoViewModel) :
             Header.viewType -> HeaderHolder(parent)
             UpdateCard.viewType -> UpdateCardHolder(parent)
             WiFiCard.viewType -> WiFiCardHolder(parent, viewModel)
+            Title.viewType -> TitleViewHolder(parent)
             else -> throw IllegalArgumentException("Unknown card type")
         }
     }
@@ -19,6 +20,7 @@ class InfoCardAdapter(private val viewModel: InfoViewModel) :
         is Header -> Header.viewType
         is UpdateCard -> UpdateCard.viewType
         is WiFiCard -> WiFiCard.viewType
+        is Title -> Title.viewType
         else -> 0
     }
 
@@ -27,6 +29,7 @@ class InfoCardAdapter(private val viewModel: InfoViewModel) :
             is HeaderHolder -> holder.bind(getItem(position) as Header)
             is UpdateCardHolder -> holder.bind(getItem(position) as UpdateCard)
             is WiFiCardHolder -> holder.bind(getItem(position) as WiFiCard)
+            is TitleViewHolder -> holder.bind(getItem(position) as Title)
         }
     }
 }

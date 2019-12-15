@@ -20,4 +20,6 @@ interface DataInfoProvider {
 
     var mapDataCopied: Boolean
 
+    var scheduleDataVersion: Long
+
 }
