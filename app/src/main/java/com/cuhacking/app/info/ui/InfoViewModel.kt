@@ -18,41 +18,27 @@ package com.cuhacking.app.info.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cuhacking.app.data.Result
 import com.cuhacking.app.info.data.WifiInfo
 import com.cuhacking.app.info.domain.GetInfoCardsUseCase
-import com.cuhacking.app.info.domain.RefreshInfoCardsUseCase
 import com.cuhacking.app.info.domain.WifiInstaller
-import kotlinx.coroutines.flow.collect
+import com.cuhacking.app.ui.cards.Card
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class InfoViewModel @Inject constructor(
     private val getInfoCards: GetInfoCardsUseCase,
-    private val refreshInfoCards: RefreshInfoCardsUseCase,
     private val wifiInstaller: WifiInstaller
 ) :
     ViewModel() {
 
-    private val _refreshState = MutableLiveData<Result<Unit>>()
-    val refreshState: LiveData<Result<Unit>> = _refreshState
-
-    private val _cards = MutableLiveData<List<InfoCard>>()
-    val cards: LiveData<List<InfoCard>> = _cards
+    private val _cards = MutableLiveData<List<Card>>()
+    val cards: LiveData<List<Card>> = _cards
 
     init {
-        viewModelScope.launch {
-            getInfoCards().collect {
-                _cards.postValue(it)
-            }
-        }
-    }
-
-    fun refreshInfo() = viewModelScope.launch {
-        _refreshState.value = Result.Loading()
-        _refreshState.postValue(refreshInfoCards())
+        _cards.value = getInfoCards()
     }
 
     fun setupWifi(wifiInfo: WifiInfo) {

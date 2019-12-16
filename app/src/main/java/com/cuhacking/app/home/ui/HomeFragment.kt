@@ -1,20 +1,4 @@
-/*
- *    Copyright 2019 cuHacking
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *        http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
- */
-
-package com.cuhacking.app.info.ui
+package com.cuhacking.app.home.ui
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -28,14 +12,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cuhacking.app.R
 import com.cuhacking.app.data.Result
 import com.cuhacking.app.di.injector
+import com.cuhacking.app.info.ui.InfoFragment
+import com.cuhacking.app.info.ui.InfoFragmentDirections
 import com.cuhacking.app.ui.cards.CardAdapter
 import com.google.android.material.appbar.MaterialToolbar
 
-class InfoFragment : Fragment(R.layout.info_fragment) {
+class HomeFragment : Fragment(R.layout.info_fragment) {
 
-    private val viewModel: InfoViewModel by viewModels { injector.infoViewModelFactory() }
+    private val viewModel: HomeViewModel by viewModels { injector.homeViewModelFactory() }
 
-    private val infoCardAdapter by lazy { CardAdapter(viewModel) }
+    private val cardAdapter by lazy { CardAdapter() }
 
     companion object {
         fun newInstance() = InfoFragment()
@@ -48,11 +34,18 @@ class InfoFragment : Fragment(R.layout.info_fragment) {
             setOnMenuItemClickListener(::onOptionsItemSelected)
         }
 
-        view.findViewById<RecyclerView>(R.id.recycler_view).adapter = infoCardAdapter
-        viewModel.cards.observe(this, Observer(infoCardAdapter::submitList))
+        view.findViewById<RecyclerView>(R.id.recycler_view).adapter = cardAdapter
+        viewModel.cards.observe(this, Observer(cardAdapter::submitList))
 
         val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_layout)
-        swipeRefreshLayout.isEnabled = false
+        swipeRefreshLayout
+            .setOnRefreshListener { viewModel.refreshInfo() }
+
+        viewModel.refreshInfo()
+
+        viewModel.refreshState.observe(this, Observer {
+            swipeRefreshLayout.isRefreshing = it is Result.Loading
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

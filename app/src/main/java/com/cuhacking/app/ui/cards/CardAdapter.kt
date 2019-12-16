@@ -1,16 +1,16 @@
-package com.cuhacking.app.info.ui
+package com.cuhacking.app.ui.cards
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import com.cuhacking.app.info.ui.*
 
-class InfoCardAdapter(private val viewModel: InfoViewModel) :
-    ListAdapter<InfoCard, CardViewHolder<*>>(InfoCard.DiffCalback) {
+class CardAdapter(private val viewModel: InfoViewModel? = null) :
+    ListAdapter<Card, CardViewHolder<*>>(Card.DiffCalback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder<*> {
         return when (viewType) {
             Header.viewType -> HeaderHolder(parent)
             UpdateCard.viewType -> UpdateCardHolder(parent)
-            WiFiCard.viewType -> WiFiCardHolder(parent, viewModel)
+            WiFiCard.viewType -> WiFiCardHolder(parent, viewModel!!)
             Title.viewType -> TitleViewHolder(parent)
             else -> throw IllegalArgumentException("Unknown card type")
         }

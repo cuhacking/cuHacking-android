@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2019 cuHacking
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,17 +16,21 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
+    <item
             android:id="@+id/info"
-            android:title="@string/info"
-            android:icon="@drawable/ic_info_outline"/>
+            android:icon="@drawable/ic_info_outline"
+            android:title="@string/info" />
 
     <item
             android:id="@+id/schedule"
-            android:title="@string/schedule"
-            android:icon="@drawable/ic_view_agenda"/>
+            android:icon="@drawable/ic_view_agenda"
+            android:title="@string/schedule" />
 
     <item
             android:id="@+id/map"
-            android:title="@string/map"
-            android:icon="@drawable/ic_map"/>
+            android:icon="@drawable/ic_map"
+            android:title="@string/map" />
 </menu>

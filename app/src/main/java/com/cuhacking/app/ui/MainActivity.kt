@@ -34,18 +34,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
 
         val navController = findNavController(R.id.nav_host_fragment)
-        findViewById<BottomNavigationView>(R.id.bottom_navigation_view).setupWithNavController(navController)
+        findViewById<BottomNavigationView>(R.id.bottom_navigation_view).setupWithNavController(
+            navController
+        )
 
-/*        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-
-        toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.profile -> navController.navigate(R.id.profile)
-                R.id.admin -> navController.navigate(R.id.admin)
-            }
-
-            true
-        }*/
+//        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
+//
+//        toolbar.setOnMenuItemClickListener { item ->
+//            when (item.itemId) {
+//                R.id.profile -> navController.navigate(R.id.profile)
+//                R.id.admin -> navController.navigate(R.id.admin)
+//            }
+//
+//            true
+//        }
 
     }
 

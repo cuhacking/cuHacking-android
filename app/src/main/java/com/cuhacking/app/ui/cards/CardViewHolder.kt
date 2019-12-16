@@ -1,4 +1,4 @@
-package com.cuhacking.app.info.ui
+package com.cuhacking.app.ui.cards
 
 import android.content.Intent
 import android.os.Build
@@ -11,9 +11,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.info.data.WifiInfo
+import com.cuhacking.app.info.ui.InfoViewModel
 import com.google.android.material.button.MaterialButton
 
-sealed class CardViewHolder<T : InfoCard>(item: View) : RecyclerView.ViewHolder(item) {
+sealed class CardViewHolder<T : Card>(item: View) : RecyclerView.ViewHolder(item) {
     abstract fun bind(value: T)
 }
 

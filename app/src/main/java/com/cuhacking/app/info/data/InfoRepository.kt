@@ -43,32 +43,7 @@ class InfoRepository @Inject constructor(
         WifiInfo("cuHacking 2020", "richcraft")
     }
 
-    suspend fun refreshUpdates(): Result<Unit> = withContext(dispatchers.io) {
-        val newUpdates = try {
-            api.getUpdates()
-        } catch (e: Exception) {
-            return@withContext Result.Error<Unit>(e)
-        }
-        val oldUpdateIds = database.announcementQueries.getAll().executeAsList().map { it.id }
 
-        // Insert updates that are not already contained in the database
-        newUpdates.updates.filter { (id) -> !oldUpdateIds.contains(id) }.forEach { (id, update) ->
-            database.announcementQueries.insert(
-                id,
-                update.title,
-                update.description,
-                update.locationId,
-                update.deliveryTime,
-                update.eventId
-            )
-        }
-
-        // Remove updates from the database that are no longer live
-        val newUpdateIds = newUpdates.updates.keys
-        oldUpdateIds.filter { !newUpdateIds.contains(it) }.forEach(database.announcementQueries::delete)
-
-        return@withContext Result.Success(Unit)
-    }
 
     suspend fun getUpdates() = database.announcementQueries.getAll().asFlow().mapToList(dispatchers.io)
 }
