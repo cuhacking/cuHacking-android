@@ -12,6 +12,7 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
             UpdateCard.viewType -> UpdateCardHolder(parent)
             WiFiCard.viewType -> WiFiCardHolder(parent, viewModel!!)
             Title.viewType -> TitleViewHolder(parent)
+            CountdownCard.viewType -> CountdownViewHolder(parent)
             else -> throw IllegalArgumentException("Unknown card type")
         }
     }
@@ -21,6 +22,7 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
         is UpdateCard -> UpdateCard.viewType
         is WiFiCard -> WiFiCard.viewType
         is Title -> Title.viewType
+        is CountdownCard -> CountdownCard.viewType
         else -> 0
     }
 
@@ -30,6 +32,14 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
             is UpdateCardHolder -> holder.bind(getItem(position) as UpdateCard)
             is WiFiCardHolder -> holder.bind(getItem(position) as WiFiCard)
             is TitleViewHolder -> holder.bind(getItem(position) as Title)
+            is CountdownViewHolder -> holder.bind(getItem(position) as CountdownCard)
+        }
+    }
+
+    override fun onViewRecycled(holder: CardViewHolder<*>) {
+        super.onViewRecycled(holder)
+        if (holder is CountdownViewHolder) {
+            holder.recycle()
         }
     }
 }

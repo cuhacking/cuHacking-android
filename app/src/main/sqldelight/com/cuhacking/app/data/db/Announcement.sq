@@ -8,13 +8,13 @@ CREATE TABLE announcement(
 );
 
 insert:
-INSERT INTO announcement VALUES(:id, :title, :descirption, :locationId, :deliveryTime, :eventId);
+INSERT INTO announcement VALUES(:id, :title, :description, :locationId, :deliveryTime, :eventId);
 
 delete:
 DELETE FROM announcement WHERE id = :id;
 
 getAll:
-SELECT * FROM announcement;
+SELECT * FROM announcement ORDER BY deliveryTime DESC;
 
 getById:
 SELECT * FROM announcement WHERE id = :id;
