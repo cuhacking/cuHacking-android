@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~    Copyright 2019 cuHacking
   ~
   ~    Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,16 +14,20 @@
   ~    limitations under the License.
   -->
 
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
             android:id="@+id/admin"
             android:icon="@drawable/ic_crop_free"
             android:title="Scan QR Code"
-            app:showAsAction="ifRoom"/>
+            app:iconTint="?menuIconColor"
+            app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/profile"
-        android:icon="@drawable/ic_person"
-        android:title="Profile"
-        app:showAsAction="always"/>
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_person"
+            android:title="Profile"
+
+            app:iconTint="?menuIconColor"
+            app:showAsAction="always" />
 </menu>

@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">?colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="menuIconColor">?android:textColorPrimary</item>
     </style>
 
     <style name="Widget.CuHacking.Card.Wifi" parent="Widget.MaterialComponents.CardView">

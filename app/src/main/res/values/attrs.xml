@@ -7,4 +7,6 @@
         <attr name="timeTextSize" format="dimension" />
         <attr name="meridiemTextSize" format="dimension" />
     </declare-styleable>
+
+    <attr name="menuIconColor" format="reference" />
 </resources>
