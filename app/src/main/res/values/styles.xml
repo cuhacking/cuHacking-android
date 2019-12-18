@@ -24,6 +24,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">?colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="menuIconColor">?colorPrimary</item>
     </style>
 
     <style name="Widget.CuHacking.Button.FloorSelectorButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
@@ -35,17 +36,20 @@
     </style>
 
     <style name="ThemeOverlay.CuHacking.Toolbar.Surface" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
-        <item name="android:textColorPrimary">?colorSurface</item>
+        <item name="android:textColorPrimary">?colorPrimary</item>
+        <item name="iconTint">?colorPrimary</item>
     </style>
 
     <style name="Widget.CuHacking.Toolbar" parent="Widget.MaterialComponents.Toolbar.Surface">
         <item name="titleTextColor">?colorPrimary</item>
         <item name="android:elevation">4dp</item>
-        <item name="android:titleTextStyle">@style/TextAppearance.CuHacking.ToolbarTitle</item>
+        <item name="titleTextAppearance">@style/TextAppearance.CuHacking.ToolbarTitle</item>
     </style>
 
     <style name="TextAppearance.CuHacking.ToolbarTitle" parent="TextAppearance.MaterialComponents.Headline6">
         <item name="fontFamily">@font/reem_kufi</item>
+        <item name="android:textSize">24sp</item>
+
     </style>
 
     <style name="ShapeAppearance.CuHacking.BottomCard" parent="ShapeAppearance.MaterialComponents.MediumComponent">
