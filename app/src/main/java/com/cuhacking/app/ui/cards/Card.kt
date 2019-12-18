@@ -3,6 +3,8 @@ package com.cuhacking.app.ui.cards
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DiffUtil
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZonedDateTime
 
 sealed class Card {
     abstract infix fun sameAs(other: Card): Boolean
@@ -22,6 +24,7 @@ sealed class Card {
 
 data class Header(@StringRes val title: Int) : Card() {
     override fun sameAs(other: Card): Boolean = (other as? Header)?.title == title
+
     companion object {
         const val viewType = 1
     }
@@ -29,13 +32,19 @@ data class Header(@StringRes val title: Int) : Card() {
 
 class Title : Card() {
     override fun sameAs(other: Card): Boolean = true
+
     companion object {
         const val viewType = 8
     }
 }
 
-data class CountdownCard(private val timeString: String) : Card() {
-    override fun sameAs(other: Card): Boolean = false
+data class CountdownCard(@StringRes val message: Int, val time: LocalDateTime) : Card() {
+    override fun sameAs(other: Card): Boolean = (other as? CountdownCard)?.time == time
+
+    companion object {
+        const val viewType = 11
+
+    }
 }
 
 data class UpdateCard(
@@ -45,12 +54,13 @@ data class UpdateCard(
     val publishTime: Long
 ) : Card() {
     override fun sameAs(other: Card): Boolean = (other as? UpdateCard)?.id == id
+
     companion object {
         const val viewType = 2
     }
 }
 
-data class WiFiCard(val ssid: String, val password: String): Card() {
+data class WiFiCard(val ssid: String, val password: String) : Card() {
     override fun sameAs(other: Card): Boolean = (other as? WiFiCard)?.ssid == ssid
 
     companion object {

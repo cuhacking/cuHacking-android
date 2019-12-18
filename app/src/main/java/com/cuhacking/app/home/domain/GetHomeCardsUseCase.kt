@@ -3,6 +3,8 @@ package com.cuhacking.app.home.domain
 import com.cuhacking.app.Database
 import com.cuhacking.app.R
 import com.cuhacking.app.data.CoroutinesDispatcherProvider
+import com.cuhacking.app.home.data.HomeRepository
+import com.cuhacking.app.ui.cards.CountdownCard
 import com.cuhacking.app.ui.cards.Header
 import com.cuhacking.app.ui.cards.Title
 import com.cuhacking.app.ui.cards.UpdateCard
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 class GetHomeCardsUseCase @Inject constructor(
     private val database: Database,
-    private val dispatchers: CoroutinesDispatcherProvider
+    private val dispatchers: CoroutinesDispatcherProvider,
+    private val repository: HomeRepository
 ) {
     operator fun invoke() =
         database.announcementQueries.getAll().asFlow().mapToList(dispatchers.io)
@@ -34,6 +37,11 @@ class GetHomeCardsUseCase @Inject constructor(
                     it
                 }
             }.map {
-                listOf(Title()) + it
+                listOf(
+                    CountdownCard(
+                        repository.getCountdownMessage(),
+                        repository.getCountdownTime()
+                    )
+                ) + it
             }
 }

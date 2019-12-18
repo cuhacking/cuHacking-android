@@ -2,17 +2,26 @@ package com.cuhacking.app.ui.cards
 
 import android.content.Intent
 import android.os.Build
+import android.os.CountDownTimer
 import android.provider.Settings
 import android.text.format.DateUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.info.data.WifiInfo
 import com.cuhacking.app.info.ui.InfoViewModel
 import com.google.android.material.button.MaterialButton
+import org.threeten.bp.Duration
+import org.threeten.bp.Instant
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.temporal.ChronoUnit
+import org.threeten.bp.temporal.TemporalUnit
+import kotlin.math.floor
 
 sealed class CardViewHolder<T : Card>(item: View) : RecyclerView.ViewHolder(item) {
     abstract fun bind(value: T)
@@ -86,5 +95,51 @@ class TitleViewHolder(parent: ViewGroup) : CardViewHolder<Title>(
     )
 ) {
     override fun bind(value: Title) {
+    }
+}
+
+class CountdownViewHolder(parent: ViewGroup) : CardViewHolder<CountdownCard>(
+    LayoutInflater.from(parent.context).inflate(
+        R.layout.header_announcement,
+        parent,
+        false
+    )
+) {
+
+    private lateinit var timer: CountDownTimer
+
+    override fun bind(value: CountdownCard) {
+        timer = object :
+            CountDownTimer(Duration.between(LocalDateTime.now(), value.time).toMillis(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val hours = floor(millisUntilFinished / 60 / 60 / 1000f).toInt()
+                val minutes = floor((millisUntilFinished - (hours * 60 * 60 * 1000L)) / 60 / 1000f).toInt()
+                val seconds = (floor(millisUntilFinished / 1000f)).toInt() % 60
+
+                val hourString = "$hours".padStart(2, '0')
+                val minuteString = "$minutes".padStart(2, '0')
+                val secondsString = "$seconds".padStart(2, '0')
+
+                itemView.findViewById<TextView>(R.id.title_text).text =
+                    itemView.context.getString(
+                        value.message,
+                        "${hourString}:${minuteString}:${secondsString}"
+                    )
+            }
+
+            override fun onFinish() {
+                itemView.findViewById<TextView>(R.id.title_text).text =
+                    itemView.context.getString(
+                        value.message,
+                        "00:00:00"
+                    )
+            }
+        }
+        timer.start()
+
+    }
+
+    fun recycle() {
+        timer.cancel()
     }
 }
