@@ -22,6 +22,7 @@ import com.cuhacking.app.home.ui.HomeViewModel
 import com.cuhacking.app.info.ui.InfoViewModel
 import com.cuhacking.app.map.ui.MapViewModel
 import com.cuhacking.app.profile.ui.ProfileViewModel
+import com.cuhacking.app.schedule.ui.EventDetailViewModel
 import com.cuhacking.app.schedule.ui.ScheduleViewModel
 import com.cuhacking.app.signin.ui.SignInViewModel
 import dagger.BindsInstance
@@ -47,7 +48,7 @@ interface CoreComponent {
     fun signInViewModelFactory(): ViewModelFactory<SignInViewModel>
     fun infoViewModelFactory(): ViewModelFactory<InfoViewModel>
     fun scheduleViewModelFactory(): ViewModelFactory<ScheduleViewModel>
-
+    fun eventDetailViewModelFactory(): ViewModelFactory<EventDetailViewModel>
     fun homeViewModelFactory(): ViewModelFactory<HomeViewModel>
 
     fun inject(application: CuHackingApplication)

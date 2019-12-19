@@ -51,6 +51,11 @@ android {
     packagingOptions {
         exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
     }
+
+    kotlinOptions {
+        this as org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions
+        jvmTarget = "1.8"
+    }
 }
 
 repositories {

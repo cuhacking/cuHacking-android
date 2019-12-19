@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
@@ -12,9 +13,18 @@ import com.cuhacking.app.schedule.data.models.EventUiModel
 import com.google.android.material.card.MaterialCardView
 import org.threeten.bp.format.DateTimeFormatter
 
-class ScheduleAdapter :
+class ScheduleAdapter(private val nav: NavController) :
     ListAdapter<EventUiModel, ScheduleAdapter.ViewHolder>(EventUiModel.DIFF_CALLBACK) {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.setOnClickListener {
+                val directions = ScheduleFragmentDirections.actionScheduleToEventDetailActivity(
+                    getItem(adapterPosition).id
+                )
+                nav.navigate(directions)
+            }
+        }
+
         fun bind(model: EventUiModel) {
             itemView.findViewById<TextView>(R.id.title).text = model.title
             itemView.findViewById<TextView>(R.id.location).text = model.locationName
