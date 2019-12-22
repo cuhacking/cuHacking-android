@@ -25,6 +25,7 @@
         <item name="android:statusBarColor">?colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="menuIconColor">?colorPrimary</item>
+        <item name="android:navigationBarColor">#00000000</item>
     </style>
 
     <style name="Widget.CuHacking.Button.FloorSelectorButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
@@ -37,7 +38,7 @@
 
     <style name="ThemeOverlay.CuHacking.Toolbar.Surface" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
         <item name="android:textColorPrimary">?colorPrimary</item>
-        <item name="iconTint">?colorPrimary</item>
+        <item name="iconTint">?menuIconColor</item>
     </style>
 
     <style name="Widget.CuHacking.Toolbar" parent="Widget.MaterialComponents.Toolbar.Surface">

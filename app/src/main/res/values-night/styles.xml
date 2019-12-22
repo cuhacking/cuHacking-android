@@ -9,6 +9,8 @@
         <item name="android:statusBarColor">?colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="menuIconColor">?android:textColorPrimary</item>
+        <item name="android:navigationBarColor">#2D2D2D</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
 
     <style name="Widget.CuHacking.Card.Wifi" parent="Widget.MaterialComponents.CardView">
@@ -16,9 +18,9 @@
     </style>
 
     <style name="Widget.CuHacking.Toolbar" parent="Widget.MaterialComponents.Toolbar.Surface">
-        <item name="android:background">?android:attr/colorBackground</item>
         <item name="titleTextColor">?android:textColorPrimary</item>
         <item name="android:elevation">4dp</item>
         <item name="android:titleTextStyle">@style/TextAppearance.CuHacking.ToolbarTitle</item>
     </style>
+
 </resources>

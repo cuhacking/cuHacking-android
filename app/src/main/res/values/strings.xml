@@ -34,4 +34,10 @@
 
     <string name="countdown_hack_start">Hacking begins in %1$s</string>
     <string name="countdown_hack_end">Hacking ends in %1$s</string>
+
+    <string name="error_event_details">Could not load event details</string>
+
+    <string name="event_add_favourite">Add to Favourites</string>
+    <string name="event_remove_favourite">Remove from Favourites</string>
+    <string name="event_view_map">View Location on Map</string>
 </resources>

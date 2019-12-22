@@ -21,6 +21,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.di.injector
@@ -34,7 +35,7 @@ class ScheduleFragment : Fragment(R.layout.schedule_fragment) {
 
     private val viewModel: ScheduleViewModel by viewModels { injector.scheduleViewModelFactory() }
 
-    private val scheduleAdapter by lazy { ScheduleAdapter() }
+    private val scheduleAdapter by lazy { ScheduleAdapter(findNavController()) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

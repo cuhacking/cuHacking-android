@@ -18,7 +18,10 @@
         <activity android:name=".signin.ui.SignInActivity"></activity>
         <activity android:name=".admin.ui.AdminActivity"></activity>
         <activity android:name=".profile.ui.ProfileActivity"></activity>
-        <activity android:name=".ui.MainActivity"></activity> <!-- Use an alias in order to avoid breaking home screen shortcuts when updated from previous version of app. -->
+        <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".schedule.ui.EventDetailActivity"></activity>
+
+        <!-- Use an alias in order to avoid breaking home screen shortcuts when updated from previous version of app. -->
         <activity-alias
                 android:name=".ui.MainActivity"
                 android:targetActivity=".ui.MainActivity">
