@@ -16,10 +16,13 @@
 
 package com.cuhacking.app.data.api
 
+import com.cuhacking.app.data.api.models.ScanRequest
 import com.cuhacking.app.data.api.models.ScheduleResponse
 import com.cuhacking.app.data.api.models.UpdatesResponse
 import com.cuhacking.app.profile.data.model.UserFromApi
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface ApiService {
@@ -34,4 +37,7 @@ interface ApiService {
 
     @GET("schedule")
     suspend fun getSchedule(): ScheduleResponse
+
+    @POST("scan")
+    suspend fun scanUser(@Body request: ScanRequest): String?
 }

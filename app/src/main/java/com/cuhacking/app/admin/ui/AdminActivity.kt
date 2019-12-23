@@ -27,13 +27,14 @@ import android.view.Surface
 import android.view.TextureView
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.camera.core.AspectRatio
-import androidx.camera.core.CameraX
-import androidx.camera.core.Preview
-import androidx.camera.core.PreviewConfig
+import androidx.camera.core.*
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.cuhacking.app.R
+import com.google.common.util.concurrent.ListenableFuture
+import kotlinx.android.synthetic.main.activity_admin.*
 
 private const val REQUEST_PERMISSIONS_CODE = 10
 
@@ -41,59 +42,36 @@ private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
 class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
 
-    private val viewFinder: TextureView by lazy { findViewById<TextureView>(R.id.view_finder) }
+    private val viewFinder: PreviewView by lazy { findViewById<PreviewView>(R.id.view_finder) }
+    private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if (allPermissionsGranted()) {
             viewFinder.post { startCamera() }
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_PERMISSIONS_CODE)
         }
-
-        viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            updateTransform()
-        }
     }
 
     private fun startCamera() {
-        val previewConfig = PreviewConfig.Builder().apply {
-            setTargetAspectRatio(AspectRatio.RATIO_16_9)
-            setTargetResolution(Size(640, 640))
-        }.build()
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        cameraProviderFuture.addListener(Runnable {
+            val cameraProvider = cameraProviderFuture.get()
+            bindPreview(cameraProvider)
+        }, ContextCompat.getMainExecutor(this))
 
-        val preview = Preview(previewConfig)
-
-        preview.setOnPreviewOutputUpdateListener {
-            val parent = viewFinder.parent as ViewGroup
-            parent.removeView(viewFinder)
-            parent.addView(viewFinder, 0)
-
-            viewFinder.surfaceTexture = it.surfaceTexture
-            updateTransform()
-
-        }
-
-        CameraX.bindToLifecycle(this, preview)
     }
 
-    private fun updateTransform() {
-        val matrix = Matrix()
+    private fun bindPreview(cameraProvider: ProcessCameraProvider) {
+        val preview: Preview = Preview.Builder()
+            .setTargetName("Preview")
+            .build()
 
-        val centerX = viewFinder.width / 2f
-        val centerY = viewFinder.height / 2f
+        preview.previewSurfaceProvider = viewFinder.previewSurfaceProvider
 
-        val rotationDegrees = when(viewFinder.display.rotation) {
-            Surface.ROTATION_0 -> 0
-            Surface.ROTATION_90 -> 90
-            Surface.ROTATION_180 -> 180
-            Surface.ROTATION_270 -> 270
-            else -> return
-        }
-        matrix.postRotate(-rotationDegrees.toFloat(), centerX, centerY)
-
-        viewFinder.setTransform(matrix)
+        cameraProvider.bindToLifecycle(this, CameraSelector.DEFAULT_BACK_CAMERA, preview)
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

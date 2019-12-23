@@ -71,10 +71,11 @@ class MapFragment : Fragment(R.layout.map_fragment) {
 
         mapView.getMapAsync { mapboxMap ->
             map = mapboxMap
-            val mapStyle = when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_YES -> Style.DARK
-                else -> Style.LIGHT
-            }
+            val mapStyle =
+                when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                    Configuration.UI_MODE_NIGHT_YES -> Style.DARK
+                    else -> Style.LIGHT
+                }
             mapboxMap.setStyle(mapStyle) { style ->
                 viewModel.floorSource.observe(this, Observer { source ->
                     applyMapStyle(style, source)
@@ -130,12 +131,12 @@ class MapFragment : Fragment(R.layout.map_fragment) {
             setProperties(
                 fillColor(
                     match(
-                        get("type"), color(Color.parseColor("#212121")),
-                        stop("room", color(Color.parseColor("#00FF00"))),
-                        stop("washroom", color(Color.parseColor("#FFFF00"))),
-                        stop("elevator", color(Color.parseColor("#FF0000"))),
-                        stop("stairs", color(Color.parseColor("#0000FF"))),
-                        stop("hallway", color(Color.parseColor("#FFFFFF")))
+                        get("type"), color(Color.parseColor("#AAAAAA")),
+                        stop("room", color(Color.parseColor("#9756D8"))),
+                        stop("washroom", color(Color.parseColor("#F6D500"))),
+                        stop("elevator", color(Color.parseColor("#DD001E"))),
+                        stop("stairs", color(Color.parseColor("#006CA9"))),
+                        stop("hallway", color(Color.parseColor("#FEFEFE")))
                     )
                 ),
                 fillOpacity(
@@ -157,8 +158,16 @@ class MapFragment : Fragment(R.layout.map_fragment) {
 
         LineLayer("rb-lines", source.id).apply {
             setProperties(
-                lineWidth(1f),
-                lineColor("#7C39BF")
+                lineWidth(3f),
+                lineColor("#212121")
+            )
+            style.addLayer(this)
+        }
+
+        LineLayer("rb-backdrop-lines", source.id).apply {
+            setProperties(
+                lineWidth(5f),
+                lineColor("#212121")
             )
             style.addLayer(this)
         }
@@ -190,7 +199,18 @@ class MapFragment : Fragment(R.layout.map_fragment) {
     private fun setLayerFilters(style: Style, floor: Floor) {
         // Room fills
         (style.getLayer("rb") as FillLayer)
-            .setFilter(all(eq(get("floor"), floor.number), neq(get("type"), "backdrop")))
+            .setFilter(
+                all(
+                    eq(get("floor"), floor.number),
+                    any(
+                        eq(get("type"), "elevator"),
+                        eq(get("type"), "room"),
+                        eq(get("type"), "washroom"),
+                        eq(get("type"), "stairs"),
+                        eq(get("type"), "hallway")
+                    )
+                )
+            )
 
         // Backdrop layer
         (style.getLayer("rb-backdrop") as FillLayer)
@@ -198,7 +218,11 @@ class MapFragment : Fragment(R.layout.map_fragment) {
 
         // Room outlines
         (style.getLayer("rb-lines") as LineLayer)
-            .setFilter(eq(get("floor"), floor.number))
+            .setFilter(all(eq(get("floor"), floor.number), eq(get("type"), "line")))
+
+        // Backdrop lines
+        (style.getLayer("rb-backdrop-lines") as LineLayer)
+            .setFilter(all(eq(get("floor"), floor.number), eq(get("type"), "backdrop-line")))
 
         // Labels/Icons
         (style.getLayer("rb-symbols") as SymbolLayer)

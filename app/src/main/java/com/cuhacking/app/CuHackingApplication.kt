@@ -17,6 +17,8 @@
 package com.cuhacking.app
 
 import android.app.Application
+import androidx.camera.camera2.Camera2Config
+import androidx.camera.core.CameraXConfig
 import com.cuhacking.app.data.DefaultDataInfoProvider
 import com.cuhacking.app.di.CoreComponent
 import com.cuhacking.app.di.DaggerComponentProvider
@@ -24,7 +26,7 @@ import com.cuhacking.app.di.DaggerCoreComponent
 import com.cuhacking.app.di.SharedPreferencesModule
 import com.jakewharton.threetenabp.AndroidThreeTen
 
-class CuHackingApplication : Application(), DaggerComponentProvider {
+class CuHackingApplication : Application(), DaggerComponentProvider, CameraXConfig.Provider {
 
     override val component: CoreComponent by lazy {
         DaggerCoreComponent.builder()
@@ -40,4 +42,5 @@ class CuHackingApplication : Application(), DaggerComponentProvider {
         component.inject(this)
     }
 
+    override fun getCameraXConfig(): CameraXConfig = Camera2Config.defaultConfig()
 }
