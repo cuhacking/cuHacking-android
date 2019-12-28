@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             style="@style/Widget.CuHacking.Toolbar"
+            app:menu="@menu/toolbar"
             android:elevation="4dp"
             app:title="@string/app_name"
             app:layout_constraintTop_toTopOf="parent"

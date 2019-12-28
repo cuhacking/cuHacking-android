@@ -57,5 +57,5 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideConverterFactory() = MoshiConverterFactory.create()
+    fun provideConverterFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
 }

@@ -18,6 +18,7 @@ package com.cuhacking.app.di
 
 import android.content.Context
 import com.cuhacking.app.CuHackingApplication
+import com.cuhacking.app.admin.ui.AdminViewModel
 import com.cuhacking.app.home.ui.HomeViewModel
 import com.cuhacking.app.info.ui.InfoViewModel
 import com.cuhacking.app.map.ui.MapViewModel
@@ -50,6 +51,7 @@ interface CoreComponent {
     fun scheduleViewModelFactory(): ViewModelFactory<ScheduleViewModel>
     fun eventDetailViewModelFactory(): ViewModelFactory<EventDetailViewModel>
     fun homeViewModelFactory(): ViewModelFactory<HomeViewModel>
+    fun adminViewModelFactory(): ViewModelFactory<AdminViewModel>
 
     fun inject(application: CuHackingApplication)
 

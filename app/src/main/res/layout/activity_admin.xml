@@ -19,7 +19,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".admin.ui.AdminActivity">
+        tools:context=".admin.ui.AdminActivity"
+        android:fitsSystemWindows="false">
 
     <androidx.camera.view.PreviewView
             android:id="@+id/view_finder"

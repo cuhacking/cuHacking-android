@@ -50,12 +50,10 @@ class HomeFragment : Fragment(R.layout.info_fragment) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.profile -> {
-                findNavController().navigate(InfoFragmentDirections.login())
-            }
+            R.id.profile -> findNavController().navigate(InfoFragmentDirections.login())
+            R.id.admin -> findNavController().navigate(InfoFragmentDirections.scan())
         }
 
         return super.onOptionsItemSelected(item)
     }
-
 }

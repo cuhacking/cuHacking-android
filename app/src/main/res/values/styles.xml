@@ -25,7 +25,11 @@
         <item name="android:statusBarColor">?colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="menuIconColor">?colorPrimary</item>
-        <item name="android:navigationBarColor">#00000000</item>
+    </style>
+
+    <style name="AppTheme.CameraPreview" parent="AppTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="Widget.CuHacking.Button.FloorSelectorButton" parent="Widget.MaterialComponents.Button.OutlinedButton">

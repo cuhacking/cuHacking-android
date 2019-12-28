@@ -16,7 +16,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".signin.ui.SignInActivity"></activity>
-        <activity android:name=".admin.ui.AdminActivity"></activity>
+        <activity
+                android:name=".admin.ui.AdminActivity"
+                android:theme="@style/AppTheme.CameraPreview"></activity>
         <activity android:name=".profile.ui.ProfileActivity"></activity>
         <activity android:name=".ui.MainActivity"></activity>
         <activity android:name=".schedule.ui.EventDetailActivity"></activity>

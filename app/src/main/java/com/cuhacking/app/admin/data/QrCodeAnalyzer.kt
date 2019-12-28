@@ -1,6 +1,7 @@
 package com.cuhacking.app.admin.data
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.android.gms.tasks.Task
@@ -31,6 +32,8 @@ class QrCodeAnalyzer(
             }
             .addOnFailureListener{
             }
+
+        image.close()
     }
 
     private fun rotationDegreesToFirebaseRotation(rotationDegrees: Int) : Int {
