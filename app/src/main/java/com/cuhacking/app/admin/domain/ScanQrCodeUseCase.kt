@@ -9,10 +9,7 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.*
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -27,7 +24,7 @@ class ScanQrCodeUseCase @Inject constructor(
     private val channel = ConflatedBroadcastChannel<Pair<String, List<FirebaseVisionBarcode>>>()
     val flow = channel.asFlow()
         .filter(::filterEvents)
-        .mapNotNull(::processCodes)
+        .map(::processCodes)
         .flowOn(dispatchers.io)
 
     @Suppress("RedundantSuspendModifier")

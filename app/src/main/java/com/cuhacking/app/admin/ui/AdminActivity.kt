@@ -51,7 +51,7 @@ class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
     private val viewFinder: PreviewView by lazy { findViewById<PreviewView>(R.id.view_finder) }
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private val viewModel: AdminViewModel by viewModels { injector.adminViewModelFactory() }
-
+    private val resultOverlay by lazy { findViewById<ResultOverlay>(R.id.result_overlay) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +64,8 @@ class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
         viewModel.scanStatus.observe(this, Observer {
             it ?: return@Observer
             Snackbar.make(viewFinder, it.messageRes, Snackbar.LENGTH_SHORT).show()
+
+            resultOverlay.updateState(if (it.success) ResultOverlay.State.SUCCESS else ResultOverlay.State.FAILURE)
         })
     }
 
