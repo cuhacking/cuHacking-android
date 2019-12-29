@@ -20,10 +20,7 @@ import com.cuhacking.app.data.api.models.ScanRequest
 import com.cuhacking.app.data.api.models.ScheduleResponse
 import com.cuhacking.app.data.api.models.UpdatesResponse
 import com.cuhacking.app.profile.data.model.UserFromApi
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiService {
     @GET("hello/{id}")
@@ -39,5 +36,5 @@ interface ApiService {
     suspend fun getSchedule(): ScheduleResponse
 
     @POST("scan")
-    suspend fun scanUser(@Body request: ScanRequest): String?
+    suspend fun scanUser(@Body request: ScanRequest, @Header("Auth-Token") auth: String): String?
 }
