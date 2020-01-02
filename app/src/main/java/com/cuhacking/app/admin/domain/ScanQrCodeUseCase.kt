@@ -5,6 +5,7 @@ import com.cuhacking.app.admin.ui.ScanResponseUiModel
 import com.cuhacking.app.data.CoroutinesDispatcherProvider
 import com.cuhacking.app.data.api.ApiService
 import com.cuhacking.app.data.api.models.ScanRequest
+import com.cuhacking.app.util.getBearerAuth
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
@@ -61,7 +62,7 @@ class ScanQrCodeUseCase @Inject constructor(
                 ScanResponseUiModel(false, R.string.scan_error_too_many)
             }
             else -> try {
-                val token = Tasks.await(user.getIdToken(false)).token ?: return ScanResponseUiModel(
+                val token = user.getBearerAuth() ?: return ScanResponseUiModel(
                     false,
                     R.string.scan_error_generic
                 )

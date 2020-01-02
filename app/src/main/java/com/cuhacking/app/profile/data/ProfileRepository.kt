@@ -6,7 +6,10 @@ import com.cuhacking.app.Database
 import com.cuhacking.app.data.CoroutinesDispatcherProvider
 import com.cuhacking.app.data.Result
 import com.cuhacking.app.data.api.ApiService
+import com.cuhacking.app.data.auth.UserRole
 import com.cuhacking.app.data.db.User
+import com.cuhacking.app.util.getBearerAuth
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToOneNotNull
 import kotlinx.coroutines.flow.Flow
@@ -49,8 +52,27 @@ class ProfileRepository @Inject constructor(
     suspend fun loadUser(userId: String, isPrimary: Boolean): Result<Unit> =
         withContext(dispatchers.io) {
             return@withContext try {
-                val (id, name, email, color, school) = apiService.getUser(userId)
-                database.userQueries.insert(id, name, email, color, school, isPrimary, Date().time)
+                val (user) = apiService.getUser(
+                    userId,
+                    FirebaseAuth.getInstance().currentUser?.getBearerAuth()!!
+                )
+                val (id, name, email, color, school, role) = user
+                val roleValue = when (role) {
+                    "user" -> UserRole.USER
+                    "admin" -> UserRole.ADMIN
+                    "sponsor" -> UserRole.SPONSOR
+                    else -> UserRole.USER
+                }
+                database.userQueries.insert(
+                    id,
+                    name,
+                    email,
+                    color,
+                    school,
+                    isPrimary,
+                    Date().time,
+                    roleValue
+                )
                 Result.Success(Unit)
             } catch (e: Exception) {
                 Result.Error<Unit>(e)

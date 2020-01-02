@@ -1,3 +1,5 @@
+import com.cuhacking.app.data.auth.UserRole;
+
 CREATE TABLE user(
     id TEXT NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
@@ -5,14 +7,15 @@ CREATE TABLE user(
     color TEXT NOT NULL,
     school TEXT NOT NULL,
     isPrimary INTEGER AS Boolean NOT NULL DEFAULT 0,
-    lastViewed INTEGER AS Long NOT NULL
+    lastViewed INTEGER AS Long NOT NULL,
+    role INTEGER AS UserRole NOT NULL
 );
 
 getById:
 SELECT * FROM user WHERE id = :id;
 
 insert:
-REPLACE INTO user VALUES(:id, :name, :email, :color, :school, :isPrimary, :lastViewed);
+REPLACE INTO user VALUES(:id, :name, :email, :color, :school, :isPrimary, :lastViewed, :role);
 DELETE FROM user WHERE :lastViewed - lastViewed < 900000 AND isPrimary = 0;
 
 delete:
