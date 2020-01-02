@@ -77,6 +77,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:${ProjectVersions.NAVIGATION}")
     implementation("androidx.camera:camera-core:${ProjectVersions.CAMERA}")
     implementation("androidx.camera:camera-camera2:${ProjectVersions.CAMERA}")
+    implementation("androidx.camera:camera-view:${ProjectVersions.CAMERA_VIEW}")
+    implementation("androidx.camera:camera-extensions:${ProjectVersions.CAMERA_EXTENSIONS}")
+    implementation("androidx.camera:camera-lifecycle:${ProjectVersions.CAMERA_LIFECYCLE}")
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:${ProjectVersions.SWIPE_REFRESH}")
 
     implementation("com.google.dagger:dagger:${ProjectVersions.DAGGER}")
@@ -87,10 +90,10 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:${ProjectVersions.GLIDE}")
 
     implementation("com.google.firebase:firebase-analytics:${ProjectVersions.FIREBASE_CORE}")
-//    implementation("com.google.firebase:firebase-common-ktx:${ProjectVersions.FIREBASE_CORE}")
     implementation("com.google.firebase:firebase-auth:${ProjectVersions.FIREBASE_AUTH}")
     implementation("com.google.firebase:firebase-messaging:${ProjectVersions.FIREBASE_CLOUD_MESSAGING}")
     implementation("com.google.firebase:firebase-ml-vision:${ProjectVersions.FIREBASE_VISION}")
+    implementation("com.google.firebase:firebase-ml-vision-barcode-model:${ProjectVersions.FIREBASE_VISION_BARCODE_MODEL}")
     implementation("com.crashlytics.sdk.android:crashlytics:${ProjectVersions.FIREBASE_CRASHLYTICS}")
 
     implementation("com.squareup.sqldelight:android-driver:${ProjectVersions.SQLDELIGHT}")

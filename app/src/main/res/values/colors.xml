@@ -26,4 +26,7 @@
     <color name="eventRed">#D85656</color>
     <color name="eventGreen">#4CAF50</color>
     <color name="eventBlue">#007CC2</color>
+
+    <color name="error">#f44336</color>
+    <color name="success">#8bc34a</color>
 </resources>

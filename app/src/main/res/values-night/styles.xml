@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPale</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">?colorSurface</item>
+        <item name="android:statusBarColor">#282828</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="menuIconColor">?android:textColorPrimary</item>
         <item name="android:navigationBarColor">#2D2D2D</item>

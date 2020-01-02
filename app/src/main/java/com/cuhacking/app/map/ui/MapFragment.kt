@@ -21,6 +21,7 @@ import android.graphics.Color
 import android.graphics.RectF
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -28,10 +29,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.cuhacking.app.BuildConfig
 import com.cuhacking.app.R
 import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.di.injector
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.card.MaterialCardView
@@ -71,10 +74,11 @@ class MapFragment : Fragment(R.layout.map_fragment) {
 
         mapView.getMapAsync { mapboxMap ->
             map = mapboxMap
-            val mapStyle = when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_YES -> Style.DARK
-                else -> Style.LIGHT
-            }
+            val mapStyle =
+                when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                    Configuration.UI_MODE_NIGHT_YES -> Style.DARK
+                    else -> Style.LIGHT
+                }
             mapboxMap.setStyle(mapStyle) { style ->
                 viewModel.floorSource.observe(this, Observer { source ->
                     applyMapStyle(style, source)
@@ -121,6 +125,10 @@ class MapFragment : Fragment(R.layout.map_fragment) {
             bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
             view.findViewById<TextView>(R.id.room_name).text = roomId
         })
+
+        view.findViewById<MaterialToolbar>(R.id.toolbar).apply {
+            setOnMenuItemClickListener(::onOptionsItemSelected)
+        }
     }
 
     private fun applyMapStyle(style: Style, source: GeoJsonSource) {
@@ -130,12 +138,12 @@ class MapFragment : Fragment(R.layout.map_fragment) {
             setProperties(
                 fillColor(
                     match(
-                        get("type"), color(Color.parseColor("#212121")),
-                        stop("room", color(Color.parseColor("#00FF00"))),
-                        stop("washroom", color(Color.parseColor("#FFFF00"))),
-                        stop("elevator", color(Color.parseColor("#FF0000"))),
-                        stop("stairs", color(Color.parseColor("#0000FF"))),
-                        stop("hallway", color(Color.parseColor("#FFFFFF")))
+                        get("type"), color(Color.parseColor("#AAAAAA")),
+                        stop("room", color(Color.parseColor("#9756D8"))),
+                        stop("washroom", color(Color.parseColor("#F6D500"))),
+                        stop("elevator", color(Color.parseColor("#DD001E"))),
+                        stop("stairs", color(Color.parseColor("#006CA9"))),
+                        stop("hallway", color(Color.parseColor("#FEFEFE")))
                     )
                 ),
                 fillOpacity(
@@ -157,8 +165,16 @@ class MapFragment : Fragment(R.layout.map_fragment) {
 
         LineLayer("rb-lines", source.id).apply {
             setProperties(
-                lineWidth(1f),
-                lineColor("#7C39BF")
+                lineWidth(3f),
+                lineColor("#212121")
+            )
+            style.addLayer(this)
+        }
+
+        LineLayer("rb-backdrop-lines", source.id).apply {
+            setProperties(
+                lineWidth(5f),
+                lineColor("#212121")
             )
             style.addLayer(this)
         }
@@ -190,7 +206,18 @@ class MapFragment : Fragment(R.layout.map_fragment) {
     private fun setLayerFilters(style: Style, floor: Floor) {
         // Room fills
         (style.getLayer("rb") as FillLayer)
-            .setFilter(all(eq(get("floor"), floor.number), neq(get("type"), "backdrop")))
+            .setFilter(
+                all(
+                    eq(get("floor"), floor.number),
+                    any(
+                        eq(get("type"), "elevator"),
+                        eq(get("type"), "room"),
+                        eq(get("type"), "washroom"),
+                        eq(get("type"), "stairs"),
+                        eq(get("type"), "hallway")
+                    )
+                )
+            )
 
         // Backdrop layer
         (style.getLayer("rb-backdrop") as FillLayer)
@@ -198,7 +225,11 @@ class MapFragment : Fragment(R.layout.map_fragment) {
 
         // Room outlines
         (style.getLayer("rb-lines") as LineLayer)
-            .setFilter(eq(get("floor"), floor.number))
+            .setFilter(all(eq(get("floor"), floor.number), eq(get("type"), "line")))
+
+        // Backdrop lines
+        (style.getLayer("rb-backdrop-lines") as LineLayer)
+            .setFilter(all(eq(get("floor"), floor.number), eq(get("type"), "backdrop-line")))
 
         // Labels/Icons
         (style.getLayer("rb-symbols") as SymbolLayer)
@@ -256,5 +287,14 @@ class MapFragment : Fragment(R.layout.map_fragment) {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         view?.findViewById<MapView>(R.id.map_view)?.onSaveInstanceState(outState)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.profile -> findNavController().navigate(MapFragmentDirections.login())
+            R.id.admin -> findNavController().navigate(MapFragmentDirections.scan())
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }

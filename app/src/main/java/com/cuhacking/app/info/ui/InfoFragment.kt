@@ -26,6 +26,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cuhacking.app.R
+import com.cuhacking.app.admin.ui.AdminActivityDirections
 import com.cuhacking.app.data.Result
 import com.cuhacking.app.di.injector
 import com.cuhacking.app.ui.cards.CardAdapter
@@ -59,6 +60,9 @@ class InfoFragment : Fragment(R.layout.info_fragment) {
         when (item.itemId) {
             R.id.profile -> {
                 findNavController().navigate(InfoFragmentDirections.login())
+            }
+            R.id.admin -> {
+                findNavController().navigate(InfoFragmentDirections.scan())
             }
         }
 

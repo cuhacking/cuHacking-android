@@ -4,7 +4,10 @@ object ProjectVersions {
     const val MIN_SDK = 21
 
     const val APPCOMPAT = "1.1.0"
-    const val CAMERA = "1.0.0-alpha06"
+    const val CAMERA = "1.0.0-alpha08"
+    const val CAMERA_EXTENSIONS = "1.0.0-alpha05"
+    const val CAMERA_LIFECYCLE = "1.0.0-alpha02"
+    const val CAMERA_VIEW = "1.0.0-alpha05"
     const val CONSTRAINT_LAYOUT = "1.1.3"
     const val COROUTINES = "1.3.2"
     const val DAGGER = "2.25.2"
@@ -14,6 +17,7 @@ object ProjectVersions {
     const val FIREBASE_CORE = "17.2.1"
     const val FIREBASE_CRASHLYTICS = "2.10.1"
     const val FIREBASE_VISION = "24.0.1"
+    const val FIREBASE_VISION_BARCODE_MODEL = "16.0.2"
     const val FRAGMENT = "1.1.0"
     const val GLIDE = "4.9.0"
     const val JUNIT = "4.12"

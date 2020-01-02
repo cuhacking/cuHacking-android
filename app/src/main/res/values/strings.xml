@@ -40,4 +40,10 @@
     <string name="event_add_favourite">Add to Favourites</string>
     <string name="event_remove_favourite">Remove from Favourites</string>
     <string name="event_view_map">View Location on Map</string>
+
+    <string name="scan_success">Success</string>
+    <string name="scan_error_already">Already scanned</string>
+    <string name="scan_error_not_found">User not found</string>
+    <string name="scan_error_generic">An error occurred</string>
+    <string name="scan_error_too_many">Cannot scan more than one code at a time</string>
 </resources>
