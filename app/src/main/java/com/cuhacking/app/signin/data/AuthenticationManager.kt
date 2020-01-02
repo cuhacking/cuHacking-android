@@ -35,7 +35,7 @@ class AuthenticationManager @Inject constructor(
                 val user = result.user!!
 
                 val (apiUser) = api.getUser(user.uid, user.getBearerAuth()!!)
-                val (_, name, userEmail, color, school, role) = apiUser
+                val (_, userEmail, _, role, application) = apiUser
                 val roleValue = when (role) {
                     "user" -> UserRole.USER
                     "admin" -> UserRole.ADMIN
@@ -45,10 +45,10 @@ class AuthenticationManager @Inject constructor(
 
                 database.userQueries.insert(
                     user.uid,
-                    name,
+                    "${application.basicInfo.firstName} ${application.basicInfo.lastName}",
                     userEmail,
-                    color,
-                    school,
+                    "red",
+                    application.personalInfo.school,
                     true,
                     Date().time,
                     roleValue

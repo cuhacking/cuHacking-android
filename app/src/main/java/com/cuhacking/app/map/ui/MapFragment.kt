@@ -34,6 +34,7 @@ import com.cuhacking.app.BuildConfig
 import com.cuhacking.app.R
 import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.di.injector
+import com.cuhacking.app.ui.PageFragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButtonToggleGroup
@@ -52,7 +53,7 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 
-class MapFragment : Fragment(R.layout.map_fragment) {
+class MapFragment : PageFragment(R.layout.map_fragment) {
 
     companion object {
         fun newInstance() = MapFragment()
@@ -125,10 +126,6 @@ class MapFragment : Fragment(R.layout.map_fragment) {
             bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
             view.findViewById<TextView>(R.id.room_name).text = roomId
         })
-
-        view.findViewById<MaterialToolbar>(R.id.toolbar).apply {
-            setOnMenuItemClickListener(::onOptionsItemSelected)
-        }
     }
 
     private fun applyMapStyle(style: Style, source: GeoJsonSource) {
@@ -289,12 +286,4 @@ class MapFragment : Fragment(R.layout.map_fragment) {
         view?.findViewById<MapView>(R.id.map_view)?.onSaveInstanceState(outState)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.profile -> findNavController().navigate(MapFragmentDirections.login())
-            R.id.admin -> findNavController().navigate(MapFragmentDirections.scan())
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
 }

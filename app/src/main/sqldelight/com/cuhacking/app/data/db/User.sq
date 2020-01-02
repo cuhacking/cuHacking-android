@@ -14,6 +14,9 @@ CREATE TABLE user(
 getById:
 SELECT * FROM user WHERE id = :id;
 
+getPrimary:
+SELECT * FROM user WHERE isPrimary = 1 LIMIT 1;
+
 insert:
 REPLACE INTO user VALUES(:id, :name, :email, :color, :school, :isPrimary, :lastViewed, :role);
 DELETE FROM user WHERE :lastViewed - lastViewed < 900000 AND isPrimary = 0;

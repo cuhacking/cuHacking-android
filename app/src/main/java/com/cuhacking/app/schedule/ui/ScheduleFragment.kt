@@ -17,9 +17,7 @@
 package com.cuhacking.app.schedule.ui
 
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -27,9 +25,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.di.injector
 import com.cuhacking.app.schedule.data.models.EventUiModel
-import com.google.android.material.appbar.MaterialToolbar
+import com.cuhacking.app.ui.PageFragment
 
-class ScheduleFragment : Fragment(R.layout.schedule_fragment) {
+class ScheduleFragment : PageFragment(R.layout.schedule_fragment) {
 
     companion object {
         fun newInstance() = ScheduleFragment()
@@ -47,10 +45,6 @@ class ScheduleFragment : Fragment(R.layout.schedule_fragment) {
         }
 
         viewModel.scheduleData.observe(this, Observer(::updateScheduleUi))
-
-        view.findViewById<MaterialToolbar>(R.id.toolbar).apply {
-            setOnMenuItemClickListener(::onOptionsItemSelected)
-        }
     }
 
     private fun updateScheduleUi(data: List<EventUiModel>?) {
@@ -62,14 +56,5 @@ class ScheduleFragment : Fragment(R.layout.schedule_fragment) {
                 addItemDecoration(ScheduleTimeDecoration(context, data))
             }
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.profile -> findNavController().navigate(ScheduleFragmentDirections.login())
-            R.id.admin -> findNavController().navigate(ScheduleFragmentDirections.scan())
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 }
