@@ -46,5 +46,24 @@
     <string name="scan_error_not_found">User not found</string>
     <string name="scan_error_generic">An error occurred</string>
     <string name="scan_error_too_many">Cannot scan more than one code at a time</string>
+
     <string name="logout">Logout</string>
+
+    <string name="color_group">%s Group</string>
+    <string name="color_red">Red</string>
+    <string name="color_green">Green</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_yellow">Yellow</string>
+
+    <string name="food_restrictions_other">Other: %s</string>
+    <string name="food_nut_free">Nut Free</string>
+    <string name="food_vegetarian">Vegetarian</string>
+    <string name="food_lactose_free">Lactose Free</string>
+    <string name="food_halal">Halal</string>
+    <string name="food_gluten_free">Gluten Free</string>
+    <string name="food_none">None</string>
+
+    <string name="login_success">Login successful</string>
+    <string name="login_error">Wrong Email or Password</string>
+    <string name="logout_success">Logged out</string>
 </resources>

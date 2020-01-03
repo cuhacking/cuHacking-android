@@ -51,7 +51,13 @@ class AuthenticationManager @Inject constructor(
                     application.personalInfo.school,
                     true,
                     Date().time,
-                    roleValue
+                    roleValue,
+                    application.personalInfo.dietaryRestrictions.lactoseFree,
+                    application.personalInfo.dietaryRestrictions.nutFree,
+                    application.personalInfo.dietaryRestrictions.vegetarian,
+                    application.personalInfo.dietaryRestrictions.halal,
+                    application.personalInfo.dietaryRestrictions.glutenFree,
+                    application.personalInfo.dietaryRestrictions.other
                 )
 
                 Result.Success(database.userQueries.getById(user.uid).executeAsOne())

@@ -1,9 +1,11 @@
 package com.cuhacking.app.util
 
+import android.content.Context
 import android.os.Build
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
+import androidx.recyclerview.widget.RecyclerView
 
 fun newStaticLayout(
     source: CharSequence,
@@ -23,13 +25,16 @@ fun newStaticLayout(
     } else {
         @Suppress("DEPRECATION")
         (StaticLayout(
-        source,
-        paint,
-        width,
-        alignment,
-        spacingmult,
-        spacingadd,
-        includepad
-    ))
+            source,
+            paint,
+            width,
+            alignment,
+            spacingmult,
+            spacingadd,
+            includepad
+        ))
     }
 }
+
+val RecyclerView.ViewHolder.viewContext: Context
+    get() = itemView.context

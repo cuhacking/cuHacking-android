@@ -69,7 +69,13 @@ class ProfileRepository @Inject constructor(
                     application.personalInfo.school,
                     id == FirebaseAuth.getInstance().currentUser?.uid,
                     Date().time,
-                    roleValue
+                    roleValue,
+                    application.personalInfo.dietaryRestrictions.lactoseFree,
+                    application.personalInfo.dietaryRestrictions.nutFree,
+                    application.personalInfo.dietaryRestrictions.vegetarian,
+                    application.personalInfo.dietaryRestrictions.halal,
+                    application.personalInfo.dietaryRestrictions.glutenFree,
+                    application.personalInfo.dietaryRestrictions.other
                 )
                 Result.Success(Unit)
             } catch (e: Exception) {
