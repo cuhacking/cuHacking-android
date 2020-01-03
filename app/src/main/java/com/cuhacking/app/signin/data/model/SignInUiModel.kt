@@ -5,9 +5,10 @@ import androidx.annotation.StringRes
 sealed class SignInUiModel {
     /**
      * Represents the UI state of the success state of a sign in attempt.
-     * @property name The name of the user who has signed in
      */
-    data class Success(val name: String) : SignInUiModel()
+    object Success : SignInUiModel()
+
+    object Loading : SignInUiModel()
 
     /**
      * Represents the UI state of the failure state of a sign in attempt.

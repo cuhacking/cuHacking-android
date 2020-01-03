@@ -25,6 +25,7 @@ object ProjectVersions {
     const val KTX = "1.1.0"
     const val LIFECYCLE = "2.1.0"
     const val MATERIAL = "1.2.0-alpha02"
+    const val MATERIAL_TAP_TARGET_PROMPT = "3.0.0"
     const val MAPBOX = "8.5.0"
     const val NAVIGATION = "2.1.0"
     const val OKHTTP = "4.2.1"

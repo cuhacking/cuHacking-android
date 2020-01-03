@@ -26,6 +26,7 @@ import com.cuhacking.app.profile.ui.ProfileViewModel
 import com.cuhacking.app.schedule.ui.EventDetailViewModel
 import com.cuhacking.app.schedule.ui.ScheduleViewModel
 import com.cuhacking.app.signin.ui.SignInViewModel
+import com.cuhacking.app.ui.MainViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -52,6 +53,7 @@ interface CoreComponent {
     fun eventDetailViewModelFactory(): ViewModelFactory<EventDetailViewModel>
     fun homeViewModelFactory(): ViewModelFactory<HomeViewModel>
     fun adminViewModelFactory(): ViewModelFactory<AdminViewModel>
+    fun mainViewModelFactory(): ViewModelFactory<MainViewModel>
 
     fun inject(application: CuHackingApplication)
 

@@ -18,10 +18,13 @@ package com.cuhacking.app.profile.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.di.injector
@@ -30,6 +33,7 @@ import net.glxn.qrgen.android.QRCode
 class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
 
     private val viewModel by viewModels<ProfileViewModel> { injector.profileViewModelFactory() }
+    private val args by navArgs<ProfileActivityArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,14 +48,25 @@ class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
         val adapter = ProfileAdapter()
         findViewById<RecyclerView>(R.id.recycler_view).adapter = adapter
 
+        viewModel.setUser(args.uid)
         viewModel.profileItems.observe(this, Observer {
             adapter.submitList(it)
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.profile, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()
+            R.id.logout -> {
+                viewModel.logUserOut()
+                Toast.makeText(this, R.string.logout_success, Toast.LENGTH_LONG).show()
+                finish()
+            }
         }
 
         return super.onOptionsItemSelected(item)

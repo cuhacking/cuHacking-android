@@ -29,4 +29,9 @@
 
     <color name="error">#f44336</color>
     <color name="success">#8bc34a</color>
+
+    <color name="foodRed">#f44336</color>
+    <color name="foodGreen">#66bb6a</color>
+    <color name="foodBlue">#1e88e5</color>
+    <color name="foodYellow">#ffc107</color>
 </resources>

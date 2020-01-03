@@ -109,7 +109,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${ProjectVersions.SERIALIZATION}")
     implementation("com.github.kenglxn.QRGen:android:${ProjectVersions.QRGEN}")
     implementation("com.jakewharton.threetenabp:threetenabp:${ProjectVersions.THREE_TEN_ABP}")
-
+    implementation("uk.co.samuelwall:material-tap-target-prompt:${ProjectVersions.MATERIAL_TAP_TARGET_PROMPT}")
 
     testImplementation("junit:junit:${ProjectVersions.JUNIT}")
     testImplementation("androidx.arch.core:core-testing:${ProjectVersions.LIFECYCLE}")

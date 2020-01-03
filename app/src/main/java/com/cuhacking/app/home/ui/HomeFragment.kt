@@ -1,23 +1,23 @@
 package com.cuhacking.app.home.ui
 
+import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.cuhacking.app.R
 import com.cuhacking.app.data.Result
 import com.cuhacking.app.di.injector
 import com.cuhacking.app.info.ui.InfoFragment
-import com.cuhacking.app.info.ui.InfoFragmentDirections
+import com.cuhacking.app.ui.PageFragment
 import com.cuhacking.app.ui.cards.CardAdapter
-import com.google.android.material.appbar.MaterialToolbar
+import uk.co.samuelwall.materialtaptargetprompt.MaterialTapTargetPrompt
 
-class HomeFragment : Fragment(R.layout.info_fragment) {
+class HomeFragment : PageFragment(R.layout.info_fragment) {
 
     private val viewModel: HomeViewModel by viewModels { injector.homeViewModelFactory() }
 
@@ -29,10 +29,6 @@ class HomeFragment : Fragment(R.layout.info_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        view.findViewById<MaterialToolbar>(R.id.toolbar).apply {
-            setOnMenuItemClickListener(::onOptionsItemSelected)
-        }
 
         view.findViewById<RecyclerView>(R.id.recycler_view).adapter = cardAdapter
         viewModel.cards.observe(this, Observer(cardAdapter::submitList))
@@ -46,14 +42,29 @@ class HomeFragment : Fragment(R.layout.info_fragment) {
         viewModel.refreshState.observe(this, Observer {
             swipeRefreshLayout.isRefreshing = it is Result.Loading
         })
+
+        viewModel.showOnboarding.observe(this, Observer {
+            if (it == true) {
+                val backgroundColor = ColorUtils.setAlphaComponent(ContextCompat.getColor(requireContext(), R.color.colorPrimary), 0xF4)
+
+                MaterialTapTargetPrompt.Builder(this)
+                    .setTarget(R.id.profile)
+                    .setIcon(R.drawable.ic_person)
+                    .setPrimaryText(R.string.onboard_login_title)
+                    .setSecondaryText(R.string.onboard_login_description)
+                    .setBackgroundColour(backgroundColor)
+                    .setIconDrawableColourFilter(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+                    .setPromptStateChangeListener { _, state ->
+                        if (state == MaterialTapTargetPrompt.STATE_DISMISSED) {
+                            viewModel.dismissOnboarding()
+                        }
+                    }
+                    .show()
+
+
+            }
+        })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.profile -> findNavController().navigate(InfoFragmentDirections.login())
-            R.id.admin -> findNavController().navigate(InfoFragmentDirections.scan())
-        }
 
-        return super.onOptionsItemSelected(item)
-    }
 }
