@@ -16,10 +16,6 @@ class GetProfileItemsUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(userId: String): Flow<List<ProfileItem>> =
         withContext(dispatchers.io) {
-            async(dispatchers.io) {
-                repository.loadUser(userId)
-            }
-
             return@withContext repository.getUser(userId)
                 .map { user ->
                     listOf(

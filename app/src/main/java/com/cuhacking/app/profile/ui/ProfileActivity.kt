@@ -18,6 +18,7 @@ package com.cuhacking.app.profile.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.activity.viewModels
@@ -52,11 +53,16 @@ class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.profile, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()
             R.id.logout -> {
-                viewModel.logout()
+                viewModel.logUserOut()
                 finish()
             }
         }
