@@ -70,4 +70,6 @@
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
     <string name="required">Required</string>
+    <string name="onboard_login_description">Login to access your personalized badge which you will need during the event</string>
+    <string name="onboard_login_title">Login Here</string>
 </resources>

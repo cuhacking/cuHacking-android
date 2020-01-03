@@ -11,7 +11,7 @@ data class UserResponse(
 data class UserFromApi(
     @field:Json(name = "uid") val id: String,
     @field:Json(name = "email") val email: String,
-    @field:Json(name = "color") val color: String?,
+    @field:Json(name = "color") val color: String,
     @field:Json(name = "role") val role: String,
     @field:Json(name = "application") val applicationInfo: ApplicationInfo
 )

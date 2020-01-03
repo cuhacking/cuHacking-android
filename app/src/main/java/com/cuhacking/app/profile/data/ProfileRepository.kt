@@ -54,7 +54,7 @@ class ProfileRepository @Inject constructor(
                     userId,
                     FirebaseAuth.getInstance().currentUser?.getBearerAuth()!!
                 )
-                val (id, email, _, role, application) = user
+                val (id, email, color, role, application) = user
                 val roleValue = when (role) {
                     "user" -> UserRole.USER
                     "admin" -> UserRole.ADMIN
@@ -65,7 +65,7 @@ class ProfileRepository @Inject constructor(
                     id,
                     "${application.basicInfo.firstName} ${application.basicInfo.lastName}",
                     email,
-                    "red",
+                    color,
                     application.personalInfo.school,
                     id == FirebaseAuth.getInstance().currentUser?.uid,
                     Date().time,
