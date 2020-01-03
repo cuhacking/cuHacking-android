@@ -22,6 +22,7 @@ import android.view.MenuItem
 import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.di.injector
@@ -30,6 +31,7 @@ import net.glxn.qrgen.android.QRCode
 class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
 
     private val viewModel by viewModels<ProfileViewModel> { injector.profileViewModelFactory() }
+    private val args by navArgs<ProfileActivityArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +46,7 @@ class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
         val adapter = ProfileAdapter()
         findViewById<RecyclerView>(R.id.recycler_view).adapter = adapter
 
+        viewModel.setUser(args.uid)
         viewModel.profileItems.observe(this, Observer {
             adapter.submitList(it)
         })
@@ -52,6 +55,10 @@ class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> finish()
+            R.id.logout -> {
+                viewModel.logout()
+                finish()
+            }
         }
 
         return super.onOptionsItemSelected(item)

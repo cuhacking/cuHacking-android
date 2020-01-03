@@ -36,20 +36,18 @@ class ProfileRepository @Inject constructor(
      * Gets a bitmap for a user with a specified width, height, and optionally a colour.
      * The QR code is mapped to a url to the user's profile page.
      */
-    fun getUserQRCode(userId: String, size: Int, color: Int? = null): Bitmap {
-        return QRCode.from("https://live.cuhacking.com/dashboard/user/$userId")
+    fun getUserQRCode(userId: String, color: Int? = null): Bitmap {
+        return QRCode.from(userId)
             .apply {
                 if (color != null) withColor(color, Color.WHITE)
             }
-            .withSize(size, size)
             .bitmap()
     }
 
     /**
      * Loads an actual user from the remote api service and updates or saves it to the caching database
-     * @param isPrimary Whether or not this user is the *primary* user on the device, i.e. the user who is currently signed in to the app
      */
-    suspend fun loadUser(userId: String, isPrimary: Boolean): Result<Unit> =
+    suspend fun loadUser(userId: String): Result<Unit> =
         withContext(dispatchers.io) {
             return@withContext try {
                 val (user) = apiService.getUser(
@@ -69,7 +67,7 @@ class ProfileRepository @Inject constructor(
                     email,
                     "red",
                     application.personalInfo.school,
-                    isPrimary,
+                    id == FirebaseAuth.getInstance().currentUser?.uid,
                     Date().time,
                     roleValue
                 )

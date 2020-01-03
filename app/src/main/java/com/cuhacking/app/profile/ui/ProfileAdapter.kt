@@ -1,6 +1,8 @@
 package com.cuhacking.app.profile.ui
 
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -15,10 +17,10 @@ class ProfileAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            0 -> HeaderHolder(View.inflate(parent.context, R.layout.profile_header, parent))
-            1 -> FoodGroupHolder(View.inflate(parent.context, R.layout.profile_food_group, parent))
-            2 -> SchoolHolder(View.inflate(parent.context, R.layout.profile_school, parent))
-            3 -> EmailHolder(View.inflate(parent.context, R.layout.profile_email, parent))
+            0 -> HeaderHolder(LayoutInflater.from(parent.context).inflate(R.layout.profile_header, parent, false))
+            1 -> FoodGroupHolder(LayoutInflater.from(parent.context).inflate(R.layout.profile_food_group, parent, false))
+            2 -> SchoolHolder(LayoutInflater.from(parent.context).inflate(R.layout.profile_school, parent, false))
+            3 -> EmailHolder(LayoutInflater.from(parent.context).inflate(R.layout.profile_email, parent, false))
             else -> throw IllegalArgumentException("Invalid view type")
         }
 
@@ -37,7 +39,9 @@ class ProfileAdapter :
 class HeaderHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(header: ProfileItem.Header) {
         itemView.findViewById<TextView>(R.id.name).text = header.name
-        itemView.findViewById<ImageView>(R.id.imageView).setImageBitmap(header.qrCode)
+        val drawable = BitmapDrawable(itemView.context.resources, header.qrCode)
+        drawable.paint.isFilterBitmap = false
+        itemView.findViewById<ImageView>(R.id.imageView).setImageDrawable(drawable)
     }
 }
 

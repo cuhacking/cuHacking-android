@@ -23,3 +23,6 @@ DELETE FROM user WHERE :lastViewed - lastViewed < 900000 AND isPrimary = 0;
 
 delete:
 DELETE FROM user WHERE id = :id;
+
+clear:
+DELETE FROM user;

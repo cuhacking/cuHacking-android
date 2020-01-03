@@ -46,4 +46,5 @@
     <string name="scan_error_not_found">User not found</string>
     <string name="scan_error_generic">An error occurred</string>
     <string name="scan_error_too_many">Cannot scan more than one code at a time</string>
+    <string name="logout">Logout</string>
 </resources>

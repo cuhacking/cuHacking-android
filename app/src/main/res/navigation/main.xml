@@ -33,7 +33,11 @@
     <activity android:id="@+id/admin" android:name="com.cuhacking.app.admin.ui.AdminActivity"
               android:label="activity_admin" tools:layout="@layout/activity_admin"/>
     <activity android:id="@+id/profile" android:name="com.cuhacking.app.profile.ui.ProfileActivity"
-              android:label="activity_profile" tools:layout="@layout/activity_profile"/>
+              android:label="activity_profile" tools:layout="@layout/activity_profile">
+        <argument
+                android:name="uid"
+                app:argType="string" />
+    </activity>
     <action android:id="@+id/action_global_profile" app:destination="@id/profile"/>
     <activity
             android:id="@+id/signInActivity"

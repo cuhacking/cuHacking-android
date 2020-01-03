@@ -27,7 +27,7 @@ class AuthenticationManager @Inject constructor(
         withContext(dispatchers.io) {
             // Allow only a single user to be signed in at a time
             if (auth.currentUser != null) {
-                signOut(auth.currentUser!!)
+                signOut()
             }
 
             return@withContext try {
@@ -60,8 +60,8 @@ class AuthenticationManager @Inject constructor(
             }
         }
 
-    suspend fun signOut(user: FirebaseUser) = withContext(dispatchers.io) {
-        database.userQueries.delete(user.uid)
+    suspend fun signOut() = withContext(dispatchers.io) {
+        database.userQueries.clear()
         auth.signOut()
     }
 }

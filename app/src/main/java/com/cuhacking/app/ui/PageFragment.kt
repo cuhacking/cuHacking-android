@@ -34,8 +34,9 @@ open class PageFragment(@LayoutRes layout: Int) : Fragment(layout) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.profile -> {
-                if (mainViewModel.authState.value is AuthState.Authenticated) {
-                    findNavController().navigate(InfoFragmentDirections.actionGlobalProfile())
+                val authState = mainViewModel.authState.value
+                if (authState is AuthState.Authenticated) {
+                    findNavController().navigate(InfoFragmentDirections.actionGlobalProfile(authState.uid))
                 } else {
                     findNavController().navigate(InfoFragmentDirections.login())
                 }
