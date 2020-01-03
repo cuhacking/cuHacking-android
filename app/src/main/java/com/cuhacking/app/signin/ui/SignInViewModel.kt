@@ -13,7 +13,11 @@ class SignInViewModel @Inject constructor(private val signIn: SignInUseCase) : V
     private val _userData = MutableLiveData<SignInUiModel>()
     val userData: LiveData<SignInUiModel> = _userData
 
-    fun performSignIn(email: String, password: String) = viewModelScope.launch {
-        _userData.postValue(signIn(email, password))
+    fun performSignIn(email: String, password: String) {
+        _userData.value = SignInUiModel.Loading
+        viewModelScope.launch {
+            _userData.postValue(signIn(email, password))
+        }
     }
+
 }

@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.navArgs
@@ -63,6 +64,7 @@ class ProfileActivity : AppCompatActivity(R.layout.activity_profile) {
             android.R.id.home -> finish()
             R.id.logout -> {
                 viewModel.logUserOut()
+                Toast.makeText(this, R.string.logout_success, Toast.LENGTH_LONG).show()
                 finish()
             }
         }

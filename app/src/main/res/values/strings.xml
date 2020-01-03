@@ -66,4 +66,8 @@
     <string name="login_success">Login successful</string>
     <string name="login_error">Wrong Email or Password</string>
     <string name="logout_success">Logged out</string>
+    <string name="login">Login</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="required">Required</string>
 </resources>

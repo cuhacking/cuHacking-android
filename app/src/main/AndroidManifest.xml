@@ -15,7 +15,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".signin.ui.SignInActivity"></activity>
+        <activity
+                android:name=".signin.ui.SignInActivity"
+                android:windowSoftInputMode="adjustResize"></activity>
         <activity
                 android:name=".admin.ui.AdminActivity"
                 android:theme="@style/AppTheme.CameraPreview"></activity>
