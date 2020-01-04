@@ -56,25 +56,26 @@
                 android:id="@+id/second"
                 android:layout_below="@id/second"
                 android:text="2"/>
+
         <com.cuhacking.app.map.ui.FloorSelectionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Widget.CuHacking.Button.FloorSelectorButton"
-                android:background="?colorSurface"
                 android:id="@+id/third"
-                android:text="3"/>
+                style="@style/Widget.CuHacking.Button.FloorSelectorButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?colorSurface"
+                android:text="3" />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/toolbar"
             style="@style/Widget.CuHacking.Toolbar.Transparent"
-            app:menu="@menu/toolbar"
-            app:title=""
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/toolbar"
+            app:title="@string/app_name" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
