@@ -1,18 +1,21 @@
+import java.lang.Boolean;
 import java.lang.Long;
+import org.threeten.bp.OffsetDateTime;
 
 CREATE TABLE event(
     id TEXT NOT NULL PRIMARY KEY,
-    locationName TEXT NOT NULL,
-    locationId TEXT NOT NULL,
+    location TEXT NOT NULL,
     title TEXT NOT NULL,
     description TEXT NOT NULL,
-    startTime INTEGER As Long NOT NULL,
-    endTime INTEGER As Long NOT NULL,
-    type TEXT NOT NULL
+    startTime TEXT AS OffsetDateTime NOT NULL,
+    endTime TEXT AS OffsetDateTime NOT NULL,
+    type TEXT NOT NULL,
+    countdown INTEGER AS Boolean NOT NULL DEFAULT 0,
+    scan INTEGER AS Boolean NOT NULL DEFAULT 0
 );
 
 insert:
-INSERT INTO event VALUES(:id, :locationName, :locationId, :title, :description, :startTime, :endTime, :type);
+INSERT INTO event VALUES(:id, :location, :title, :description, :startTime, :endTime, :type, :countdown, :scan);
 
 deleteAll:
 DELETE FROM event;

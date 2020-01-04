@@ -7,7 +7,6 @@ import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToOneOrNull
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import org.threeten.bp.Instant
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -23,21 +22,11 @@ class GetEventDetailUseCase @Inject constructor(
         database.eventQueries.getById(id).asFlow().mapToOneOrNull(dispatchers.io)
             .map { event ->
                 event ?: return@map null
-
-                val startTime = ZonedDateTime.ofInstant(
-                    Instant.ofEpochSecond(event.startTime / 1000),
-                    ZoneOffset.UTC
-                )
-                val endTime = ZonedDateTime.ofInstant(
-                    Instant.ofEpochSecond(event.endTime / 1000),
-                    ZoneOffset.UTC
-                )
-
                 return@map EventDetailUiModel(
                     event.id,
                     event.title,
-                    "${timeFormatter.format(startTime)} - ${timeFormatter.format(endTime)}",
-                    event.locationName,
+                    "${timeFormatter.format(event.startTime)} - ${timeFormatter.format(event.endTime)}",
+                    event.location,
                     event.type,
                     event.description
                 )

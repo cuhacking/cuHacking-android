@@ -20,16 +20,21 @@ import android.content.Context
 import com.cuhacking.app.data.CoroutinesDispatcherProvider
 import com.cuhacking.app.data.DataInfoProvider
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileNotFoundException
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class MapDataSource @Inject constructor(
     private val context: Context,
     private val dataInfoProvider: DataInfoProvider,
     private val dispatchers: CoroutinesDispatcherProvider
 ) {
+
+    private val dataChannel = ConflatedBroadcastChannel<String>()
 
     suspend fun getData(): GeoJsonSource = withContext(dispatchers.io) {
         if (!dataInfoProvider.mapDataCopied) {

@@ -11,7 +11,7 @@ import org.threeten.bp.LocalDateTime
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor() {
-    fun getCountdownTime() =
+    fun getCountdownTime(): LocalDateTime =
         if (LocalDateTime.now().isBefore(LocalDateTime.of(2020, 1, 11, 10, 30))) {
             LocalDateTime.of(2020, 1, 11, 10, 0)
         } else {

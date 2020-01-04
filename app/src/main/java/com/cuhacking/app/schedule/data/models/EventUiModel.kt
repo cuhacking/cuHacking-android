@@ -1,12 +1,12 @@
 package com.cuhacking.app.schedule.data.models
 
 import androidx.recyclerview.widget.DiffUtil
-import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.OffsetDateTime
 
 data class EventUiModel(
     val title: String,
-    val startTime: ZonedDateTime,
-    val endTime: ZonedDateTime,
+    val startTime: OffsetDateTime,
+    val endTime: OffsetDateTime,
     val locationName: String,
     val id: String
 ) {

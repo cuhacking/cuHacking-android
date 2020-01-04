@@ -50,7 +50,7 @@ class UpdateCardHolder(parent: ViewGroup) :
     ) {
     override fun bind(value: UpdateCard) {
         itemView.findViewById<TextView>(R.id.time).text =
-            DateUtils.getRelativeTimeSpanString(value.publishTime)
+            DateUtils.getRelativeTimeSpanString(value.publishTime.toEpochSecond() * 1000)
         itemView.findViewById<TextView>(R.id.title).text = value.title
         itemView.findViewById<TextView>(R.id.description).text = value.description
     }
@@ -113,7 +113,8 @@ class CountdownViewHolder(parent: ViewGroup) : CardViewHolder<CountdownCard>(
             CountDownTimer(Duration.between(LocalDateTime.now(), value.time).toMillis(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val hours = floor(millisUntilFinished / 60 / 60 / 1000f).toInt()
-                val minutes = floor((millisUntilFinished - (hours * 60 * 60 * 1000L)) / 60 / 1000f).toInt()
+                val minutes =
+                    floor((millisUntilFinished - (hours * 60 * 60 * 1000L)) / 60 / 1000f).toInt()
                 val seconds = (floor(millisUntilFinished / 1000f)).toInt() % 60
 
                 val hourString = "$hours".padStart(2, '0')

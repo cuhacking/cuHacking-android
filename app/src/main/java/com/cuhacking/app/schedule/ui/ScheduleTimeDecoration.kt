@@ -20,9 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.schedule.data.models.EventUiModel
 import com.cuhacking.app.util.newStaticLayout
-import org.threeten.bp.Instant
-import org.threeten.bp.ZoneId
-import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.ChronoUnit
 
@@ -148,7 +146,7 @@ class ScheduleTimeDecoration(
     /**
      * Create a header layout for the given [startTime].
      */
-    private fun createHeader(startTime: ZonedDateTime): StaticLayout {
+    private fun createHeader(startTime: OffsetDateTime): StaticLayout {
         val text = SpannableStringBuilder().apply {
             inSpans(timeTextSizeSpan) {
                 append(timeFormatter.format(startTime))

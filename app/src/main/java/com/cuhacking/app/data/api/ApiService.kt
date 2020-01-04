@@ -24,9 +24,6 @@ import com.cuhacking.app.profile.data.model.UserResponse
 import retrofit2.http.*
 
 interface ApiService {
-    @GET("hello/{id}")
-    suspend fun exampleApiMethod(@Path("id") id: String): String
-
     @GET("users/{id}")
     suspend fun getUser(@Path("id") id: String, @Header("Authorization") auth: String): UserResponse
 

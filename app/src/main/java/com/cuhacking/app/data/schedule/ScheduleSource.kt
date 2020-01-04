@@ -22,7 +22,8 @@ class ScheduleSource @Inject constructor(
     suspend fun checkAndUpdateSchedule() = withContext(dispatchers.io) {
         val response = try {
             api.getSchedule()
-        } catch (_: Exception) {
+        } catch (e: Exception) {
+            e.printStackTrace()
             return@withContext
         }
 
@@ -30,16 +31,17 @@ class ScheduleSource @Inject constructor(
             database.eventQueries.deleteAll()
 
             database.transaction {
-                response.events.entries.forEach { (id, event) ->
+                response.schedule.entries.forEach { (id, event) ->
                     database.eventQueries.insert(
                         id,
-                        event.locationName,
-                        event.locationId,
+                        event.location,
                         event.title,
                         event.description,
                         event.startTime,
                         event.endTime,
-                        event.type
+                        event.type,
+                        event.countdown,
+                        event.scan
                     )
                 }
             }

@@ -17,13 +17,7 @@ class GetScheduleUseCase @Inject constructor(private val repository: ScheduleRep
         return repository.getSchedule().map {
             it.sortedBy { event -> event.startTime }.map { event ->
                 EventUiModel(
-                    event.title, ZonedDateTime.ofInstant(
-                        Instant.ofEpochSecond(event.startTime / 1000),
-                        ZoneOffset.UTC
-                    ), ZonedDateTime.ofInstant(
-                        Instant.ofEpochSecond(event.endTime / 1000),
-                        ZoneOffset.UTC
-                    ), event.locationName, event.id
+                    event.title, event.startTime, event.endTime, event.location, event.id
                 )
             }
         }

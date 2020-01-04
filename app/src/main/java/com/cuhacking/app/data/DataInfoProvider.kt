@@ -16,10 +16,14 @@
 
 package com.cuhacking.app.data
 
+import org.threeten.bp.OffsetDateTime
+
 interface DataInfoProvider {
 
     var mapDataCopied: Boolean
 
-    var scheduleDataVersion: Long
+    var mapDataVersion: OffsetDateTime
+
+    var scheduleDataVersion: OffsetDateTime
 
 }

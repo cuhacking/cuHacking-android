@@ -1,14 +1,15 @@
+import org.threeten.bp.OffsetDateTime;
+
 CREATE TABLE announcement(
     id TEXT NOT NULL PRIMARY KEY,
-    title TEXT NOT NULL,
+    name TEXT NOT NULL,
     description TEXT NOT NULL,
-    locationId TEXT,
-    deliveryTime INTEGER NOT NULL,
-    eventId TEXT
+    location TEXT,
+    deliveryTime TEXT AS OffsetDateTime NOT NULL
 );
 
 insert:
-INSERT INTO announcement VALUES(:id, :title, :description, :locationId, :deliveryTime, :eventId);
+INSERT INTO announcement VALUES(:id, :name, :description, :location, :deliveryTime);
 
 delete:
 DELETE FROM announcement WHERE id = :id;
