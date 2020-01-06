@@ -19,8 +19,13 @@ package com.cuhacking.app.data.map
 import android.content.Context
 import com.cuhacking.app.data.CoroutinesDispatcherProvider
 import com.cuhacking.app.data.DataInfoProvider
+import com.cuhacking.app.data.api.ApiService
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileNotFoundException
@@ -31,29 +36,60 @@ import javax.inject.Singleton
 class MapDataSource @Inject constructor(
     private val context: Context,
     private val dataInfoProvider: DataInfoProvider,
-    private val dispatchers: CoroutinesDispatcherProvider
+    private val dispatchers: CoroutinesDispatcherProvider,
+    private val api: ApiService,
+    private val moshi: Moshi
 ) {
 
     private val dataChannel = ConflatedBroadcastChannel<String>()
 
-    suspend fun getData(): GeoJsonSource = withContext(dispatchers.io) {
+    suspend fun getData(): Flow<String> = withContext(dispatchers.io) {
         if (!dataInfoProvider.mapDataCopied) {
             copyAssetData()
+        } else {
+            loadData()
         }
 
         val file = File(context.filesDir, "RB.geojson")
-        if (!file.exists()) { throw FileNotFoundException("Could not find RB.geojson") }
+        if (!file.exists()) {
+            throw FileNotFoundException("Could not find RB.geojson")
+        }
 
-        return@withContext withContext(dispatchers.main) { GeoJsonSource("rb", file.readText()) }
+        dataChannel.asFlow()
     }
 
-    private fun copyAssetData() {
+    suspend fun checkAndUpdateData() = withContext(dispatchers.io) {
+        val versionData = api.getMapDataVersion()
+        if (versionData.version > dataInfoProvider.mapDataVersion) {
+            val newData = api.getMapData()
+            context.openFileOutput(DATA_FILE, Context.MODE_PRIVATE).use { outputStream ->
+                val type =
+                    Types.newParameterizedType(Map::class.java, String::class.java, Any::class.java)
+                val adapter = moshi.adapter<Map<String, Any>>(type)
+                outputStream.write(adapter.toJson(newData.map.map).toByteArray())
+            }
+        }
+    }
+
+    private suspend fun copyAssetData() = withContext(dispatchers.io) {
         context.assets.open("RB.geojson").use { inputStream ->
-            context.openFileOutput("RB.geojson", Context.MODE_PRIVATE).use { outputStream ->
+            context.openFileOutput(DATA_FILE, Context.MODE_PRIVATE).use { outputStream ->
                 outputStream.write(inputStream.readBytes())
             }
         }
 
+        loadData()
         dataInfoProvider.mapDataCopied = true
+    }
+
+    private suspend fun loadData() = withContext(dispatchers.io) {
+        context.openFileInput(DATA_FILE).use { inputStream ->
+            val bytes = inputStream.readBytes()
+            dataChannel.offer(bytes.toString(Charsets.UTF_8))
+        }
+    }
+
+    companion object {
+        const val DATA_FILE = "RB.geojson"
     }
 }

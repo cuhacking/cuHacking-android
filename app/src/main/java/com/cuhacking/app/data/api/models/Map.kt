@@ -9,5 +9,5 @@ data class MapDataResponse(
 )
 
 data class MapData(
-    @field:Json(name = "map") val map: String
+    @field:Json(name = "map") val map: Map<String, Any>
 )
