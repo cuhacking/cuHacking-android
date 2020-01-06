@@ -39,4 +39,7 @@ interface ApiService {
 
     @GET("map")
     suspend fun getMapData(): MapDataResponse
+
+    @GET("info")
+    suspend fun getInfo(): InfoResponse
 }
