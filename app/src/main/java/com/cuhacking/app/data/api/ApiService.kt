@@ -16,17 +16,12 @@
 
 package com.cuhacking.app.data.api
 
-import com.cuhacking.app.data.api.models.ScanRequest
-import com.cuhacking.app.data.api.models.ScheduleResponse
-import com.cuhacking.app.data.api.models.UpdatesResponse
+import com.cuhacking.app.data.api.models.*
 import com.cuhacking.app.profile.data.model.UserFromApi
 import com.cuhacking.app.profile.data.model.UserResponse
 import retrofit2.http.*
 
 interface ApiService {
-    @GET("hello/{id}")
-    suspend fun exampleApiMethod(@Path("id") id: String): String
-
     @GET("users/{id}")
     suspend fun getUser(@Path("id") id: String, @Header("Authorization") auth: String): UserResponse
 
@@ -38,4 +33,13 @@ interface ApiService {
 
     @POST("scan")
     suspend fun scanUser(@Body request: ScanRequest, @Header("Authorization") auth: String): String?
+
+    @GET("map/version")
+    suspend fun getMapDataVersion(): VersionResponse
+
+    @GET("map")
+    suspend fun getMapData(): MapDataResponse
+
+    @GET("info")
+    suspend fun getInfo(): InfoResponse
 }

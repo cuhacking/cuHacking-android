@@ -24,14 +24,24 @@ import com.cuhacking.app.data.DataInfoProvider
 import com.cuhacking.app.data.DefaultDataInfoProvider
 import com.cuhacking.app.data.api.ApiService
 import com.cuhacking.app.data.auth.UserRole
+import com.cuhacking.app.data.db.Announcement
+import com.cuhacking.app.data.db.Event
 import com.cuhacking.app.data.db.User
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.JsonReader
+import com.squareup.moshi.JsonWriter
+import com.squareup.moshi.Moshi
 import com.squareup.sqldelight.ColumnAdapter
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.threeten.bp.Instant
+import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.format.DateTimeFormatter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -62,12 +72,12 @@ class DataModule {
     fun provideDatabase(context: Context): Database =
         Database(
             AndroidSqliteDriver(Database.Schema, context, "cuHacking.db"),
-            userAdapter = User.Adapter(roleAdapter = object : ColumnAdapter<UserRole, Long> {
-                override fun decode(databaseValue: Long): UserRole =
-                    UserRole.values()[databaseValue.toInt()]
-
-                override fun encode(value: UserRole): Long = value.ordinal.toLong()
-            })
+            userAdapter = User.Adapter(roleAdapter = UserRoleAdapter),
+            announcementAdapter = Announcement.Adapter(deliveryTimeAdapter = OffsetDateTimeAdapter),
+            eventAdapter = Event.Adapter(
+                startTimeAdapter = OffsetDateTimeAdapter,
+                endTimeAdapter = OffsetDateTimeAdapter
+            )
         )
 
     @Provides
@@ -76,7 +86,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideConverterFactory(): MoshiConverterFactory = MoshiConverterFactory.create()
+    fun provideConverterFactory(moshi: Moshi): MoshiConverterFactory =
+        MoshiConverterFactory.create(moshi)
 
     @Provides
     @Singleton
@@ -91,4 +102,45 @@ class DataModule {
         OkHttpClient.Builder()
             .addInterceptor(interceptor)
             .build()
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .add(OffsetDateTime::class.java, Rfc3339OffsetDateTimeJsonAdapter)
+        .build()
+
+    companion object {
+        private val OffsetDateTimeAdapter = object : ColumnAdapter<OffsetDateTime, String> {
+            override fun decode(databaseValue: String): OffsetDateTime =
+                OffsetDateTime.parse(databaseValue)
+
+            override fun encode(value: OffsetDateTime): String =
+                DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(value)
+        }
+
+        private val UserRoleAdapter = object : ColumnAdapter<UserRole, Long> {
+            override fun decode(databaseValue: Long): UserRole =
+                UserRole.values()[databaseValue.toInt()]
+
+            override fun encode(value: UserRole): Long = value.ordinal.toLong()
+        }
+
+        private val Rfc3339OffsetDateTimeJsonAdapter = object : JsonAdapter<OffsetDateTime>() {
+            override fun fromJson(reader: JsonReader): OffsetDateTime? {
+                if (reader.peek() == JsonReader.Token.NULL) {
+                    return reader.nextNull()
+                }
+
+                return OffsetDateTime.parse(reader.nextString())
+            }
+
+            override fun toJson(writer: JsonWriter, value: OffsetDateTime?) {
+                if (value == null) {
+                    writer.nullValue()
+                } else {
+                    writer.value(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(value))
+                }
+            }
+        }
+    }
 }

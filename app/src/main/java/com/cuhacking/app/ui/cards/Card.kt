@@ -3,8 +3,9 @@ package com.cuhacking.app.ui.cards
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DiffUtil
+import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZonedDateTime
+import org.threeten.bp.OffsetDateTime
 
 sealed class Card {
     abstract infix fun sameAs(other: Card): Boolean
@@ -51,7 +52,8 @@ data class UpdateCard(
     val id: String,
     val title: String,
     val description: String,
-    val publishTime: Long
+    val location: String?,
+    val publishTime: OffsetDateTime
 ) : Card() {
     override fun sameAs(other: Card): Boolean = (other as? UpdateCard)?.id == id
 

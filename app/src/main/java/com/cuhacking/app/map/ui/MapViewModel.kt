@@ -22,11 +22,16 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope
 import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.data.map.MapDataSource
+import com.cuhacking.app.map.domain.GetMapDataSourceUseCase
+import com.cuhacking.app.map.domain.UpdateMapDataUseCase
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MapViewModel @Inject constructor(private val mapDataSource: MapDataSource) : ViewModel() {
+class MapViewModel @Inject constructor(private val getMapDataSource: GetMapDataSourceUseCase,
+                                       private val updateMapData: UpdateMapDataUseCase) :
+    ViewModel() {
 
     private val _floorSource = MutableLiveData<GeoJsonSource>()
     val floorSource: LiveData<GeoJsonSource> = _floorSource
@@ -39,7 +44,13 @@ class MapViewModel @Inject constructor(private val mapDataSource: MapDataSource)
 
     init {
         viewModelScope.launch {
-            _floorSource.value = mapDataSource.getData()
+            getMapDataSource().collect {
+                _floorSource.postValue(it)
+            }
+        }
+
+        viewModelScope.launch {
+            updateMapData()
         }
     }
 

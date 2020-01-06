@@ -6,7 +6,6 @@ import com.cuhacking.app.data.CoroutinesDispatcherProvider
 import com.cuhacking.app.home.data.HomeRepository
 import com.cuhacking.app.ui.cards.CountdownCard
 import com.cuhacking.app.ui.cards.Header
-import com.cuhacking.app.ui.cards.Title
 import com.cuhacking.app.ui.cards.UpdateCard
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import com.squareup.sqldelight.runtime.coroutines.mapToList
@@ -24,8 +23,9 @@ class GetHomeCardsUseCase @Inject constructor(
                 it.map { update ->
                     UpdateCard(
                         update.id,
-                        update.title,
+                        update.name,
                         update.description,
+                        update.location,
                         update.deliveryTime
                     )
                 }

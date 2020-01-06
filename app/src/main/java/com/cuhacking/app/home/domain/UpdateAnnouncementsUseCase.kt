@@ -24,11 +24,10 @@ class UpdateAnnouncementsUseCase @Inject constructor(
         newUpdates.updates.filter { (id) -> !oldUpdateIds.contains(id) }.forEach { (id, update) ->
             database.announcementQueries.insert(
                 id,
-                update.title,
+                update.name,
                 update.description,
-                update.locationId,
-                update.deliveryTime,
-                update.eventId
+                update.location,
+                update.deliveryTime
             )
         }
 
