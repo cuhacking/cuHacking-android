@@ -3,12 +3,6 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:id="@+id/favourite"
-            android:icon="@drawable/ic_star_border"
-            android:title="@string/event_add_favourite"
-            app:showAsAction="ifRoom"
-            app:iconTint="?menuIconColor"/>
-    <item
             android:id="@+id/on_map"
             android:icon="@drawable/ic_room"
             android:title="@string/event_view_map"

@@ -9,9 +9,11 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
+import com.cuhacking.app.data.api.models.EventType
 import com.cuhacking.app.schedule.data.models.EventUiModel
 import com.google.android.material.card.MaterialCardView
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.*
 
 class ScheduleAdapter(private val nav: NavController) :
     ListAdapter<EventUiModel, ScheduleAdapter.ViewHolder>(EventUiModel.DIFF_CALLBACK) {
@@ -34,11 +36,13 @@ class ScheduleAdapter(private val nav: NavController) :
                 DateTimeFormatter.ofPattern("hh:mm a")
             )}"
 
-            val colorId = when (model.id) {
-                "id001", "id002" -> R.color.eventPurple
-                "id000" -> R.color.eventGreen
-                "id003" -> R.color.eventRed
-                "id004" -> R.color.eventBlue
+            val colorId = when (model.type.toLowerCase(Locale.getDefault())) {
+                EventType.WORKSHOP.typeString -> R.color.eventGreen
+                EventType.KEY_EVENT.typeString -> R.color.eventPurple
+                EventType.SPONSOR_EVENT.typeString -> R.color.eventYellow
+                EventType.SOCIAL_ACTIVITY.typeString -> R.color.eventBlue
+                EventType.FOOD.typeString -> R.color.eventRed
+                EventType.VOLUNTEER.typeString -> R.color.eventOrange
                 else -> R.color.eventPurple
             }
 

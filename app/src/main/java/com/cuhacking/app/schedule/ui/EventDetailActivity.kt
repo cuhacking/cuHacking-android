@@ -6,6 +6,7 @@ import android.view.Menu
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.navArgs
@@ -53,5 +54,7 @@ class EventDetailActivity : AppCompatActivity(R.layout.activity_schedule_detail)
         event_location_name.text = model.locationName
         event_type_name.text = model.category
         event_summary.text = model.description
+
+        category_icon.setColorFilter(ContextCompat.getColor(this, model.typeColor))
     }
 }

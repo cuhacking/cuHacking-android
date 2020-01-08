@@ -70,3 +70,18 @@ data class WiFiCard(val ssid: String, val password: String) : Card() {
     }
 }
 
+data class EmergencyContactCard(val number: String) : Card() {
+    override fun sameAs(other: Card): Boolean = (other as? EmergencyContactCard)?.number == number
+
+    companion object {
+        const val viewType = 99
+    }
+}
+
+data class HelpCard(val message: String) : Card() {
+    override fun sameAs(other: Card): Boolean = (other as? HelpCard)?.message == message
+
+    companion object {
+        const val viewType = 101
+    }
+}

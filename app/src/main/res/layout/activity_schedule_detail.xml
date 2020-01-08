@@ -80,9 +80,8 @@
                 android:layout_height="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="18dp"
-                android:alpha="0.8"
                 android:src="@drawable/ic_food_group"
-                android:tint="?android:attr/textColorHint"
+                android:tint="@color/eventBlue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/event_location_name" />
 

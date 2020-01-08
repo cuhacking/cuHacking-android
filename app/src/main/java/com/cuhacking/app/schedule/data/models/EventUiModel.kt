@@ -8,7 +8,8 @@ data class EventUiModel(
     val startTime: OffsetDateTime,
     val endTime: OffsetDateTime,
     val locationName: String,
-    val id: String
+    val id: String,
+    val type: String
 ) {
     companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<EventUiModel>() {

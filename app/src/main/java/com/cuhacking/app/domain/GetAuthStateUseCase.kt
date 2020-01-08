@@ -13,7 +13,7 @@ class GetAuthStateUseCase @Inject constructor(
     private val database: Database,
     private val dispatchers: CoroutinesDispatcherProvider
 ) {
-    fun invoke(): Flow<AuthState> {
+    operator fun invoke(): Flow<AuthState> {
         return database.userQueries.getPrimary().asFlow().mapToOneOrNull(dispatchers.io)
             .map {
                 when (it) {

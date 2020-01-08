@@ -18,7 +18,7 @@ class MainViewModel @Inject constructor(private val getAuthState: GetAuthStateUs
 
     init {
         viewModelScope.launch {
-            getAuthState.invoke().collect {
+            getAuthState().collect {
                 _authState.postValue(it)
             }
         }

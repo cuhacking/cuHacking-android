@@ -72,4 +72,5 @@
     <string name="required">Required</string>
     <string name="onboard_login_description">Login to access your personalized badge which you will need during the event</string>
     <string name="onboard_login_title">Login Here</string>
+    <string name="emergency_notice">In case of emergency, contact Campus Safety Services</string>
 </resources>

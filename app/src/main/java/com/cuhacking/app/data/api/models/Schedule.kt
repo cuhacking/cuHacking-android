@@ -18,4 +18,17 @@ data class ScheduleEvent(
     @field:Json(name = "type") val type: String,
     @field:Json(name = "countdown") val countdown: Boolean,
     @field:Json(name = "scan") val scan: Boolean
-)
+) {
+    companion object {
+
+    }
+}
+
+enum class EventType(val typeString: String) {
+    WORKSHOP("workshop"),
+    KEY_EVENT("key event"),
+    SPONSOR_EVENT("sponsor event"),
+    SOCIAL_ACTIVITY("social activity"),
+    FOOD("food"),
+    VOLUNTEER("volunteer")
+}
