@@ -13,6 +13,7 @@ import org.threeten.bp.Instant
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.ZonedDateTime
+import java.util.*
 import javax.inject.Inject
 
 class GetScheduleUseCase @Inject constructor(
@@ -40,7 +41,7 @@ class GetScheduleUseCase @Inject constructor(
                     if (isAdmin) {
                         true
                     } else {
-                        event.type != EventType.VOLUNTEER.typeString
+                        event.type.toLowerCase(Locale.CANADA) != EventType.VOLUNTEER.typeString
                     }
                 }
         }
