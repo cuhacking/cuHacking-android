@@ -39,8 +39,8 @@ class MapViewModel @Inject constructor(
     private val _selectedFloor = MutableLiveData<MutableMap<String, String>>()
     val selectedFloor: LiveData<out Map<String, String>> = _selectedFloor
 
-    private val _targetBuilding = MutableLiveData<List<FloorData>?>()
-    val targetBuilding: LiveData<List<FloorData>?> = _targetBuilding
+    private val _targetBuilding = MutableLiveData<Pair<String, List<FloorData>>?>()
+    val targetBuilding: LiveData<Pair<String, List<FloorData>>?> = _targetBuilding
 
     private val _selectedRoom = MutableLiveData<String>()
     val selectedRoom: LiveData<String> = _selectedRoom
@@ -66,9 +66,12 @@ class MapViewModel @Inject constructor(
         _selectedFloor.value = map
     }
 
-    fun updateCenter(latLng: LatLng) {
+    fun updateCenter(latLng: LatLng, zoom: Double) {
         viewModelScope.launch {
-            _targetBuilding.value = getTargetBuilding(latLng)
+            val target = getTargetBuilding(latLng, zoom)
+            if (target != _targetBuilding.value) {
+                _targetBuilding.value = target
+            }
         }
     }
 

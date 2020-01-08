@@ -27,6 +27,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -39,6 +40,7 @@ import com.cuhacking.app.di.injector
 import com.cuhacking.app.ui.PageFragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.card.MaterialCardView
 import com.mapbox.mapboxsdk.Mapbox
@@ -54,6 +56,7 @@ import com.mapbox.mapboxsdk.style.layers.LineLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import kotlinx.android.synthetic.main.map_fragment.*
 
 class MapFragment : PageFragment(R.layout.map_fragment) {
 
@@ -63,6 +66,8 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
 
     private val viewModel: MapViewModel by viewModels { injector.mapViewModelFactory() }
     private var map: MapboxMap? = null
+
+    private var floorButtons: List<FloorSelectionButton> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,6 +104,12 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             }
 
             mapboxMap.addOnMapClickListener(::handleMapClick)
+            mapboxMap.addOnCameraIdleListener {
+                viewModel.updateCenter(
+                    mapboxMap.cameraPosition.target,
+                    mapboxMap.cameraPosition.zoom
+                )
+            }
 
             if (savedInstanceState == null) {
                 map?.cameraPosition = CameraPosition.Builder()
@@ -119,15 +130,36 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             }
         }
 
-        view.findViewById<MaterialButtonToggleGroup>(R.id.button_toggle_group)
-            .addOnButtonCheckedListener { _, checkedId, isChecked ->
-                if (!isChecked) return@addOnButtonCheckedListener
+        viewModel.targetBuilding.observe(this, Observer {
+            button_toggle_group.removeAllViews()
 
-//                when (checkedId) {
-//                    R.id.first -> viewModel.setFloor(Floor.LV01)
-//                    R.id.second -> viewModel.setFloor(Floor.LV02)
-//                    R.id.third -> viewModel.setFloor(Floor.LV03)
-//                }
+            it ?: return@Observer
+
+            val (_, floor) = it
+
+            floorButtons = floor.reversed().map { (name, floorId) ->
+                FloorSelectionButton(
+                    ContextThemeWrapper(
+                        requireContext(),
+                        R.style.Widget_CuHacking_Button_FloorSelectorButton
+                    )
+                ).apply {
+                    text = name
+                    id = View.generateViewId()
+                    tag = floorId
+                    button_toggle_group.addView(this)
+                }
+            }
+        })
+
+        view.findViewById<MaterialButtonToggleGroup>(R.id.button_toggle_group)
+            .addOnButtonCheckedListener { v, checkedId, isChecked ->
+                if (!isChecked) return@addOnButtonCheckedListener
+                val (building, floors) = viewModel.targetBuilding.value
+                    ?: return@addOnButtonCheckedListener
+
+                val floorId = v.findViewById<FloorSelectionButton>(checkedId).tag as String
+                viewModel.selectFloor(building, floorId)
             }
 
         val bottomCard = view.findViewById<MaterialCardView>(R.id.bottom_card)

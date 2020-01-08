@@ -11,8 +11,9 @@ import kotlin.math.min
 class GetTargetBuildingUseCase @Inject constructor(
     private val mapDataSource: MapDataSource
 ) {
-    suspend operator fun invoke(latLng: LatLng): List<FloorData>? {
-        val data = mapDataSource.getData().single()
+    suspend operator fun invoke(latLng: LatLng, zoom: Double): Pair<String, List<FloorData>>? {
+        if (zoom <= 17) return null
+        val data = mapDataSource.dataChannel.valueOrNull ?: return null
 
         val rbDist = calculateDistance(latLng, data, "RB")
         val hsDist = calculateDistance(latLng, data, "HS")
@@ -20,10 +21,10 @@ class GetTargetBuildingUseCase @Inject constructor(
         val apDist = calculateDistance(latLng, data, "AP")
 
         return when (min(min(min(rbDist, hsDist), scDist), apDist)) {
-            rbDist -> data.map.getValue("RB").floors
-            hsDist -> data.map.getValue("HS").floors
-            scDist -> data.map.getValue("SC").floors
-            apDist -> data.map.getValue("AP").floors
+            rbDist -> "RB" to data.map.getValue("RB").floors
+            hsDist -> "HS" to data.map.getValue("HS").floors
+            scDist -> "SC" to data.map.getValue("SC").floors
+            apDist -> "AP" to data.map.getValue("AP").floors
             else -> null
         }
     }

@@ -42,7 +42,7 @@ class MapDataSource @Inject constructor(
     private val moshi: Moshi
 ) {
 
-    private val dataChannel = ConflatedBroadcastChannel<MapData>()
+    val dataChannel = ConflatedBroadcastChannel<MapData>()
 
     suspend fun getData() = withContext(dispatchers.io) {
         if (!dataInfoProvider.mapDataCopied) {
