@@ -9,5 +9,16 @@ data class MapDataResponse(
 )
 
 data class MapData(
-    @field:Json(name = "map") val map: Map<String, Any>
+    @field:Json(name = "map") val map: Map<String, BuildingData>
+)
+
+data class FloorData(
+    @field:Json(name = "name") val name: String,
+    @field:Json(name = "id") val id: String
+)
+
+data class BuildingData(
+    @field:Json(name = "center") val center: List<Double>,
+    @field:Json(name = "floors") val floors: List<FloorData>,
+    @field:Json(name = "geometry") val geometry: Map<String, Any>
 )

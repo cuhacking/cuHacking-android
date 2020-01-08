@@ -45,7 +45,7 @@ class AdminViewModel @Inject constructor(
     }
 
     fun scan(qrCodes: List<FirebaseVisionBarcode>) {
-        scanQrCode(qrCodes, "id000")
+        scanQrCode(qrCodes, "bcnOvGUM")
     }
 
 

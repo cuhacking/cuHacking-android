@@ -20,6 +20,7 @@ import android.content.Context
 import com.cuhacking.app.data.CoroutinesDispatcherProvider
 import com.cuhacking.app.data.DataInfoProvider
 import com.cuhacking.app.data.api.ApiService
+import com.cuhacking.app.data.api.models.MapData
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -41,9 +42,9 @@ class MapDataSource @Inject constructor(
     private val moshi: Moshi
 ) {
 
-    private val dataChannel = ConflatedBroadcastChannel<String>()
+    private val dataChannel = ConflatedBroadcastChannel<MapData>()
 
-    suspend fun getData(): Flow<String> = withContext(dispatchers.io) {
+    suspend fun getData() = withContext(dispatchers.io) {
         if (!dataInfoProvider.mapDataCopied) {
             copyAssetData()
         } else {
@@ -63,10 +64,8 @@ class MapDataSource @Inject constructor(
         if (versionData.version > dataInfoProvider.mapDataVersion) {
             val newData = api.getMapData()
             context.openFileOutput(DATA_FILE, Context.MODE_PRIVATE).use { outputStream ->
-                val type =
-                    Types.newParameterizedType(Map::class.java, String::class.java, Any::class.java)
-                val adapter = moshi.adapter<Map<String, Any>>(type)
-                outputStream.write(adapter.toJson(newData.map.map).toByteArray())
+                val adapter = moshi.adapter(MapData::class.java)
+                outputStream.write(adapter.toJson(newData.map).toByteArray())
             }
         }
     }
@@ -85,7 +84,8 @@ class MapDataSource @Inject constructor(
     private suspend fun loadData() = withContext(dispatchers.io) {
         context.openFileInput(DATA_FILE).use { inputStream ->
             val bytes = inputStream.readBytes()
-            dataChannel.offer(bytes.toString(Charsets.UTF_8))
+            val adapter = moshi.adapter(MapData::class.java)
+            dataChannel.offer(adapter.fromJson(bytes.toString(Charsets.UTF_8))!!)
         }
     }
 

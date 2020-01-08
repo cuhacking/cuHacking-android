@@ -17,6 +17,7 @@
 package com.cuhacking.app.map.ui
 
 import android.content.res.Configuration
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.RectF
 import android.os.Bundle
@@ -130,24 +131,37 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
 
     private fun applyMapStyle(style: Style, source: GeoJsonSource) {
         style.addSource(source)
+        style.addImage("stairs", BitmapFactory.decodeResource(resources, R.drawable.map_stairs))
+        style.addImage(
+            "elevator",
+            BitmapFactory.decodeResource(resources, R.drawable.map_elevators)
+        )
+        style.addImage("male", BitmapFactory.decodeResource(resources, R.drawable.map_male))
+        style.addImage("female", BitmapFactory.decodeResource(resources, R.drawable.map_female))
+        style.addImage("neutral", BitmapFactory.decodeResource(resources, R.drawable.map_neutral))
+        style.addImage("info", BitmapFactory.decodeResource(resources, R.drawable.map_info))
+        style.addImage("fountain", BitmapFactory.decodeResource(resources, R.drawable.map_fountain))
 
         FillLayer("rb", source.id).apply {
             setProperties(
                 fillColor(
                     match(
-                        get("type"), color(Color.parseColor("#AAAAAA")),
-                        stop("room", color(Color.parseColor("#9756D8"))),
-                        stop("washroom", color(Color.parseColor("#F6D500"))),
-                        stop("elevator", color(Color.parseColor("#DD001E"))),
-                        stop("stairs", color(Color.parseColor("#006CA9"))),
+                        get("room-type"), color(Color.parseColor("#545454")),
+                        stop(
+                            "room", switchCase(
+                                eq(get("available"), true), color(Color.parseColor("#b17fe2")),
+                                color(Color.parseColor("#CCCCCC"))
+                            )
+                        )
+                        ,
+                        stop("washroom", color(Color.parseColor("#ffe544"))),
+                        stop("elevator", color(Color.parseColor("#ff1131"))),
+                        stop("stairs", color(Color.parseColor("#008ddc"))),
                         stop("hallway", color(Color.parseColor("#FEFEFE")))
                     )
                 ),
                 fillOpacity(
-                    match(
-                        get("type"), literal(1f),
-                        stop("open", 0f)
-                    )
+                    interpolate(linear(), zoom(), stop(17, 0), stop(18, 1))
                 )
             )
             style.addLayer(this)
@@ -155,14 +169,25 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
 
         FillLayer("rb-backdrop", source.id).apply {
             setProperties(
-                fillColor(Color.parseColor("#888888"))
+                fillColor(Color.parseColor("#545454"))
             )
             style.addLayerBelow(this, "rb")
         }
 
+        SymbolLayer("rb-name", source.id).apply {
+            setProperties(
+                textField(get("name")),
+                textColor("#FFFFFF"),
+                textHaloWidth(1f),
+                textHaloColor("#000000")
+            )
+            maxZoom = 18f
+            style.addLayer(this)
+        }
+
         LineLayer("rb-lines", source.id).apply {
             setProperties(
-                lineWidth(3f),
+                lineWidth(interpolate(linear(), zoom(), stop(18, 0), stop(19, 3))),
                 lineColor("#212121")
             )
             style.addLayer(this)
@@ -171,13 +196,41 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         LineLayer("rb-backdrop-lines", source.id).apply {
             setProperties(
                 lineWidth(5f),
-                lineColor("#212121")
+                lineColor("#212121"),
+                lineOpacity(interpolate(linear(), zoom(), stop(17, 0), stop(18, 1)))
             )
             style.addLayer(this)
         }
 
         SymbolLayer("rb-symbols", source.id).apply {
-            setProperties(textField(get("name")))
+            setProperties(
+                textField(
+                    switchCase(
+                        eq(get("room-type"), "room"), get("name"), literal("")
+                    )
+                ),
+                iconImage(
+                    switchCase(
+                        eq(get("room-type"), "stairs"),
+                        literal("stairs"),
+                        eq(get("room-type"), "elevator"),
+                        literal("elevator"),
+                        all(eq(get("room-type"), "washroom"), eq(get("name"), "Men's")),
+                        literal("male"),
+                        all(eq(get("room-type"), "washroom"), eq(get("name"), "Women's")),
+                        literal("female"),
+                        all(eq(get("room-type"), "washroom"), eq(get("name"), "Neutral")),
+                        literal("neutral"),
+                        eq(get("point-type"), "info"),
+                        literal("info"),
+                        eq(get("point-type"), "fountain"),
+                        literal("fountain"),
+                        literal("")
+                    )
+                ),
+                iconSize(0.4f)
+            )
+            minZoom = 19f
             style.addLayer(this)
         }
 
@@ -205,32 +258,30 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         (style.getLayer("rb") as FillLayer)
             .setFilter(
                 all(
-                    eq(get("floor"), floor.number),
-                    any(
-                        eq(get("type"), "elevator"),
-                        eq(get("type"), "room"),
-                        eq(get("type"), "washroom"),
-                        eq(get("type"), "stairs"),
-                        eq(get("type"), "hallway")
-                    )
+                    eq(get("floor"), "RB${floor.number}"),
+                    eq(get("type"), "room")
                 )
             )
 
         // Backdrop layer
         (style.getLayer("rb-backdrop") as FillLayer)
-            .setFilter(all(eq(get("floor"), floor.number), eq(get("type"), "backdrop")))
+            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("type"), "backdrop")))
 
         // Room outlines
         (style.getLayer("rb-lines") as LineLayer)
-            .setFilter(all(eq(get("floor"), floor.number), eq(get("type"), "line")))
+            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("type"), "line")))
 
         // Backdrop lines
         (style.getLayer("rb-backdrop-lines") as LineLayer)
-            .setFilter(all(eq(get("floor"), floor.number), eq(get("type"), "backdrop-line")))
+            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("type"), "backdrop-line")))
 
         // Labels/Icons
         (style.getLayer("rb-symbols") as SymbolLayer)
-            .setFilter(all(eq(get("floor"), floor.number), eq(get("label"), true)))
+            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("label"), true)))
+
+        // Name
+        (style.getLayer("rb-name") as SymbolLayer)
+            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("type"), "backdrop")))
     }
 
     private fun handleMapClick(latLng: LatLng): Boolean {
