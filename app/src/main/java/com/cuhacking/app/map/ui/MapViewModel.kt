@@ -20,9 +20,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope
+import com.cuhacking.app.data.api.models.FloorData
 import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.data.map.MapDataSource
 import com.cuhacking.app.map.domain.GetMapDataSourceUseCase
+import com.cuhacking.app.map.domain.GetMapDataUseCase
 import com.cuhacking.app.map.domain.UpdateMapDataUseCase
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import kotlinx.coroutines.flow.collect
@@ -30,22 +32,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MapViewModel @Inject constructor(private val getMapDataSource: GetMapDataSourceUseCase,
-                                       private val updateMapData: UpdateMapDataUseCase) :
+                                       private val updateMapData: UpdateMapDataUseCase,
+                                       private val getMapData: GetMapDataUseCase) :
     ViewModel() {
 
-    private val _floorSource = MutableLiveData<GeoJsonSource>()
-    val floorSource: LiveData<GeoJsonSource> = _floorSource
-
-    private val _selectedFloor = MutableLiveData<Floor>()
-    val selectedFloor: LiveData<Floor> = _selectedFloor
+    private val _selectedFloor = MutableLiveData<MutableMap<String, String>>()
+    val selectedFloor: LiveData<out Map<String, String>> = _selectedFloor
 
     private val _selectedRoom = MutableLiveData<String>()
     val selectedRoom: LiveData<String> = _selectedRoom
 
+    private val _buildings = MutableLiveData<List<FloorDataUiModel>>()
+    val buildings: LiveData<List<FloorDataUiModel>> = _buildings
+
     init {
         viewModelScope.launch {
-            getMapDataSource().collect {
-                _floorSource.postValue(it)
+            getMapData().collect {
+                _buildings.postValue(it)
             }
         }
 
@@ -54,8 +57,10 @@ class MapViewModel @Inject constructor(private val getMapDataSource: GetMapDataS
         }
     }
 
-    fun setFloor(floor: Floor) {
-        _selectedFloor.value = floor
+    fun selectFloor(building: String, floor: String) {
+        val map = _selectedFloor.value ?: return
+        map[building] = floor
+        _selectedFloor.value = map
     }
 
     fun selectRoom(id: String) {

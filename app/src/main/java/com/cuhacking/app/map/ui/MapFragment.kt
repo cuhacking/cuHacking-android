@@ -33,6 +33,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.cuhacking.app.BuildConfig
 import com.cuhacking.app.R
+import com.cuhacking.app.data.api.models.FloorData
 import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.di.injector
 import com.cuhacking.app.ui.PageFragment
@@ -82,8 +83,18 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
                     else -> Style.LIGHT
                 }
             mapboxMap.setStyle(mapStyle) { style ->
-                viewModel.floorSource.observe(this, Observer { source ->
-                    applyMapStyle(style, source)
+                applyStyle(style)
+
+                viewModel.buildings.observe(this, Observer { buildings ->
+                    buildings.forEach { building ->
+                        loadBuilding(style, building)
+                    }
+                })
+
+                viewModel.selectedFloor.observe(this, Observer { map ->
+                    map.entries.forEach { (building, floor) ->
+                        setLayerFilters(style, building, floor)
+                    }
                 })
             }
 
@@ -112,11 +123,11 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             .addOnButtonCheckedListener { _, checkedId, isChecked ->
                 if (!isChecked) return@addOnButtonCheckedListener
 
-                when (checkedId) {
-                    R.id.first -> viewModel.setFloor(Floor.LV01)
-                    R.id.second -> viewModel.setFloor(Floor.LV02)
-                    R.id.third -> viewModel.setFloor(Floor.LV03)
-                }
+//                when (checkedId) {
+//                    R.id.first -> viewModel.setFloor(Floor.LV01)
+//                    R.id.second -> viewModel.setFloor(Floor.LV02)
+//                    R.id.third -> viewModel.setFloor(Floor.LV03)
+//                }
             }
 
         val bottomCard = view.findViewById<MaterialCardView>(R.id.bottom_card)
@@ -129,8 +140,7 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         })
     }
 
-    private fun applyMapStyle(style: Style, source: GeoJsonSource) {
-        style.addSource(source)
+    private fun applyStyle(style: Style) {
         style.addImage("stairs", BitmapFactory.decodeResource(resources, R.drawable.map_stairs))
         style.addImage(
             "elevator",
@@ -141,8 +151,13 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         style.addImage("neutral", BitmapFactory.decodeResource(resources, R.drawable.map_neutral))
         style.addImage("info", BitmapFactory.decodeResource(resources, R.drawable.map_info))
         style.addImage("fountain", BitmapFactory.decodeResource(resources, R.drawable.map_fountain))
+    }
 
-        FillLayer("rb", source.id).apply {
+    private fun loadBuilding(style: Style, building: FloorDataUiModel) {
+        style.addSource(building.source)
+        val (source, prefix, floors) = building
+
+        FillLayer(prefix, source.id).apply {
             setProperties(
                 fillColor(
                     match(
@@ -167,14 +182,14 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             style.addLayer(this)
         }
 
-        FillLayer("rb-backdrop", source.id).apply {
+        FillLayer("${prefix}-backdrop", source.id).apply {
             setProperties(
                 fillColor(Color.parseColor("#545454"))
             )
-            style.addLayerBelow(this, "rb")
+            style.addLayerBelow(this, prefix)
         }
 
-        SymbolLayer("rb-name", source.id).apply {
+        SymbolLayer("${prefix}-name", source.id).apply {
             setProperties(
                 textField(get("name")),
                 textColor("#FFFFFF"),
@@ -185,7 +200,7 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             style.addLayer(this)
         }
 
-        LineLayer("rb-lines", source.id).apply {
+        LineLayer("${prefix}-lines", source.id).apply {
             setProperties(
                 lineWidth(interpolate(linear(), zoom(), stop(18, 0), stop(19, 3))),
                 lineColor("#212121")
@@ -193,7 +208,7 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             style.addLayer(this)
         }
 
-        LineLayer("rb-backdrop-lines", source.id).apply {
+        LineLayer("${prefix}-backdrop-lines", source.id).apply {
             setProperties(
                 lineWidth(5f),
                 lineColor("#212121"),
@@ -202,7 +217,7 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             style.addLayer(this)
         }
 
-        SymbolLayer("rb-symbols", source.id).apply {
+        SymbolLayer("${prefix}-symbols", source.id).apply {
             setProperties(
                 textField(
                     switchCase(
@@ -234,54 +249,39 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             style.addLayer(this)
         }
 
-        setLayerFilters(style, Floor.LV01)
-        viewModel.selectedFloor.observe(this, Observer { floor ->
-            val id = when (floor) {
-                Floor.LV01 -> R.id.first
-                Floor.LV02 -> R.id.second
-                Floor.LV03 -> R.id.third
-                else -> R.id.first
-            }
-
-            view?.findViewById<FloorSelectionButton>(id)?.let {
-                if (!it.isChecked) {
-                    it.isChecked = true
-                }
-            }
-
-            setLayerFilters(style, floor)
-        })
+        setLayerFilters(style, prefix, floors[0].id)
     }
 
-    private fun setLayerFilters(style: Style, floor: Floor) {
+
+    private fun setLayerFilters(style: Style, prefix: String, floorId: String) {
         // Room fills
-        (style.getLayer("rb") as FillLayer)
+        (style.getLayer(prefix) as FillLayer)
             .setFilter(
                 all(
-                    eq(get("floor"), "RB${floor.number}"),
+                    eq(get("floor"), floorId),
                     eq(get("type"), "room")
                 )
             )
 
         // Backdrop layer
-        (style.getLayer("rb-backdrop") as FillLayer)
-            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("type"), "backdrop")))
+        (style.getLayer("${prefix}-backdrop") as FillLayer)
+            .setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop")))
 
         // Room outlines
-        (style.getLayer("rb-lines") as LineLayer)
-            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("type"), "line")))
+        (style.getLayer("${prefix}-lines") as LineLayer)
+            .setFilter(all(eq(get("floor"), floorId), eq(get("type"), "line")))
 
         // Backdrop lines
-        (style.getLayer("rb-backdrop-lines") as LineLayer)
-            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("type"), "backdrop-line")))
+        (style.getLayer("${prefix}-backdrop-lines") as LineLayer)
+            .setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop-line")))
 
         // Labels/Icons
-        (style.getLayer("rb-symbols") as SymbolLayer)
-            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("label"), true)))
+        (style.getLayer("${prefix}-symbols") as SymbolLayer)
+            .setFilter(all(eq(get("floor"), floorId), eq(get("label"), true)))
 
         // Name
-        (style.getLayer("rb-name") as SymbolLayer)
-            .setFilter(all(eq(get("floor"), "RB${floor.number}"), eq(get("type"), "backdrop")))
+        (style.getLayer("${prefix}-name") as SymbolLayer)
+            .setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop")))
     }
 
     private fun handleMapClick(latLng: LatLng): Boolean {
