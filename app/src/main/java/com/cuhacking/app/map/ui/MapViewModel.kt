@@ -18,26 +18,29 @@ package com.cuhacking.app.map.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cuhacking.app.data.api.models.FloorData
-import com.cuhacking.app.data.map.Floor
-import com.cuhacking.app.data.map.MapDataSource
-import com.cuhacking.app.map.domain.GetMapDataSourceUseCase
 import com.cuhacking.app.map.domain.GetMapDataUseCase
+import com.cuhacking.app.map.domain.GetTargetBuildingUseCase
 import com.cuhacking.app.map.domain.UpdateMapDataUseCase
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import com.mapbox.mapboxsdk.geometry.LatLng
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class MapViewModel @Inject constructor(private val getMapDataSource: GetMapDataSourceUseCase,
-                                       private val updateMapData: UpdateMapDataUseCase,
-                                       private val getMapData: GetMapDataUseCase) :
+class MapViewModel @Inject constructor(
+    private val getTargetBuilding: GetTargetBuildingUseCase,
+    private val updateMapData: UpdateMapDataUseCase,
+    private val getMapData: GetMapDataUseCase
+) :
     ViewModel() {
 
     private val _selectedFloor = MutableLiveData<MutableMap<String, String>>()
     val selectedFloor: LiveData<out Map<String, String>> = _selectedFloor
+
+    private val _targetBuilding = MutableLiveData<List<FloorData>?>()
+    val targetBuilding: LiveData<List<FloorData>?> = _targetBuilding
 
     private val _selectedRoom = MutableLiveData<String>()
     val selectedRoom: LiveData<String> = _selectedRoom
@@ -61,6 +64,12 @@ class MapViewModel @Inject constructor(private val getMapDataSource: GetMapDataS
         val map = _selectedFloor.value ?: return
         map[building] = floor
         _selectedFloor.value = map
+    }
+
+    fun updateCenter(latLng: LatLng) {
+        viewModelScope.launch {
+            _targetBuilding.value = getTargetBuilding(latLng)
+        }
     }
 
     fun selectRoom(id: String) {

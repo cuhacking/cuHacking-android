@@ -252,7 +252,6 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         setLayerFilters(style, prefix, floors[0].id)
     }
 
-
     private fun setLayerFilters(style: Style, prefix: String, floorId: String) {
         // Room fills
         (style.getLayer(prefix) as FillLayer)
