@@ -9,6 +9,7 @@ import com.cuhacking.app.home.domain.GetHomeCardsUseCase
 import com.cuhacking.app.home.domain.ShouldShowOnboardingUseCase
 import com.cuhacking.app.home.domain.UpdateAnnouncementsUseCase
 import com.cuhacking.app.home.domain.UpdateOnboardingFlagUseCase
+import com.cuhacking.app.schedule.domain.UpdateScheduleUseCase
 import com.cuhacking.app.ui.cards.Card
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -18,7 +19,8 @@ class HomeViewModel @Inject constructor(
     private val updateAnnouncements: UpdateAnnouncementsUseCase,
     private val getHomeCards: GetHomeCardsUseCase,
     private val shouldShowOnboarding: ShouldShowOnboardingUseCase,
-    private val updateOnBoardingFlag: UpdateOnboardingFlagUseCase
+    private val updateOnBoardingFlag: UpdateOnboardingFlagUseCase,
+    private val updateSchedule: UpdateScheduleUseCase
 ) : ViewModel() {
 
     private val _refreshState = MutableLiveData<Result<Unit>>()
@@ -35,6 +37,10 @@ class HomeViewModel @Inject constructor(
             getHomeCards().collect {
                 _cards.postValue(it)
             }
+        }
+
+        viewModelScope.launch {
+            updateSchedule()
         }
 
         _showOnboarding.value = shouldShowOnboarding()

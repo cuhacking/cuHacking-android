@@ -3,8 +3,6 @@ package com.cuhacking.app.ui.cards
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DiffUtil
-import org.threeten.bp.Instant
-import org.threeten.bp.LocalDateTime
 import org.threeten.bp.OffsetDateTime
 
 sealed class Card {
@@ -39,7 +37,7 @@ class Title : Card() {
     }
 }
 
-data class CountdownCard(@StringRes val message: Int, val time: LocalDateTime) : Card() {
+data class CountdownCard(@StringRes val message: Int, val time: OffsetDateTime) : Card() {
     override fun sameAs(other: Card): Boolean = (other as? CountdownCard)?.time == time
 
     companion object {

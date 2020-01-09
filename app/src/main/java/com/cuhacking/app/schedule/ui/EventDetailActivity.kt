@@ -13,6 +13,7 @@ import androidx.navigation.navArgs
 import com.cuhacking.app.R
 import com.cuhacking.app.di.injector
 import com.cuhacking.app.schedule.data.models.EventDetailUiModel
+import com.cuhacking.app.util.formatTimeDuration
 import kotlinx.android.synthetic.main.activity_schedule_detail.*
 
 class EventDetailActivity : AppCompatActivity(R.layout.activity_schedule_detail) {
@@ -50,7 +51,7 @@ class EventDetailActivity : AppCompatActivity(R.layout.activity_schedule_detail)
 
     private fun updateUi(model: EventDetailUiModel) {
         event_title.text = model.title
-        event_time.text = model.timeDuration
+        event_time.text = formatTimeDuration(model.start, model.end)
         event_location_name.text = model.locationName
         event_type_name.text = model.category
         event_summary.text = model.description

@@ -36,6 +36,7 @@
 
     <string name="countdown_hack_start">Hacking begins in %1$s</string>
     <string name="countdown_hack_end">Hacking ends in %1$s</string>
+    <string name="countdown_hack_over">Thank you for attending cuHacking 2020!</string>
 
     <string name="error_event_details">Could not load event details</string>
 

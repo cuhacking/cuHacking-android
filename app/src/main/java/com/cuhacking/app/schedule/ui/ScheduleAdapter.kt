@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.data.api.models.EventType
 import com.cuhacking.app.schedule.data.models.EventUiModel
+import com.cuhacking.app.util.formatTimeDuration
 import com.cuhacking.app.util.viewContext
 import com.google.android.material.card.MaterialCardView
 import kotlinx.android.synthetic.main.card_event.view.*
@@ -33,20 +34,8 @@ class ScheduleAdapter(private val nav: NavController) :
         fun bind(model: EventUiModel) {
             itemView.findViewById<TextView>(R.id.title).text = model.title
             itemView.findViewById<TextView>(R.id.location).text = model.locationName
-
-            if (model.startTime != model.endTime) {
-                itemView.findViewById<TextView>(R.id.time).text = viewContext.getString(
-                    R.string.time_duration, model.startTime.format(
-                        DateTimeFormatter.ofPattern("hh:mm a")
-                    ), model.endTime.format(
-                        DateTimeFormatter.ofPattern("hh:mm a")
-                    )
-                )
-            } else {
-                itemView.findViewById<TextView>(R.id.time).text = model.startTime.format(
-                    DateTimeFormatter.ofPattern("hh:mm a")
-                )
-            }
+            itemView.findViewById<TextView>(R.id.time).text =
+                viewContext.formatTimeDuration(model.startTime, model.endTime)
 
             val colorId = when (model.type.toLowerCase(Locale.getDefault())) {
                 EventType.WORKSHOP.typeString -> R.color.eventGreen

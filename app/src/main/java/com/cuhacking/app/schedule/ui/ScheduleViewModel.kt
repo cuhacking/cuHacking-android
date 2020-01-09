@@ -22,11 +22,16 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.viewModelScope
 import com.cuhacking.app.schedule.data.models.EventUiModel
 import com.cuhacking.app.schedule.domain.GetScheduleUseCase
+import com.cuhacking.app.schedule.domain.UpdateScheduleUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.threeten.bp.OffsetDateTime
 import javax.inject.Inject
 
-class ScheduleViewModel @Inject constructor(private val getSchedule: GetScheduleUseCase) : ViewModel() {
+class ScheduleViewModel @Inject constructor(
+    private val getSchedule: GetScheduleUseCase,
+    private val updateScheduleUseCase: UpdateScheduleUseCase
+) : ViewModel() {
     private val _scheduleData = MutableLiveData<List<EventUiModel>>()
     val scheduleData: LiveData<List<EventUiModel>> = _scheduleData
 
@@ -36,5 +41,17 @@ class ScheduleViewModel @Inject constructor(private val getSchedule: GetSchedule
                 _scheduleData.postValue(it)
             }
         }
+
+        viewModelScope.launch {
+            updateScheduleUseCase()
+        }
+    }
+
+    fun getNextEventIndex(): Int {
+        scheduleData.value?.forEachIndexed { index, event ->
+            if (event.startTime > OffsetDateTime.now()) return index
+        }
+
+        return -1
     }
 }

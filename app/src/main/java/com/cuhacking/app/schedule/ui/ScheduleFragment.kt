@@ -43,7 +43,6 @@ class ScheduleFragment : PageFragment(R.layout.schedule_fragment) {
         view.findViewById<RecyclerView>(R.id.recycler_view).apply {
             adapter = scheduleAdapter
         }
-
         viewModel.scheduleData.observe(this, Observer(::updateScheduleUi))
     }
 
@@ -52,6 +51,12 @@ class ScheduleFragment : PageFragment(R.layout.schedule_fragment) {
 
         view?.findViewById<RecyclerView>(R.id.recycler_view)?.apply {
             scheduleAdapter.submitList(data)
+
+            val nextEventIndex = viewModel.getNextEventIndex()
+            if (nextEventIndex > -1) {
+                layoutManager?.scrollToPosition(nextEventIndex)
+            }
+
             if (data.isNotEmpty()) {
                 addItemDecoration(ScheduleTimeDecoration(context, data))
             }

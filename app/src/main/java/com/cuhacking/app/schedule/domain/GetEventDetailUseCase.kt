@@ -39,7 +39,8 @@ class GetEventDetailUseCase @Inject constructor(
                 return@map EventDetailUiModel(
                     event.id,
                     event.title,
-                    "${timeFormatter.format(event.startTime)} - ${timeFormatter.format(event.endTime)}",
+                    event.startTime,
+                    event.endTime,
                     event.location,
                     event.type,
                     event.description,

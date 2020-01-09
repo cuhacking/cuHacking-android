@@ -18,7 +18,6 @@ class GetScheduleUseCase @Inject constructor(
     private val dispatchers: CoroutinesDispatcherProvider
 ) {
     suspend operator fun invoke(): Flow<List<EventUiModel>> = withContext(dispatchers.io) {
-        repository.updateSchedule()
         val isAdmin =
             database.userQueries.getPrimary().executeAsOneOrNull()?.role == UserRole.ADMIN ?: false
 
