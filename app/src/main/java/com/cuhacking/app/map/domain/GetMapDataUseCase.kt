@@ -62,4 +62,8 @@ class GetMapDataUseCase @Inject constructor(
             sourceMap[id]!!, id, building.floors, LatLng(building.center[1], building.center[0])
         )
     }
+
+    fun clearCachedSources() {
+        sourceMap.clear()
+    }
 }

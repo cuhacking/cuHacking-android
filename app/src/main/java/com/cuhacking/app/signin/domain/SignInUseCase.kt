@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class SignInUseCase @Inject constructor(private val authenticationManager: AuthenticationManager) {
     suspend operator fun invoke(email: String, password: String): SignInUiModel =
-        when (authenticationManager.authenticateUser(email, password)) {
-            is Result.Success<User> -> SignInUiModel.Success
+        when (val result = authenticationManager.authenticateUser(email, password)) {
+            is Result.Success<User> -> SignInUiModel.Success(result.data.id)
             else -> SignInUiModel.Failure(R.string.authentication_failure)
         }
 }

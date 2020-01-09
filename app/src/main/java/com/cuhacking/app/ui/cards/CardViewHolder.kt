@@ -1,6 +1,7 @@
 package com.cuhacking.app.ui.cards
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.CountDownTimer
 import android.provider.Settings
@@ -15,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.info.data.WifiInfo
 import com.cuhacking.app.info.ui.InfoViewModel
+import com.cuhacking.app.util.viewContext
 import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.card_emergency.view.*
 import kotlinx.android.synthetic.main.card_help.view.*
+import kotlinx.android.synthetic.main.card_social.view.*
 import org.threeten.bp.Duration
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
@@ -50,6 +53,29 @@ class HelpHolder(parent: ViewGroup) : CardViewHolder<HelpCard>(
 ) {
     override fun bind(value: HelpCard) {
         itemView.message.text = value.message
+    }
+}
+
+class SocialHolder(parent: ViewGroup) : CardViewHolder<SocialCard>(
+    LayoutInflater.from(parent.context).inflate(
+        R.layout.card_social,
+        parent,
+        false
+    )
+) {
+    override fun bind(value: SocialCard) {
+        itemView.slack.setOnClickListener {
+            viewContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(value.socialLinks.slack)))
+        }
+        itemView.twitter.setOnClickListener {
+            viewContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(value.socialLinks.twitter)))
+        }
+        itemView.instagram.setOnClickListener {
+            viewContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(value.socialLinks.instagram)))
+        }
+        itemView.facebook.setOnClickListener {
+            viewContext.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(value.socialLinks.facebook)))
+        }
     }
 }
 

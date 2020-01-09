@@ -3,6 +3,7 @@ package com.cuhacking.app.ui.cards
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.DiffUtil
+import com.cuhacking.app.data.api.models.SocialLinks
 import org.threeten.bp.OffsetDateTime
 
 sealed class Card {
@@ -81,5 +82,13 @@ data class HelpCard(val message: String) : Card() {
 
     companion object {
         const val viewType = 101
+    }
+}
+
+data class SocialCard(val socialLinks: SocialLinks) : Card() {
+    override fun sameAs(other: Card): Boolean = (other as? SocialCard)?.socialLinks == socialLinks
+
+    companion object {
+        const val viewType = 420
     }
 }

@@ -16,7 +16,9 @@ class GetInfoCardsUseCase @Inject constructor(private val repository: InfoReposi
                 Header(R.string.header_emergency),
                 EmergencyContactCard(info.emergency),
                 Header(R.string.header_help),
-                HelpCard(info.help)
+                HelpCard(info.help),
+                Header(R.string.header_social),
+                SocialCard(info.social)
             )
         }
     }

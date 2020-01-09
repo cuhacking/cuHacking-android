@@ -39,6 +39,7 @@ import com.cuhacking.app.data.api.models.FloorData
 import com.cuhacking.app.data.map.Floor
 import com.cuhacking.app.di.injector
 import com.cuhacking.app.ui.PageFragment
+import com.github.zagum.expandicon.ExpandIconView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
@@ -72,6 +73,8 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
 
     private var loaded = false
 
+    private val eventAdapter by lazy { MapEventAdapter(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Mapbox.getInstance(requireContext(), BuildConfig.MAPBOX_KEY)
@@ -100,13 +103,15 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
                         bounds.include(building.center)
                     }
 
-                    if (buildings.size > 1) {
+                    if (buildings.size > 1 && !loaded) {
                         mapboxMap.moveCamera(
                             CameraUpdateFactory.newLatLngBounds(
                                 bounds.build(),
                                 256
                             )
                         )
+
+                        loaded = true
                     }
                 })
 
@@ -174,6 +179,7 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             }
         })
 
+        viewModel.setupData()
         view.findViewById<MaterialButtonToggleGroup>(R.id.button_toggle_group)
             .addOnButtonCheckedListener { v, checkedId, isChecked ->
                 if (!isChecked) return@addOnButtonCheckedListener
@@ -185,12 +191,42 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             }
 
         val bottomCard = view.findViewById<MaterialCardView>(R.id.bottom_card)
-        val bottomSheet = BottomSheetBehavior.from(bottomCard)
-        bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+        val bottomSheet = BottomSheetBehavior.from(bottomCard).apply {
+            state = BottomSheetBehavior.STATE_HIDDEN
+            addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+
+                override fun onStateChanged(bottomSheet: View, newState: Int) {
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED || newState == BottomSheetBehavior.STATE_DRAGGING) {
+                        expand_icon.setState(ExpandIconView.MORE, true)
+                    } else if (newState == BottomSheetBehavior.STATE_COLLAPSED || newState == BottomSheetBehavior.STATE_HIDDEN) {
+                        expand_icon.setState(ExpandIconView.LESS, true)
+                    }
+                }
+            })
+        }
+        bottomCard.setOnClickListener {
+            if (bottomSheet.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
+            } else {
+                bottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+        }
+        event_list.adapter = eventAdapter
 
         viewModel.selectedRoom.observe(this, Observer { roomId ->
-            bottomSheet.state = BottomSheetBehavior.STATE_EXPANDED
-            view.findViewById<TextView>(R.id.room_name).text = roomId
+            if (roomId != null) {
+                bottomSheet.state = BottomSheetBehavior.STATE_COLLAPSED
+                view.findViewById<TextView>(R.id.room_name).text = roomId
+            } else {
+                bottomSheet.state = BottomSheetBehavior.STATE_HIDDEN
+            }
+        })
+
+        viewModel.selectedEvents.observe(this, Observer { events ->
+            events ?: return@Observer
+            eventAdapter.submitList(events)
+            expand_icon.visibility = if (events.isEmpty()) View.GONE else View.VISIBLE
         })
     }
 
@@ -341,14 +377,23 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         map?.let { mapboxMap ->
             val pointF = mapboxMap.projection.toScreenLocation(latLng)
             val rectF = RectF(pointF.x - 10, pointF.y - 10, pointF.x + 10, pointF.y - 10)
-            val features = mapboxMap.queryRenderedFeatures(rectF, "rb")
+
+            val buildingIds = viewModel.buildings.value?.map { it.prefix } ?: return false
+            val features = mapboxMap.queryRenderedFeatures(rectF, *buildingIds.toTypedArray())
 
             if (features.size > 0) {
-                if (features[0].hasNonNullValueForProperty("room")) {
+                if (features[0].hasNonNullValueForProperty("room") && (features[0].getStringProperty(
+                        "room-type"
+                    ) == "room" || features[0].getStringProperty("room") == "Atrium") && features[0].getBooleanProperty(
+                        "available"
+                    ) == true
+                ) {
                     viewModel.selectRoom(features[0].getStringProperty("room"))
                 }
 
                 return true
+            } else {
+                viewModel.selectRoom(null)
             }
         }
 
@@ -378,6 +423,10 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
     override fun onDestroyView() {
         super.onDestroyView()
         view?.findViewById<MapView>(R.id.map_view)?.onDestroy()
+        map?.style?.let { style ->
+            cleanEverything(style)
+        }
+        viewModel.cleanupSources()
     }
 
     override fun onLowMemory() {
@@ -390,4 +439,16 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         view?.findViewById<MapView>(R.id.map_view)?.onSaveInstanceState(outState)
     }
 
+    private fun cleanEverything(style: Style) {
+        viewModel.buildings.value?.forEach { data ->
+            style.removeSource(data.source)
+
+            style.removeLayer(data.prefix)
+            style.removeLayer("${data.prefix}-backdrop")
+            style.removeLayer("${data.prefix}-name")
+            style.removeLayer("${data.prefix}-lines")
+            style.removeLayer("${data.prefix}-backdrop-lines")
+            style.removeLayer("${data.prefix}-symbols")
+        }
+    }
 }

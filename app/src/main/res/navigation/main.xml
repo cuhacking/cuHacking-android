@@ -23,7 +23,11 @@
     <fragment android:id="@+id/info" android:name="com.cuhacking.app.info.ui.InfoFragment"
               android:label="@string/app_name" tools:layout="@layout/info_fragment"/>
     <fragment android:id="@+id/map" android:name="com.cuhacking.app.map.ui.MapFragment"
-              android:label="@string/app_name" tools:layout="@layout/map_fragment"/>
+              android:label="@string/app_name" tools:layout="@layout/map_fragment">
+        <action
+                android:id="@+id/action_map_to_eventDetailActivity"
+                app:destination="@id/eventDetailActivity" />
+    </fragment>
     <fragment android:id="@+id/schedule" android:name="com.cuhacking.app.schedule.ui.ScheduleFragment"
               android:label="@string/app_name" tools:layout="@layout/schedule_fragment">
         <action

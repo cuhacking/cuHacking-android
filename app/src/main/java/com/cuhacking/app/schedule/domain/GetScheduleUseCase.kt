@@ -19,7 +19,7 @@ class GetScheduleUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(): Flow<List<EventUiModel>> = withContext(dispatchers.io) {
         val isAdmin =
-            database.userQueries.getPrimary().executeAsOneOrNull()?.role == UserRole.ADMIN ?: false
+            database.userQueries.getPrimary().executeAsOneOrNull()?.role == UserRole.ADMIN
 
         return@withContext repository.getSchedule().map {
             it.sortedBy { event -> event.startTime }.map { event ->

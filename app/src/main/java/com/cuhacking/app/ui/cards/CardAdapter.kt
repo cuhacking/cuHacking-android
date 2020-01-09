@@ -15,6 +15,7 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
             CountdownCard.viewType -> CountdownViewHolder(parent)
             EmergencyContactCard.viewType -> EmergencyContactHolder(parent)
             HelpCard.viewType -> HelpHolder(parent)
+            SocialCard.viewType -> SocialHolder(parent)
             else -> throw IllegalArgumentException("Unknown card type")
         }
     }
@@ -27,6 +28,7 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
         is CountdownCard -> CountdownCard.viewType
         is EmergencyContactCard -> EmergencyContactCard.viewType
         is HelpCard -> HelpCard.viewType
+        is SocialCard -> SocialCard.viewType
         else -> 0
     }
 
@@ -39,6 +41,7 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
             is CountdownViewHolder -> holder.bind(getItem(position) as CountdownCard)
             is EmergencyContactHolder -> holder.bind(getItem(position) as EmergencyContactCard)
             is HelpHolder -> holder.bind(getItem(position) as HelpCard)
+            is SocialHolder -> holder.bind(getItem(position) as SocialCard)
         }
     }
 

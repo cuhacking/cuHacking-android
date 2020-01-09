@@ -21,10 +21,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cuhacking.app.data.api.models.FloorData
+import com.cuhacking.app.map.domain.GetEventsInRoomUseCase
 import com.cuhacking.app.map.domain.GetMapDataUseCase
 import com.cuhacking.app.map.domain.GetTargetBuildingUseCase
 import com.cuhacking.app.map.domain.UpdateMapDataUseCase
+import com.cuhacking.app.schedule.data.models.EventUiModel
 import com.mapbox.mapboxsdk.geometry.LatLng
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,7 +35,8 @@ import javax.inject.Inject
 class MapViewModel @Inject constructor(
     private val getTargetBuilding: GetTargetBuildingUseCase,
     private val updateMapData: UpdateMapDataUseCase,
-    private val getMapData: GetMapDataUseCase
+    private val getMapData: GetMapDataUseCase,
+    private val getEventsInRoom: GetEventsInRoomUseCase
 ) :
     ViewModel() {
 
@@ -42,24 +46,32 @@ class MapViewModel @Inject constructor(
     private val _targetBuilding = MutableLiveData<Pair<String, List<FloorData>>?>()
     val targetBuilding: LiveData<Pair<String, List<FloorData>>?> = _targetBuilding
 
-    private val _selectedRoom = MutableLiveData<String>()
-    val selectedRoom: LiveData<String> = _selectedRoom
+    private val _selectedRoom = MutableLiveData<String?>()
+    val selectedRoom: LiveData<String?> = _selectedRoom
+
+    private val _selectedEvents = MutableLiveData<List<EventUiModel>>()
+    val selectedEvents: LiveData<List<EventUiModel>> = _selectedEvents
 
     private val _buildings = MutableLiveData<List<FloorDataUiModel>>()
     val buildings: LiveData<List<FloorDataUiModel>> = _buildings
 
-    init {
-        viewModelScope.launch {
-            getMapData().collect {
-                _buildings.postValue(it)
-            }
-        }
+    private var job: Job? = null
 
+    init {
         viewModelScope.launch {
             updateMapData()
         }
 
         _selectedFloor.value = mutableMapOf()
+    }
+
+    fun setupData() {
+        job?.cancel()
+        job = viewModelScope.launch {
+            getMapData().collect {
+                _buildings.postValue(it)
+            }
+        }
     }
 
     fun selectFloor(building: String, floor: String) {
@@ -77,8 +89,18 @@ class MapViewModel @Inject constructor(
         }
     }
 
-    fun selectRoom(id: String) {
+    fun selectRoom(id: String?) {
         _selectedRoom.value = id
+        _selectedEvents.value = emptyList()
+
+        if (id != null) {
+            viewModelScope.launch {
+                _selectedEvents.value = getEventsInRoom(id)
+            }
+        }
     }
 
+    fun cleanupSources() {
+        getMapData.clearCachedSources()
+    }
 }

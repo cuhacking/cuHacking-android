@@ -45,7 +45,7 @@ class InfoRepository @Inject constructor(
     suspend fun getInfo() {
         val data = sharedPreferences.getString(
             KEY_INFO_DATA,
-            "{\"wifi\":{\"network\":\"cuHacking 2020\",\"password\":\"richcraft\"},\"emergency\":\"613-520-4444\",\"help\":\"For help, look for a volunteer (purple shirt) or an organizer (black shirt).\",\"social\":{\"twitter\":\"https://twitter.com/cuHacking/\",\"facebook\":\"https://www.facebook.com/cuhacking/\",\"instagram\":\"https://instagram.com/cuHacking\",\"slack\":\"LINK TO SLACK HERE\"}}"
+            "{\"wifi\":{\"network\":\"cuHacking 2020\",\"password\":\"richcraft\"},\"emergency\":\"613-520-4444\",\"help\":\"For help, look for a volunteer (purple shirt) or an organizer (black shirt).\",\"social\":{\"twitter\":\"https://twitter.com/cuHacking/\",\"facebook\":\"https://www.facebook.com/cuhacking/\",\"instagram\":\"https://instagram.com/cuHacking\",\"slack\":\"https://cuhacking.slack.com/\"}}"
         )
         if (data != null) {
             infoChannel.offer(moshi.adapter(Info::class.java).fromJson(data)!!)

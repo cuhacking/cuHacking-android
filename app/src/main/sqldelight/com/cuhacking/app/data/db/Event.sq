@@ -23,5 +23,8 @@ DELETE FROM event;
 getById:
 SELECT * FROM event WHERE id = :id;
 
+getByRoom:
+SELECT * FROM event WHERE location = :room;
+
 getAll:
 SELECT * FROM event;

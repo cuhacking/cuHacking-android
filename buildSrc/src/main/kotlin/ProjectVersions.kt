@@ -4,6 +4,7 @@ object ProjectVersions {
     const val MIN_SDK = 21
 
     const val APPCOMPAT = "1.1.0"
+    const val ANDROID_EXPAND_ICON = "1.2.1"
     const val CAMERA = "1.0.0-alpha08"
     const val CAMERA_EXTENSIONS = "1.0.0-alpha05"
     const val CAMERA_LIFECYCLE = "1.0.0-alpha02"

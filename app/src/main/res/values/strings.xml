@@ -78,4 +78,9 @@
     <string name="emergency_notice">In case of emergency, contact Campus Safety Services</string>
 
     <string name="time_duration">%1$s – %2$s</string>
+    <string name="slack">Slack</string>
+    <string name="twitter">Twitter</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+    <string name="header_social">cuHacking Online</string>
 </resources>

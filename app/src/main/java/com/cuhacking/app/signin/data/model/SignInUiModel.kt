@@ -6,7 +6,7 @@ sealed class SignInUiModel {
     /**
      * Represents the UI state of the success state of a sign in attempt.
      */
-    object Success : SignInUiModel()
+    data class Success(val uid: String) : SignInUiModel()
 
     object Loading : SignInUiModel()
 
