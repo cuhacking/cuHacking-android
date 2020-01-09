@@ -2,10 +2,4 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-            android:id="@+id/on_map"
-            android:icon="@drawable/ic_room"
-            android:title="@string/event_view_map"
-            app:showAsAction="ifRoom"
-            app:iconTint="?menuIconColor"/>
 </menu>

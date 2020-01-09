@@ -13,6 +13,8 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
             WiFiCard.viewType -> WiFiCardHolder(parent, viewModel!!)
             Title.viewType -> TitleViewHolder(parent)
             CountdownCard.viewType -> CountdownViewHolder(parent)
+            EmergencyContactCard.viewType -> EmergencyContactHolder(parent)
+            HelpCard.viewType -> HelpHolder(parent)
             else -> throw IllegalArgumentException("Unknown card type")
         }
     }
@@ -23,6 +25,8 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
         is WiFiCard -> WiFiCard.viewType
         is Title -> Title.viewType
         is CountdownCard -> CountdownCard.viewType
+        is EmergencyContactCard -> EmergencyContactCard.viewType
+        is HelpCard -> HelpCard.viewType
         else -> 0
     }
 
@@ -33,6 +37,8 @@ class CardAdapter(private val viewModel: InfoViewModel? = null) :
             is WiFiCardHolder -> holder.bind(getItem(position) as WiFiCard)
             is TitleViewHolder -> holder.bind(getItem(position) as Title)
             is CountdownViewHolder -> holder.bind(getItem(position) as CountdownCard)
+            is EmergencyContactHolder -> holder.bind(getItem(position) as EmergencyContactCard)
+            is HelpHolder -> holder.bind(getItem(position) as HelpCard)
         }
     }
 

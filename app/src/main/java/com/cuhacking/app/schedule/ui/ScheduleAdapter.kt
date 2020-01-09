@@ -1,5 +1,6 @@
 package com.cuhacking.app.schedule.ui
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cuhacking.app.R
 import com.cuhacking.app.data.api.models.EventType
 import com.cuhacking.app.schedule.data.models.EventUiModel
+import com.cuhacking.app.util.viewContext
 import com.google.android.material.card.MaterialCardView
+import kotlinx.android.synthetic.main.card_event.view.*
 import org.threeten.bp.format.DateTimeFormatter
 import java.util.*
 
@@ -30,11 +33,20 @@ class ScheduleAdapter(private val nav: NavController) :
         fun bind(model: EventUiModel) {
             itemView.findViewById<TextView>(R.id.title).text = model.title
             itemView.findViewById<TextView>(R.id.location).text = model.locationName
-            itemView.findViewById<TextView>(R.id.time).text = "${model.startTime.format(
-                DateTimeFormatter.ofPattern("hh:mm a")
-            )} - ${model.endTime.format(
-                DateTimeFormatter.ofPattern("hh:mm a")
-            )}"
+
+            if (model.startTime != model.endTime) {
+                itemView.findViewById<TextView>(R.id.time).text = viewContext.getString(
+                    R.string.time_duration, model.startTime.format(
+                        DateTimeFormatter.ofPattern("hh:mm a")
+                    ), model.endTime.format(
+                        DateTimeFormatter.ofPattern("hh:mm a")
+                    )
+                )
+            } else {
+                itemView.findViewById<TextView>(R.id.time).text = model.startTime.format(
+                    DateTimeFormatter.ofPattern("hh:mm a")
+                )
+            }
 
             val colorId = when (model.type.toLowerCase(Locale.getDefault())) {
                 EventType.WORKSHOP.typeString -> R.color.eventGreen
@@ -46,12 +58,18 @@ class ScheduleAdapter(private val nav: NavController) :
                 else -> R.color.eventPurple
             }
 
-            (itemView as MaterialCardView).setCardBackgroundColor(
-                ContextCompat.getColor(
-                    itemView.context,
-                    colorId
-                )
+            val eventColor = ContextCompat.getColor(
+                itemView.context,
+                colorId
             )
+
+            itemView.category_icon.setColorFilter(eventColor)
+            (itemView as MaterialCardView).apply {
+                setStrokeColor(ColorStateList.valueOf(eventColor))
+                setRippleColorResource(colorId)
+            }
+
+            itemView.event_type_name.text = model.type
         }
     }
 

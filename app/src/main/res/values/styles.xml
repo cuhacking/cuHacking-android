@@ -70,8 +70,18 @@
         <item name="cornerSizeTopRight">16dp</item>
     </style>
 
+    <style name="Widget.CuHacking.Card.Emergency" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">?colorSurface</item>
+    </style>
+
     <style name="Widget.CuHacking.Card.Wifi" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/colorPale</item>
+    </style>
+
+    <style name="Widget.CuHacking.Card.Event" parent="Widget.MaterialComponents.CardView">
+        <item name="android:textColorPrimary">?android:attr/textColorPrimary</item>
+        <item name="android:textColorSecondary">?android:attr/textColorSecondary</item>
+        <item name="android:textColorHint">?android:attr/textColorHint</item>
     </style>
 
     <style name="Widget.CuHacking" parent="@android:style/Widget.Material" />

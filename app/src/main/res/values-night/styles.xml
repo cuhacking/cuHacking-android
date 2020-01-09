@@ -33,4 +33,10 @@
         <item name="fontFamily">@font/reem_kufi</item>
         <item name="android:textSize">24sp</item>
     </style>
+
+    <style name="Widget.CuHacking.Card.Event" parent="Widget.MaterialComponents.CardView">
+        <item name="android:textColorPrimary">?android:attr/textColorPrimaryInverse</item>
+        <item name="android:textColorSecondary">?android:attr/textColorSecondaryInverse</item>
+        <item name="android:textColorHint">?android:attr/textColorHintInverse</item>
+    </style>
 </resources>

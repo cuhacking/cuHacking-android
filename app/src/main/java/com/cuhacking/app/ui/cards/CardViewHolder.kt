@@ -16,6 +16,8 @@ import com.cuhacking.app.R
 import com.cuhacking.app.info.data.WifiInfo
 import com.cuhacking.app.info.ui.InfoViewModel
 import com.google.android.material.button.MaterialButton
+import kotlinx.android.synthetic.main.card_emergency.view.*
+import kotlinx.android.synthetic.main.card_help.view.*
 import org.threeten.bp.Duration
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime
@@ -25,6 +27,30 @@ import kotlin.math.floor
 
 sealed class CardViewHolder<T : Card>(item: View) : RecyclerView.ViewHolder(item) {
     abstract fun bind(value: T)
+}
+
+class EmergencyContactHolder(parent: ViewGroup) : CardViewHolder<EmergencyContactCard>(
+    LayoutInflater.from(parent.context).inflate(
+        R.layout.card_emergency,
+        parent,
+        false
+    )
+) {
+    override fun bind(value: EmergencyContactCard) {
+        itemView.phone_number.text = value.number
+    }
+}
+
+class HelpHolder(parent: ViewGroup) : CardViewHolder<HelpCard>(
+    LayoutInflater.from(parent.context).inflate(
+        R.layout.card_help,
+        parent,
+        false
+    )
+) {
+    override fun bind(value: HelpCard) {
+        itemView.message.text = value.message
+    }
 }
 
 class HeaderHolder(parent: ViewGroup) :
