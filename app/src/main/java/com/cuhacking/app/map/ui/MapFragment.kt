@@ -145,24 +145,29 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         }
 
         viewModel.targetBuilding.observe(this, Observer {
-            it ?: return@Observer
-
-            val (building, floor) = it
-            val reversed = floor.asReversed()
-
-            button_toggle_group.children.forEachIndexed { index, view ->
-                if (index >= reversed.size) {
+            if (it == null) {
+                button_toggle_group.children.forEach { view ->
                     view.visibility = View.GONE
-                } else {
-                    val (name, floorId) = reversed[index]
-                    (view as FloorSelectionButton).apply {
-                        visibility = View.VISIBLE
-                        text = name
-                        tag = floorId
-                        if ((viewModel.selectedFloor.value?.get(building)
-                                ?: floor[0].id) == floorId
-                        ) {
-                            button_toggle_group.check(this.id)
+                }
+            } else {
+
+                val (building, floor) = it
+                val reversed = floor.asReversed()
+
+                button_toggle_group.children.forEachIndexed { index, view ->
+                    if (index >= reversed.size) {
+                        view.visibility = View.GONE
+                    } else {
+                        val (name, floorId) = reversed[index]
+                        (view as FloorSelectionButton).apply {
+                            visibility = View.VISIBLE
+                            text = name
+                            tag = floorId
+                            if ((viewModel.selectedFloor.value?.get(building)
+                                    ?: floor[0].id) == floorId
+                            ) {
+                                button_toggle_group.check(this.id)
+                            }
                         }
                     }
                 }
