@@ -34,9 +34,10 @@ class HomeFragment : PageFragment(R.layout.info_fragment) {
         view.findViewById<RecyclerView>(R.id.recycler_view).adapter = cardAdapter
         viewModel.cards.observe(this, Observer(cardAdapter::submitList))
 
-        val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_layout)
-        swipeRefreshLayout
-            .setOnRefreshListener { viewModel.refreshInfo() }
+        val swipeRefreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.swipe_layout).apply {
+            setOnRefreshListener { viewModel.refreshInfo() }
+            setColorSchemeResources(R.color.colorPrimary)
+        }
 
         viewModel.refreshInfo()
 

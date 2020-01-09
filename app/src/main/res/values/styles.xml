@@ -23,6 +23,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">?colorSurface</item>
+        <item name="android:navigationBarColor">?colorSurface</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="menuIconColor">?colorPrimary</item>
     </style>
