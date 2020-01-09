@@ -1,6 +1,5 @@
 package com.cuhacking.app.home.ui
 
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
@@ -22,6 +21,8 @@ class HomeFragment : PageFragment(R.layout.info_fragment) {
     private val viewModel: HomeViewModel by viewModels { injector.homeViewModelFactory() }
 
     private val cardAdapter by lazy { CardAdapter() }
+
+    private var tapTargetPrompt: MaterialTapTargetPrompt? = null
 
     companion object {
         fun newInstance() = InfoFragment()
@@ -47,7 +48,7 @@ class HomeFragment : PageFragment(R.layout.info_fragment) {
             if (it == true) {
                 val backgroundColor = ColorUtils.setAlphaComponent(ContextCompat.getColor(requireContext(), R.color.colorPrimary), 0xF4)
 
-                MaterialTapTargetPrompt.Builder(this)
+                tapTargetPrompt = MaterialTapTargetPrompt.Builder(this)
                     .setTarget(R.id.profile)
                     .setIcon(R.drawable.ic_person)
                     .setPrimaryText(R.string.onboard_login_title)
@@ -60,11 +61,12 @@ class HomeFragment : PageFragment(R.layout.info_fragment) {
                         }
                     }
                     .show()
-
-
             }
         })
     }
 
-
+    override fun onPause() {
+        super.onPause()
+        tapTargetPrompt?.dismiss()
+    }
 }
