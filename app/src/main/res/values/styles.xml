@@ -36,6 +36,9 @@
 
     <style name="Widget.CuHacking.Button.FloorSelectorButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:backgroundTint">?attr/colorSurface</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
     <style name="Widget.CuHacking.Toolbar.Transparent" parent="Widget.MaterialComponents.Toolbar.Surface">

@@ -4,6 +4,7 @@ import com.cuhacking.app.data.CoroutinesDispatcherProvider
 import com.cuhacking.app.data.api.models.BuildingData
 import com.cuhacking.app.data.map.MapDataSource
 import com.cuhacking.app.map.ui.FloorDataUiModel
+import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -58,7 +59,7 @@ class GetMapDataUseCase @Inject constructor(
         }
 
         return FloorDataUiModel(
-            sourceMap[id]!!, id, building.floors
+            sourceMap[id]!!, id, building.floors, LatLng(building.center[1], building.center[0])
         )
     }
 }

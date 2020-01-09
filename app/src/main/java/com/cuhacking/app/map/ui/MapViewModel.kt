@@ -58,6 +58,8 @@ class MapViewModel @Inject constructor(
         viewModelScope.launch {
             updateMapData()
         }
+
+        _selectedFloor.value = mutableMapOf()
     }
 
     fun selectFloor(building: String, floor: String) {

@@ -28,6 +28,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -45,6 +46,7 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.card.MaterialCardView
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.camera.CameraPosition
+import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.MapView
@@ -57,6 +59,7 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory.*
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import kotlinx.android.synthetic.main.map_fragment.*
+import kotlinx.android.synthetic.main.profile_header.view.*
 
 class MapFragment : PageFragment(R.layout.map_fragment) {
 
@@ -67,7 +70,7 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
     private val viewModel: MapViewModel by viewModels { injector.mapViewModelFactory() }
     private var map: MapboxMap? = null
 
-    private var floorButtons: List<FloorSelectionButton> = emptyList()
+    private var loaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,8 +94,19 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
                 applyStyle(style)
 
                 viewModel.buildings.observe(this, Observer { buildings ->
+                    val bounds = LatLngBounds.Builder()
                     buildings.forEach { building ->
                         loadBuilding(style, building)
+                        bounds.include(building.center)
+                    }
+
+                    if (buildings.size > 1) {
+                        mapboxMap.moveCamera(
+                            CameraUpdateFactory.newLatLngBounds(
+                                bounds.build(),
+                                256
+                            )
+                        )
                     }
                 })
 
@@ -131,23 +145,26 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         }
 
         viewModel.targetBuilding.observe(this, Observer {
-            button_toggle_group.removeAllViews()
-
             it ?: return@Observer
 
-            val (_, floor) = it
+            val (building, floor) = it
+            val reversed = floor.asReversed()
 
-            floorButtons = floor.reversed().map { (name, floorId) ->
-                FloorSelectionButton(
-                    ContextThemeWrapper(
-                        requireContext(),
-                        R.style.Widget_CuHacking_Button_FloorSelectorButton
-                    )
-                ).apply {
-                    text = name
-                    id = View.generateViewId()
-                    tag = floorId
-                    button_toggle_group.addView(this)
+            button_toggle_group.children.forEachIndexed { index, view ->
+                if (index >= reversed.size) {
+                    view.visibility = View.GONE
+                } else {
+                    val (name, floorId) = reversed[index]
+                    (view as FloorSelectionButton).apply {
+                        visibility = View.VISIBLE
+                        text = name
+                        tag = floorId
+                        if ((viewModel.selectedFloor.value?.get(building)
+                                ?: floor[0].id) == floorId
+                        ) {
+                            button_toggle_group.check(this.id)
+                        }
+                    }
                 }
             }
         })
@@ -155,7 +172,7 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
         view.findViewById<MaterialButtonToggleGroup>(R.id.button_toggle_group)
             .addOnButtonCheckedListener { v, checkedId, isChecked ->
                 if (!isChecked) return@addOnButtonCheckedListener
-                val (building, floors) = viewModel.targetBuilding.value
+                val (building, _) = viewModel.targetBuilding.value
                     ?: return@addOnButtonCheckedListener
 
                 val floorId = v.findViewById<FloorSelectionButton>(checkedId).tag as String
@@ -286,8 +303,8 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
 
     private fun setLayerFilters(style: Style, prefix: String, floorId: String) {
         // Room fills
-        (style.getLayer(prefix) as FillLayer)
-            .setFilter(
+        (style.getLayer(prefix) as? FillLayer)
+            ?.setFilter(
                 all(
                     eq(get("floor"), floorId),
                     eq(get("type"), "room")
@@ -295,24 +312,24 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             )
 
         // Backdrop layer
-        (style.getLayer("${prefix}-backdrop") as FillLayer)
-            .setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop")))
+        (style.getLayer("${prefix}-backdrop") as? FillLayer)
+            ?.setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop")))
 
         // Room outlines
-        (style.getLayer("${prefix}-lines") as LineLayer)
-            .setFilter(all(eq(get("floor"), floorId), eq(get("type"), "line")))
+        (style.getLayer("${prefix}-lines") as? LineLayer)
+            ?.setFilter(all(eq(get("floor"), floorId), eq(get("type"), "line")))
 
         // Backdrop lines
-        (style.getLayer("${prefix}-backdrop-lines") as LineLayer)
-            .setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop-line")))
+        (style.getLayer("${prefix}-backdrop-lines") as? LineLayer)
+            ?.setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop-line")))
 
         // Labels/Icons
-        (style.getLayer("${prefix}-symbols") as SymbolLayer)
-            .setFilter(all(eq(get("floor"), floorId), eq(get("label"), true)))
+        (style.getLayer("${prefix}-symbols") as? SymbolLayer)
+            ?.setFilter(all(eq(get("floor"), floorId), eq(get("label"), true)))
 
         // Name
-        (style.getLayer("${prefix}-name") as SymbolLayer)
-            .setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop")))
+        (style.getLayer("${prefix}-name") as? SymbolLayer)
+            ?.setFilter(all(eq(get("floor"), floorId), eq(get("type"), "backdrop")))
     }
 
     private fun handleMapClick(latLng: LatLng): Boolean {
