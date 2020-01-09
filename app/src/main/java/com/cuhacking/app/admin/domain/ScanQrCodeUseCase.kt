@@ -9,6 +9,7 @@ import com.cuhacking.app.util.getBearerAuth
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
+import com.squareup.moshi.JsonEncodingException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
@@ -47,7 +48,6 @@ class ScanQrCodeUseCase @Inject constructor(
             list.size > 1 && lastCode == MULTI_SCAN_CODE -> false
             else -> true
         }
-
     }
 
     private suspend fun processCodes(request: Pair<String, List<FirebaseVisionBarcode>>): ScanResponseUiModel {
@@ -74,9 +74,13 @@ class ScanQrCodeUseCase @Inject constructor(
             } catch (e: HttpException) {
                 when (e.code()) {
                     400 -> ScanResponseUiModel(false, R.string.scan_error_already)
+                    403 -> ScanResponseUiModel(false, R.string.scan_error_denied)
                     404 -> ScanResponseUiModel(false, R.string.scan_error_not_found)
                     else -> ScanResponseUiModel(false, R.string.scan_error_generic)
                 }
+            } catch (e: JsonEncodingException) {
+                // Since the scan endpoint doesn't return a JSON object, this exception can only be thrown on success...
+                ScanResponseUiModel(true, R.string.scan_success)
             } catch (e: Exception) {
                 ScanResponseUiModel(false, R.string.scan_error_generic)
             }
