@@ -45,8 +45,11 @@ class AdminViewModel @Inject constructor(
     }
 
     fun scan(qrCodes: List<FirebaseVisionBarcode>) {
-        scanQrCode(qrCodes, "bcnOvGUM")
+        val event = selectedEvent.value ?: return
+        scanQrCode(qrCodes, event.id)
     }
 
-
+    fun setSelectedEvent(event: EventSelectUiModel) {
+        _selectedEvent.value = event
+    }
 }

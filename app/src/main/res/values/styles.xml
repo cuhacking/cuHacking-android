@@ -43,8 +43,14 @@
         <item name="android:insetBottom">0dp</item>
     </style>
 
-    <style name="Widget.CuHacking.Toolbar.Transparent" parent="Widget.MaterialComponents.Toolbar.Surface">
+    <style name="Widget.CuHacking.Toolbar.Transparent" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
         <item name="android:background">#00000000</item>
+        <item name="titleTextAppearance">@style/TextAppearance.CuHacking.ToolbarTitle</item>
+        <item name="titleTextColor">?colorPrimary</item>
+    </style>
+
+    <style name="Widget.CuHacking.Toolbar.SemiTransparent" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="android:background">#9A000000</item>
         <item name="titleTextAppearance">@style/TextAppearance.CuHacking.ToolbarTitle</item>
         <item name="titleTextColor">?colorPrimary</item>
     </style>

@@ -24,12 +24,11 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Rational
 import android.util.Size
-import android.view.Surface
-import android.view.TextureView
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -39,6 +38,7 @@ import androidx.lifecycle.Observer
 import com.cuhacking.app.R
 import com.cuhacking.app.admin.data.QrCodeAnalyzer
 import com.cuhacking.app.di.injector
+import com.cuhacking.app.util.formatTimeDuration
 import com.google.android.material.snackbar.Snackbar
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.android.synthetic.main.activity_admin.*
@@ -62,11 +62,23 @@ class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_PERMISSIONS_CODE)
         }
 
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "No event selected"
+
         viewModel.scanStatus.observe(this, Observer {
             it ?: return@Observer
             Snackbar.make(viewFinder, it.messageRes, Snackbar.LENGTH_SHORT).show()
 
             resultOverlay.updateState(if (it.success) ResultOverlay.State.SUCCESS else ResultOverlay.State.FAILURE)
+        })
+
+        viewModel.selectedEvent?.observe(this, Observer {
+            it ?: return@Observer
+
+            supportActionBar?.title = it.title
+            supportActionBar?.subtitle =
+                "${it.id} / ${formatTimeDuration(it.startTime, it.endTime)}"
         })
     }
 
@@ -124,5 +136,28 @@ class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
      */
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> finish()
+            R.id.select_event -> openSelectionDialog()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.admin, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    private fun openSelectionDialog() {
+        val items =
+            viewModel.scanEvents.value?.map { "${it.id}//${it.title}" }?.toTypedArray() ?: return
+        AlertDialog.Builder(this)
+            .setItems(items) { _, which ->
+                viewModel.setSelectedEvent(viewModel.scanEvents.value!![which])
+            }
+            .show()
     }
 }

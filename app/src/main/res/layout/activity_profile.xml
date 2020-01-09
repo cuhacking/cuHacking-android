@@ -43,6 +43,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/profile"
             app:title=""
+            android:elevation="0dp"
             app:navigationIcon="@drawable/ic_back"
             tools:visibility="visible" />
 
