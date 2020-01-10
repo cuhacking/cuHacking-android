@@ -15,6 +15,7 @@ import com.squareup.sqldelight.runtime.coroutines.mapToList
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
+import org.threeten.bp.OffsetDateTime
 import javax.inject.Inject
 
 class GetHomeCardsUseCase @Inject constructor(
@@ -25,7 +26,9 @@ class GetHomeCardsUseCase @Inject constructor(
     operator fun invoke(): Flow<List<Card>> =
         combine(database.announcementQueries.getAll().asFlow().mapToList(dispatchers.io)
             .map<List<Announcement>, List<Card>> {
-                it.map { update ->
+                it
+                    it.filter { update -> update.deliveryTime < OffsetDateTime.now() }
+                    .map { update ->
                     UpdateCard(
                         update.id,
                         update.name,
