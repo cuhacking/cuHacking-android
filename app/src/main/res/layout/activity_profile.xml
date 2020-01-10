@@ -35,7 +35,7 @@
 
     <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
-            style="@style/Widget.CuHacking.Toolbar.Transparent"
+            style="@style/Widget.CuHacking.Toolbar.Profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
