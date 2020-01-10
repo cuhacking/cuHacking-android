@@ -26,7 +26,6 @@ class GetHomeCardsUseCase @Inject constructor(
     operator fun invoke(): Flow<List<Card>> =
         combine(database.announcementQueries.getAll().asFlow().mapToList(dispatchers.io)
             .map<List<Announcement>, List<Card>> {
-                it
                     it.filter { update -> update.deliveryTime < OffsetDateTime.now() }
                     .map { update ->
                     UpdateCard(
