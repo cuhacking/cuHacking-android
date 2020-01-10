@@ -311,7 +311,9 @@ class MapFragment : PageFragment(R.layout.map_fragment) {
             setProperties(
                 textField(
                     switchCase(
-                        eq(get("room-type"), "room"), get("name"), literal("")
+                        eq(get("room-type"), "room"), get("name"),
+                        eq(get("room"), "Atrium"), get("name"),
+                        literal("")
                     )
                 ),
                 iconImage(
