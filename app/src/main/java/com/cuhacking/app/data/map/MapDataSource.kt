@@ -60,16 +60,17 @@ class MapDataSource @Inject constructor(
     }
 
     suspend fun checkAndUpdateData() = withContext(dispatchers.io) {
-        val versionData = api.getMapDataVersion()
-        if (versionData.version > dataInfoProvider.mapDataVersion) {
-            try {
+        try {
+            val versionData = api.getMapDataVersion()
+            if (versionData.version > dataInfoProvider.mapDataVersion) {
                 val newData = api.getMapData()
                 context.openFileOutput(DATA_FILE, Context.MODE_PRIVATE).use { outputStream ->
                     val adapter = moshi.adapter(MapData::class.java)
                     outputStream.write(adapter.toJson(newData.map).toByteArray())
                 }
-            } catch (_: Exception) {
+                dataInfoProvider.mapDataVersion = versionData.version
             }
+        } catch (_: Exception) {
         }
     }
 
