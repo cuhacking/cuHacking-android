@@ -17,10 +17,14 @@
 package com.cuhacking.app.admin.ui
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Matrix
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import android.util.Rational
 import android.util.Size
@@ -53,6 +57,7 @@ class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private val viewModel: AdminViewModel by viewModels { injector.adminViewModelFactory() }
     private val resultOverlay by lazy { findViewById<ResultOverlay>(R.id.result_overlay) }
+    private val vibrator by lazy { getSystemService(Context.VIBRATOR_SERVICE) as Vibrator }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +76,31 @@ class AdminActivity : AppCompatActivity(R.layout.activity_admin) {
             Snackbar.make(viewFinder, it.messageRes, Snackbar.LENGTH_SHORT).show()
 
             resultOverlay.updateState(if (it.success) ResultOverlay.State.SUCCESS else ResultOverlay.State.FAILURE)
+
+            if (it.success) {
+                if (Build.VERSION.SDK_INT >= 26) {
+                    vibrator.vibrate(
+                        VibrationEffect.createOneShot(
+                            50,
+                            VibrationEffect.DEFAULT_AMPLITUDE
+                        )
+                    )
+                } else {
+                    vibrator.vibrate(50)
+                }
+            } else {
+                if (Build.VERSION.SDK_INT >= 26) {
+                    vibrator.vibrate(
+                        VibrationEffect.createWaveform(
+                            longArrayOf(50L, 100L, 50L),
+                            intArrayOf(VibrationEffect.DEFAULT_AMPLITUDE, 0, VibrationEffect.DEFAULT_AMPLITUDE),
+                            -1
+                        )
+                    )
+                } else {
+                    vibrator.vibrate(longArrayOf(0L, 50L, 100L, 50L), -1)
+                }
+            }
         })
 
         viewModel.selectedEvent?.observe(this, Observer {

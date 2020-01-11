@@ -8,7 +8,7 @@ class GetNextEventUseCase @Inject constructor() {
     operator fun invoke(events: List<EventSelectUiModel>): EventSelectUiModel? {
         val now = OffsetDateTime.now()
         events.forEach {
-            if (it.startTime > now) {
+            if (it.endTime > now) {
                 return it
             }
         }
